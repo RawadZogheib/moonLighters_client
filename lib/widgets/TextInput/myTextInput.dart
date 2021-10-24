@@ -11,29 +11,36 @@ class textInput extends StatelessWidget {
   var maxLength;
   var widthh;
   var coli,coli_1,coli_2;
+  var labelText;
 
-  textInput({required this.textString, this.keybType, this.maxLength,this.widthh,this.coli,this.coli_1,this.coli_2, required this.obscure, this.onChange});
+  textInput({required this.textString, required this.labelText, this.keybType, this.maxLength, this.widthh, this.coli, this.coli_1, this.coli_2, required this.obscure, this.onChange});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: this.widthh,
-      child: TextField(
+      child: TextFormField(
         onChanged: onChange,
         textAlign: TextAlign.center,
-        cursorColor: Colors.yellowAccent,
+        cursorColor: Colors.black,
 
         decoration: InputDecoration(
             hintText: this.textString,
             hintStyle: TextStyle(
-                color: coli
+                fontSize: 15.0,
+                color: coli_1
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: coli_1),
+                borderSide: BorderSide(color: coli),
                 borderRadius: BorderRadius.circular(10.0)
             ),
             filled: true,
-            fillColor: coli_2,
+            fillColor: coli,
+            labelText: labelText,
+            labelStyle: TextStyle(
+              color: coli_1
+            ),
+            border: InputBorder.none,
 
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: coli_1),
@@ -41,6 +48,7 @@ class textInput extends StatelessWidget {
             )
 
         ),
+        textInputAction: TextInputAction.next,
         keyboardType: this.keybType,
         obscureText: this.obscure,
         maxLength: this.maxLength,

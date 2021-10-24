@@ -14,18 +14,18 @@ Color col4_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
 
-class dateOfBith extends StatefulWidget {
-  const dateOfBith({Key? key}) : super(key: key);
+class dateOfBirth extends StatefulWidget {
+  const dateOfBirth({Key? key}) : super(key: key);
 
   @override
-  _dateOfBithState createState() => _dateOfBithState();
+  _dateOfBirthState createState() => _dateOfBirthState();
 }
 
-class _dateOfBithState extends State<dateOfBith> {
+class _dateOfBirthState extends State<dateOfBirth> {
   DateTime _date = DateTime.now();
   TextEditingController _datecontroller = new TextEditingController();
 
-  var myFormat = DateFormat('d-MM-yyyy');
+  var myFormat = DateFormat('yyyy-MM-dd');
   Future<Null?> _selectDate(BuildContext context) async{
 
     DateTime? _datePicker = await showDatePicker(
@@ -47,7 +47,7 @@ class _dateOfBithState extends State<dateOfBith> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: MediaQuery.of(context).size.width * 0.78,
       child: TextFormField(
         controller: _datecontroller,
         cursorColor: col4_1,

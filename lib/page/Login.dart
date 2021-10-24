@@ -51,7 +51,12 @@ class _loginState extends State<login> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: textInput(textString: "Enter Your Email Address", coli: col8, coli_1: col8_1, coli_2: col8_2, obscure: false ,
+                  child: textInput(textString: "Enter Your Email Address",
+                      labelText: 'Enter Your Email Address',
+                      coli: col8,
+                      coli_1: col8_1,
+                      coli_2: col8_2,
+                      obscure: false ,
                       onChange: (value){
                         globals.emailLogin = value;
                       }),
@@ -60,7 +65,12 @@ class _loginState extends State<login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: textInput(
-                    textString: "Enter Your Password", coli: col5, coli_1: col5_1, coli_2: col5_2, obscure: true,
+                    textString: "Enter Your Password",
+                    labelText: 'Enter Your Password',
+                    coli: col5,
+                    coli_1: col5_1,
+                    coli_2: col5_2,
+                    obscure: true,
                     onChange: (value){
                       globals.passwordLogin = value;
                       //print(globals.passwordLogin);
@@ -192,6 +202,12 @@ class _loginState extends State<login> {
       if(body[0] == "success"){
         Navigator.pushNamed(context, '/home');
       }else if(body[0] == "error8"){
+        col8 = Colors.red.shade50;
+        col8_1 = Colors.red.shade900;
+        col8_2 = Colors.red.shade900.withOpacity(0.5);
+        col5 = Colors.red.shade50;
+        col5_1 = Colors.red.shade900;
+        col5_2 = Colors.red.shade900.withOpacity(0.5);
         showDialog(
             context: context,
             builder: (BuildContext context) => ErrorAlertDialog(

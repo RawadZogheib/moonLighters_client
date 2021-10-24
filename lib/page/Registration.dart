@@ -96,6 +96,7 @@ class _registrationState extends State<registration> {
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
                       child: textInput(
                         textString: "First Name",
+                        labelText: 'First Name',
                         widthh: 145.0,
                         coli: col1,
                         coli_1: col1_1,
@@ -110,6 +111,7 @@ class _registrationState extends State<registration> {
                     Padding(
                       padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
                       child: textInput(textString: "Last Name",
+                        labelText: 'Last Name',
                         widthh: 145.0,
                         coli: col2,
                         coli_1: col2_1,
@@ -124,8 +126,24 @@ class _registrationState extends State<registration> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001),
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, top: 8.0),
+                  child: textInput(textString: "UserName",
+                    labelText: 'UserName',
+                    widthh: MediaQuery.of(context).size.width * 0.78,
+                    coli: col3,
+                    coli_1: col3_1,
+                    coli_2: col3_2,
+                    obscure: false,
+                    onChange: (value) {
+                      globals.userName = value;
+                    },),
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
                   child: textInput(textString: "Email Address",
+                    labelText: 'Email Address',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col8,
                     coli_1: col8_1,
@@ -140,6 +158,7 @@ class _registrationState extends State<registration> {
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001,top: 8.0),
                   child: textInput(textString: "Password",
+                    labelText: 'Password',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col5,
                     coli_1: col5_1,
@@ -153,7 +172,8 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
-                  child: textInput(textString: "RePassword",
+                  child: textInput(textString: "ReEnterPassword",
+                    labelText: 'ReEnterPassword',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col6,
                     coli_1: col6_1,
@@ -166,38 +186,21 @@ class _registrationState extends State<registration> {
                 ),
 
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, top: 8.0),
-                      child: textInput(textString: "UserName",
-                        widthh: 145.0,
-                        coli: col3,
-                        coli_1: col3_1,
-                        coli_2: col3_2,
-                        obscure: false,
-                        onChange: (value) {
-                          globals.userName = value;
-                        },),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03, top: 8.0),
-                      child: textInput(textString: "Phone Number",
-                        widthh: 145.0,
-                        coli: col7,
-                        coli_1: col7_1,
-                        coli_2: col7_2,
-                        obscure: false,
-                        keybType: TextInputType.numberWithOptions(
-                            decimal: true),
-                        onChange: (value) {
-                          globals.phoneNumber = int.parse(value);
-                        },
-                      ),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
+                  child: textInput(textString: "Phone Number",
+                    labelText: 'Phone Number',
+                    widthh: MediaQuery.of(context).size.width * 0.78,
+                    coli: col7,
+                    coli_1: col7_1,
+                    coli_2: col7_2,
+                    obscure: false,
+                    keybType: TextInputType.numberWithOptions(
+                        decimal: true),
+                    onChange: (value) {
+                      globals.phoneNumber = value;
+                    },
+                  ),
                 ),
 
                 radioButton(),
@@ -207,7 +210,7 @@ class _registrationState extends State<registration> {
                   fontSize: 15.0,
                 ),),
 
-                dateOfBith(),
+                dateOfBirth(),
 
 
                 // Padding(
@@ -314,8 +317,11 @@ class _registrationState extends State<registration> {
         if6 = true;
     }
 
-    if (globals.phoneNumber != null)
-      if7 = true;
+    if (globals.phoneNumber != null){
+      if (globals.phoneNumber!.isNotEmpty)
+        if7 = true;
+    }
+
 
     if (globals.email != null) {
       if (globals.email!.isNotEmpty)
@@ -618,6 +624,7 @@ class _registrationState extends State<registration> {
           'lname': globals.lName,
           'userName': globals.userName,
           'password': globals.password,
+          'repassword': globals.repassword,
           'dateOfBirth': globals.dateOfBirth,
           'phoneNumber': globals.phoneNumber,
           'gender': globals.gender

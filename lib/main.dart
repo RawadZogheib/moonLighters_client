@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/home.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
             '/Login': (context) => login(),
             '/Registration': (context) => registration(),
             '/home': (context) => home(),
+            //'/FirstPage': (context) => firstPage(),
           });
     });
   }
