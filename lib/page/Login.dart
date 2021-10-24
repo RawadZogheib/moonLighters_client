@@ -51,7 +51,7 @@ class _loginState extends State<login> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: textInput(textString: "Enter Your Email Address",
+                  child: myTextInput(textString: "Enter Your Email Address",
                       labelText: 'Enter Your Email Address',
                       coli: col8,
                       coli_1: col8_1,
@@ -64,7 +64,7 @@ class _loginState extends State<login> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: textInput(
+                  child: myTextInput(
                     textString: "Enter Your Password",
                     labelText: 'Enter Your Password',
                     coli: col5,

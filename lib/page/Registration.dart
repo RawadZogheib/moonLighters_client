@@ -94,7 +94,7 @@ class _registrationState extends State<registration> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
-                      child: textInput(
+                      child: myTextInput(
                         textString: "First Name",
                         labelText: 'First Name',
                         widthh: 145.0,
@@ -110,7 +110,7 @@ class _registrationState extends State<registration> {
 
                     Padding(
                       padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
-                      child: textInput(textString: "Last Name",
+                      child: myTextInput(textString: "Last Name",
                         labelText: 'Last Name',
                         widthh: 145.0,
                         coli: col2,
@@ -127,7 +127,7 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, top: 8.0),
-                  child: textInput(textString: "UserName",
+                  child: myTextInput(textString: "UserName",
                     labelText: 'UserName',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col3,
@@ -142,7 +142,7 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
-                  child: textInput(textString: "Email Address",
+                  child: myTextInput(textString: "Email Address",
                     labelText: 'Email Address',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col8,
@@ -157,7 +157,7 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001,top: 8.0),
-                  child: textInput(textString: "Password",
+                  child: myTextInput(textString: "Password",
                     labelText: 'Password',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col5,
@@ -172,7 +172,7 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
-                  child: textInput(textString: "ReEnterPassword",
+                  child: myTextInput(textString: "ReEnterPassword",
                     labelText: 'ReEnterPassword',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col6,
@@ -188,7 +188,7 @@ class _registrationState extends State<registration> {
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
-                  child: textInput(textString: "Phone Number",
+                  child: myTextInput(textString: "Phone Number",
                     labelText: 'Phone Number',
                     widthh: MediaQuery.of(context).size.width * 0.78,
                     coli: col7,

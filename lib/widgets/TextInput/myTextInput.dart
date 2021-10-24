@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 
-class textInput extends StatelessWidget {
+class myTextInput extends StatelessWidget {
   var textString;
   var onChange;
   var keybType;
@@ -13,7 +13,7 @@ class textInput extends StatelessWidget {
   var coli,coli_1,coli_2;
   var labelText;
 
-  textInput({required this.textString, required this.labelText, this.keybType, this.maxLength, this.widthh, this.coli, this.coli_1, this.coli_2, required this.obscure, this.onChange});
+  myTextInput({required this.textString, required this.labelText, this.keybType, this.maxLength, this.widthh, this.coli, this.coli_1, this.coli_2, required this.obscure, this.onChange});
 
   @override
   Widget build(BuildContext context) {
