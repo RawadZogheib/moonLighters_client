@@ -2,12 +2,16 @@ library flutterclient.globals;
 
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_client/hexColor/hexColor.dart';
 //Server Ip  (page[/my_api.dart])
 const String myIP = "http://147.78.45.13/";
 
 
 //Colors
+final Color blue = Colors.blue.shade50;
+final Color blue_1 = Colors.blue.shade900;
+final Color blue_2 = Colors.blue.shade900.withOpacity(0.5);
 final Color whiteBlue = HexColor("#f2f3f8");
 final Color white = HexColor("#fdfdfd");
 

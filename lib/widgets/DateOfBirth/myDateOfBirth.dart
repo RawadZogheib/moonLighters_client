@@ -14,14 +14,14 @@ Color col4_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
 
-class dateOfBirth extends StatefulWidget {
-  const dateOfBirth({Key? key}) : super(key: key);
+class myDateOfBirth extends StatefulWidget {
+  const myDateOfBirth({Key? key}) : super(key: key);
 
   @override
-  _dateOfBirthState createState() => _dateOfBirthState();
+  _myDateOfBirthState createState() => _myDateOfBirthState();
 }
 
-class _dateOfBirthState extends State<dateOfBirth> {
+class _myDateOfBirthState extends State<myDateOfBirth> {
   DateTime _date = DateTime.now();
   TextEditingController _datecontroller = new TextEditingController();
 

@@ -9,14 +9,14 @@ import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 
-Color col8 = Colors.blue.shade50;               //email
-Color col8_1 = Colors.blue.shade900;
-Color col8_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colEmail = Colors.blue.shade50;               //email
+Color colEmail_1 = Colors.blue.shade900;
+Color colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
-Color col5 = Colors.blue.shade50;               //password
-Color col5_1 = Colors.blue.shade900;
-Color col5_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colPass = Colors.blue.shade50;               //password
+Color colPass_1 = Colors.blue.shade900;
+Color colPass_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
 class login extends StatefulWidget {
@@ -53,9 +53,9 @@ class _loginState extends State<login> {
                   padding: const EdgeInsets.all(8.0),
                   child: myTextInput(textString: "Enter Your Email Address",
                       labelText: 'Enter Your Email Address',
-                      coli: col8,
-                      coli_1: col8_1,
-                      coli_2: col8_2,
+                      colBlue: colEmail,
+                      colBlue_1: colEmail_1,
+                      colBlue_2: colEmail_2,
                       obscure: false ,
                       onChange: (value){
                         globals.emailLogin = value;
@@ -67,9 +67,9 @@ class _loginState extends State<login> {
                   child: myTextInput(
                     textString: "Enter Your Password",
                     labelText: 'Enter Your Password',
-                    coli: col5,
-                    coli_1: col5_1,
-                    coli_2: col5_2,
+                    colBlue: colPass,
+                    colBlue_1: colPass_1,
+                    colBlue_2: colPass_2,
                     obscure: true,
                     onChange: (value){
                       globals.passwordLogin = value;
@@ -141,30 +141,30 @@ class _loginState extends State<login> {
 
     if(if1){
       setState(() {
-        col8 = Colors.blue.shade50;
-        col8_1 = Colors.blue.shade900;
-        col8_2 = Colors.blue.shade900.withOpacity(0.5);
+        colEmail = Colors.blue.shade50;
+        colEmail_1 = Colors.blue.shade900;
+        colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     }else{
       setState(() {
-        col8 = Colors.red.shade50;
-        col8_1 = Colors.red.shade900;
-        col8_2 = Colors.red.shade900.withOpacity(0.5);
+        colEmail = Colors.red.shade50;
+        colEmail_1 = Colors.red.shade900;
+        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
 
     if(if2){
       setState(() {
-        col5 = Colors.blue.shade50;
-        col5_1 = Colors.blue.shade900;
-        col5_2 = Colors.blue.shade900.withOpacity(0.5);
+        colPass = Colors.blue.shade50;
+        colPass_1 = Colors.blue.shade900;
+        colPass_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     }else{
       setState(() {
-        col5 = Colors.red.shade50;
-        col5_1 = Colors.red.shade900;
-        col5_2 = Colors.red.shade900.withOpacity(0.5);
+        colPass = Colors.red.shade50;
+        colPass_1 = Colors.red.shade900;
+        colPass_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
@@ -202,12 +202,12 @@ class _loginState extends State<login> {
       if(body[0] == "success"){
         Navigator.pushNamed(context, '/home');
       }else if(body[0] == "error8"){
-        col8 = Colors.red.shade50;
-        col8_1 = Colors.red.shade900;
-        col8_2 = Colors.red.shade900.withOpacity(0.5);
-        col5 = Colors.red.shade50;
-        col5_1 = Colors.red.shade900;
-        col5_2 = Colors.red.shade900.withOpacity(0.5);
+        colEmail = Colors.red.shade50;
+        colEmail_1 = Colors.red.shade900;
+        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        colPass = Colors.red.shade50;
+        colPass_1 = Colors.red.shade900;
+        colPass_2 = Colors.red.shade900.withOpacity(0.5);
         showDialog(
             context: context,
             builder: (BuildContext context) => ErrorAlertDialog(

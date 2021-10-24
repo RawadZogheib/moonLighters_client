@@ -4,14 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 
-class radioButton extends StatefulWidget {
-  const radioButton({Key? key}) : super(key: key);
+class myRadioButton extends StatefulWidget {
+  const myRadioButton({Key? key}) : super(key: key);
 
   @override
-  _radioButtonState createState() => _radioButtonState();
+  _myRadioButtonState createState() => _myRadioButtonState();
 }
 
-class _radioButtonState extends State<radioButton> {
+class _myRadioButtonState extends State<myRadioButton> {
 
   String radioItem = '';
 

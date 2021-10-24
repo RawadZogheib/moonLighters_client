@@ -22,38 +22,38 @@ RegExp mailExp = new RegExp("[a-zA-Z0-9]+@(g|hot)mail.com", caseSensitive: false
 RegExp phoneExp = new RegExp("[0-9]{8}");
 
 
-Color col1 = Colors.blue.shade50;               //fname
-Color col1_1 = Colors.blue.shade900;
-Color col1_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colFName = Colors.blue.shade50;               //fname
+Color colFName_1 = Colors.blue.shade900;
+Color colFName_2 = Colors.blue.shade900.withOpacity(0.5);
 
-Color col2 = Colors.blue.shade50;               //lname
-Color col2_1 = Colors.blue.shade900;
-Color col2_2 = Colors.blue.shade900.withOpacity(0.5);
-
-
-Color col3 = Colors.blue.shade50;                //username
-Color col3_1 = Colors.blue.shade900;
-Color col3_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colLName = Colors.blue.shade50;               //lname
+Color colLName_1 = Colors.blue.shade900;
+Color colLName_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
-Color col5 = Colors.blue.shade50;               //password
-Color col5_1 = Colors.blue.shade900;
-Color col5_2 = Colors.blue.shade900.withOpacity(0.5);
-
-Color col6 = Colors.blue.shade50;               //repassword
-Color col6_1 = Colors.blue.shade900;
-Color col6_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colUserName = Colors.blue.shade50;                //username
+Color colUserName_1 = Colors.blue.shade900;
+Color colUserName_2 = Colors.blue.shade900.withOpacity(0.5);
 
 
-Color col7 = Colors.blue.shade50;               //phoneNumber
-Color col7_1 = Colors.blue.shade900;
-Color col7_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colPass = Colors.blue.shade50;               //password
+Color colPass_1 = Colors.blue.shade900;
+Color colPass_2 = Colors.blue.shade900.withOpacity(0.5);
 
-Color col8 = Colors.blue.shade50;               //email
-Color col8_1 = Colors.blue.shade900;
-Color col8_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colRePass = Colors.blue.shade50;               //repassword
+Color colRePass_1 = Colors.blue.shade900;
+Color colRePass_2 = Colors.blue.shade900.withOpacity(0.5);
 
-Color col9 = Colors.transparent;             //genderError
+
+Color colPhoneNb = Colors.blue.shade50;               //phoneNumber
+Color colPhoneNb_1 = Colors.blue.shade900;
+Color colPhoneNb_2 = Colors.blue.shade900.withOpacity(0.5);
+
+Color colEmail = Colors.blue.shade50;               //email
+Color colEmail_1 = Colors.blue.shade900;
+Color colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+
+Color colGender = Colors.transparent;             //genderError
 
 
 class registration extends StatefulWidget {
@@ -98,9 +98,9 @@ class _registrationState extends State<registration> {
                         textString: "First Name",
                         labelText: 'First Name',
                         widthh: 145.0,
-                        coli: col1,
-                        coli_1: col1_1,
-                        coli_2: col1_2,
+                        colBlue: colFName,
+                        colBlue_1: colFName_1,
+                        colBlue_2: colFName_2,
                         obscure: false,
                         onChange: (value) {
                           globals.fName = value;
@@ -113,9 +113,9 @@ class _registrationState extends State<registration> {
                       child: myTextInput(textString: "Last Name",
                         labelText: 'Last Name',
                         widthh: 145.0,
-                        coli: col2,
-                        coli_1: col2_1,
-                        coli_2: col2_2,
+                        colBlue: colLName,
+                        colBlue_1: colLName_1,
+                        colBlue_2: colLName_2,
                         obscure: false,
                         onChange: (value) {
                           globals.lName = value;
@@ -130,9 +130,9 @@ class _registrationState extends State<registration> {
                   child: myTextInput(textString: "UserName",
                     labelText: 'UserName',
                     widthh: MediaQuery.of(context).size.width * 0.78,
-                    coli: col3,
-                    coli_1: col3_1,
-                    coli_2: col3_2,
+                    colBlue: colUserName,
+                    colBlue_1: colUserName_1,
+                    colBlue_2: colUserName_2,
                     obscure: false,
                     onChange: (value) {
                       globals.userName = value;
@@ -145,9 +145,9 @@ class _registrationState extends State<registration> {
                   child: myTextInput(textString: "Email Address",
                     labelText: 'Email Address',
                     widthh: MediaQuery.of(context).size.width * 0.78,
-                    coli: col8,
-                    coli_1: col8_1,
-                    coli_2: col8_2,
+                    colBlue: colEmail,
+                    colBlue_1: colEmail_1,
+                    colBlue_2: colEmail_2,
                     obscure: false,
                     onChange: (value) {
                       globals.email = value;
@@ -160,9 +160,9 @@ class _registrationState extends State<registration> {
                   child: myTextInput(textString: "Password",
                     labelText: 'Password',
                     widthh: MediaQuery.of(context).size.width * 0.78,
-                    coli: col5,
-                    coli_1: col5_1,
-                    coli_2: col5_2,
+                    colBlue: colPass,
+                    colBlue_1: colPass_1,
+                    colBlue_2: colPass_2,
                     obscure: true,
                     onChange: (value) {
                       globals.password = value;
@@ -175,9 +175,9 @@ class _registrationState extends State<registration> {
                   child: myTextInput(textString: "ReEnterPassword",
                     labelText: 'ReEnterPassword',
                     widthh: MediaQuery.of(context).size.width * 0.78,
-                    coli: col6,
-                    coli_1: col6_1,
-                    coli_2: col6_2,
+                    colBlue: colRePass,
+                    colBlue_1: colRePass_1,
+                    colBlue_2: colRePass_2,
                     obscure: true,
                     onChange: (value) {
                       globals.repassword = value;
@@ -191,9 +191,9 @@ class _registrationState extends State<registration> {
                   child: myTextInput(textString: "Phone Number",
                     labelText: 'Phone Number',
                     widthh: MediaQuery.of(context).size.width * 0.78,
-                    coli: col7,
-                    coli_1: col7_1,
-                    coli_2: col7_2,
+                    colBlue: colPhoneNb,
+                    colBlue_1: colPhoneNb_1,
+                    colBlue_2: colPhoneNb_2,
                     obscure: false,
                     keybType: TextInputType.numberWithOptions(
                         decimal: true),
@@ -203,14 +203,14 @@ class _registrationState extends State<registration> {
                   ),
                 ),
 
-                radioButton(),
+                myRadioButton(),
 
                 Text("Choose your Gender", style: TextStyle(
-                  color: col9,
+                  color: colGender,
                   fontSize: 15.0,
                 ),),
 
-                dateOfBirth(),
+                myDateOfBirth(),
 
 
                 // Padding(
@@ -336,43 +336,43 @@ class _registrationState extends State<registration> {
 
     if (if1) {
       setState(() {
-        col1 = Colors.blue.shade50;
-        col1_1 = Colors.blue.shade900;
-        col1_2 = Colors.blue.shade900.withOpacity(0.5);
+        colFName = Colors.blue.shade50;
+        colFName_1 = Colors.blue.shade900;
+        colFName_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       setState(() {
-        col1 = Colors.red.shade50;
-        col1_1 = Colors.red.shade900;
-        col1_2 = Colors.red.shade900.withOpacity(0.5);
+        colFName = Colors.red.shade50;
+        colFName_1 = Colors.red.shade900;
+        colFName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
     if (if2) {
       setState(() {
-        col2 = Colors.blue.shade50;
-        col2_1 = Colors.blue.shade900;
-        col2_2 = Colors.blue.shade900.withOpacity(0.5);
+        colLName = Colors.blue.shade50;
+        colLName_1 = Colors.blue.shade900;
+        colLName_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       setState(() {
-        col2 = Colors.red.shade50;
-        col2_1 = Colors.red.shade900;
-        col2_2 = Colors.red.shade900.withOpacity(0.5);
+        colLName = Colors.red.shade50;
+        colLName_1 = Colors.red.shade900;
+        colLName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
     if (if3) {
         setState(() {
-          col3 = Colors.blue.shade50;
-          col3_1 = Colors.blue.shade900;
-          col3_2 = Colors.blue.shade900.withOpacity(0.5);
+          colUserName = Colors.blue.shade50;
+          colUserName_1 = Colors.blue.shade900;
+          colUserName_2 = Colors.blue.shade900.withOpacity(0.5);
         });
     } else {
       setState(() {
-        col3 = Colors.red.shade50;
-        col3_1 = Colors.red.shade900;
-        col3_2 = Colors.red.shade900.withOpacity(0.5);
+        colUserName = Colors.red.shade50;
+        colUserName_1 = Colors.red.shade900;
+        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
@@ -395,29 +395,29 @@ class _registrationState extends State<registration> {
 
     if (if5) {
         setState(() {
-          col5 = Colors.blue.shade50;
-          col5_1 = Colors.blue.shade900;
-          col5_2 = Colors.blue.shade900.withOpacity(0.5);
+          colPass = Colors.blue.shade50;
+          colPass_1 = Colors.blue.shade900;
+          colPass_2 = Colors.blue.shade900.withOpacity(0.5);
         });
     } else {
       setState(() {
-        col5 = Colors.red.shade50;
-        col5_1 = Colors.red.shade900;
-        col5_2 = Colors.red.shade900.withOpacity(0.5);
+        colPass = Colors.red.shade50;
+        colPass_1 = Colors.red.shade900;
+        colPass_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
     if (if6) {
       setState(() {
-        col6 = Colors.blue.shade50;
-        col6_1 = Colors.blue.shade900;
-        col6_2 = Colors.blue.shade900.withOpacity(0.5);
+        colRePass = Colors.blue.shade50;
+        colRePass_1 = Colors.blue.shade900;
+        colRePass_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       setState(() {
-        col6 = Colors.red.shade50;
-        col6_1 = Colors.red.shade900;
-        col6_2 = Colors.red.shade900.withOpacity(0.5);
+        colRePass = Colors.red.shade50;
+        colRePass_1 = Colors.red.shade900;
+        colRePass_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
@@ -425,40 +425,40 @@ class _registrationState extends State<registration> {
 
     if (if7) {
       setState(() {
-        col7 = Colors.blue.shade50;
-        col7_1 = Colors.blue.shade900;
-        col7_2 = Colors.blue.shade900.withOpacity(0.5);
+        colPhoneNb = Colors.blue.shade50;
+        colPhoneNb_1 = Colors.blue.shade900;
+        colPhoneNb_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       setState(() {
-        col7 = Colors.red.shade50;
-        col7_1 = Colors.red.shade900;
-        col7_2 = Colors.red.shade900.withOpacity(0.5);
+        colPhoneNb = Colors.red.shade50;
+        colPhoneNb_1 = Colors.red.shade900;
+        colPhoneNb_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
     if (if8) {
       setState(() {
-        col8 = Colors.blue.shade50;
-        col8_1 = Colors.blue.shade900;
-        col8_2 = Colors.blue.shade900.withOpacity(0.5);
+        colEmail = Colors.blue.shade50;
+        colEmail_1 = Colors.blue.shade900;
+        colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       setState(() {
-        col8 = Colors.red.shade50;
-        col8_1 = Colors.red.shade900;
-        col8_2 = Colors.red.shade900.withOpacity(0.5);
+        colEmail = Colors.red.shade50;
+        colEmail_1 = Colors.red.shade900;
+        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
       });
     }
 
 
     if (if9) {
       setState(() {
-        col9 = Colors.transparent;
+        colGender = Colors.transparent;
       });
     } else {
       setState(() {
-        col9 = Colors.red.shade700;
+        colGender = Colors.red.shade700;
       });
     }
 
@@ -485,9 +485,9 @@ class _registrationState extends State<registration> {
                       _reg();
                     } else {
                       setState(() {
-                        col7 = Colors.red.shade50;
-                        col7_1 = Colors.red.shade900;
-                        col7_2 = Colors.red.shade900.withOpacity(0.5);
+                        colPhoneNb = Colors.red.shade50;
+                        colPhoneNb_1 = Colors.red.shade900;
+                        colPhoneNb_2 = Colors.red.shade900.withOpacity(0.5);
                       });
                       showDialog(
                           context: context,
@@ -547,12 +547,12 @@ class _registrationState extends State<registration> {
               }
             }else {
               setState(() {
-                col5 = Colors.red.shade50;
-                col5_1 = Colors.red.shade900;
-                col5_2 = Colors.red.shade900.withOpacity(0.5);
-                col6 = Colors.red.shade50;
-                col6_1 = Colors.red.shade900;
-                col6_2 = Colors.red.shade900.withOpacity(0.5);
+                colPass = Colors.red.shade50;
+                colPass_1 = Colors.red.shade900;
+                colPass_2 = Colors.red.shade900.withOpacity(0.5);
+                colRePass = Colors.red.shade50;
+                colRePass_1 = Colors.red.shade900;
+                colRePass_2 = Colors.red.shade900.withOpacity(0.5);
               });
               showDialog(
                   context: context,
@@ -561,9 +561,9 @@ class _registrationState extends State<registration> {
             }
           }else {
             setState(() {
-              col5 = Colors.red.shade50;
-              col5_1 = Colors.red.shade900;
-              col5_2 = Colors.red.shade900.withOpacity(0.5);
+              colPass = Colors.red.shade50;
+              colPass_1 = Colors.red.shade900;
+              colPass_2 = Colors.red.shade900.withOpacity(0.5);
             });
             showDialog(
                 context: context,
@@ -572,12 +572,12 @@ class _registrationState extends State<registration> {
           }
         }else {
           setState(() {
-            col5 = Colors.red.shade50;
-            col5_1 = Colors.red.shade900;
-            col5_2 = Colors.red.shade900.withOpacity(0.5);
-            col6 = Colors.red.shade50;
-            col6_1 = Colors.red.shade900;
-            col6_2 = Colors.red.shade900.withOpacity(0.5);
+            colPass = Colors.red.shade50;
+            colPass_1 = Colors.red.shade900;
+            colPass_2 = Colors.red.shade900.withOpacity(0.5);
+            colRePass = Colors.red.shade50;
+            colRePass_1 = Colors.red.shade900;
+            colRePass_2 = Colors.red.shade900.withOpacity(0.5);
           });
           showDialog(
               context: context,
@@ -586,9 +586,9 @@ class _registrationState extends State<registration> {
         }
       } else {
         setState(() {
-          col8 = Colors.red.shade50;
-          col8_1 = Colors.red.shade900;
-          col8_2 = Colors.red.shade900.withOpacity(0.5);
+          colEmail = Colors.red.shade50;
+          colEmail_1 = Colors.red.shade900;
+          colEmail_2 = Colors.red.shade900.withOpacity(0.5);
         });
         showDialog(
             context: context,
