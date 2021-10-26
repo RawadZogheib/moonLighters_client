@@ -12,6 +12,7 @@ import 'package:flutter_client/widgets/Button/myButton.dart';
 import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
 import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
 import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
+import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
@@ -21,39 +22,49 @@ RegExp exp = new RegExp(r"^[a-zA-Z0-9_\.]*$", caseSensitive: false);
 RegExp mailExp = new RegExp("[a-zA-Z0-9]+@(g|hot)mail.com", caseSensitive: false);
 RegExp phoneExp = new RegExp("[0-9]{8}");
 
+int id = 0;     // call it for text error
 
-Color colFName = Colors.blue.shade50;               //fname
-Color colFName_1 = Colors.blue.shade900;
-Color colFName_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colFName = globals.blue;               //fname
+Color colFName_1 = globals.blue_1;
+Color colFName_2 = globals.blue_2;
 
-Color colLName = Colors.blue.shade50;               //lname
-Color colLName_1 = Colors.blue.shade900;
-Color colLName_2 = Colors.blue.shade900.withOpacity(0.5);
-
-
-Color colUserName = Colors.blue.shade50;                //username
-Color colUserName_1 = Colors.blue.shade900;
-Color colUserName_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colLName = globals.blue;               //lname
+Color colLName_1 = globals.blue_1;
+Color colLName_2 = globals.blue_2;
 
 
-Color colPass = Colors.blue.shade50;               //password
-Color colPass_1 = Colors.blue.shade900;
-Color colPass_2 = Colors.blue.shade900.withOpacity(0.5);
-
-Color colRePass = Colors.blue.shade50;               //repassword
-Color colRePass_1 = Colors.blue.shade900;
-Color colRePass_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colUserName = globals.blue;                //username
+Color colUserName_1 = globals.blue_1;
+Color colUserName_2 = globals.blue_2;
 
 
-Color colPhoneNb = Colors.blue.shade50;               //phoneNumber
-Color colPhoneNb_1 = Colors.blue.shade900;
-Color colPhoneNb_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colPass = globals.blue;               //password
+Color colPass_1 = globals.blue_1;
+Color colPass_2 = globals.blue_2;
 
-Color colEmail = Colors.blue.shade50;               //email
-Color colEmail_1 = Colors.blue.shade900;
-Color colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colRePass = globals.blue;               //repassword
+Color colRePass_1 = globals.blue_1;
+Color colRePass_2 = globals.blue_2;
 
-Color colGender = Colors.transparent;             //genderError
+
+Color colPhoneNb = globals.blue;               //phoneNumber
+Color colPhoneNb_1 = globals.blue_1;
+Color colPhoneNb_2 = globals.blue_2;
+
+Color colEmail = globals.blue;               //email
+Color colEmail_1 = globals.blue_1;
+Color colEmail_2 = globals.blue_2;
+
+Color colRadioMale = globals.blue;              // background color for gender button
+Color colRadioMale_1 = globals.blue_1;
+Color colRadioFem = globals.blue;
+Color colRadioFem_1 = globals.blue_1;
+
+Color colGender = globals.transparent;             //genderError
+
+Color colDateBirth = globals.transparent;
+
+Color colErrorText = globals.transparent;       // making text for textField errors
 
 
 class registration extends StatefulWidget {
@@ -68,6 +79,7 @@ class _registrationState extends State<registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: globals.whiteBlue,
       appBar: AppBar(
         centerTitle: true,
         title: Text("Sign up",
@@ -80,8 +92,7 @@ class _registrationState extends State<registration> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.0001,
-                      top: MediaQuery.of(context).size.height * 0.04, bottom: MediaQuery.of(context).size.height * 0.03),
+                  padding: EdgeInsets.all(8.0),
                   child: Text("Create Your Account", style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -89,65 +100,105 @@ class _registrationState extends State<registration> {
                   ),),
                 ),
 
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
-                      child: myTextInput(
-                        textString: "First Name",
-                        labelText: 'First Name',
-                        widthh: 145.0,
-                        colBlue: colFName,
-                        colBlue_1: colFName_1,
-                        colBlue_2: colFName_2,
-                        obscure: false,
-                        onChange: (value) {
-                          globals.fName = value;
-                        },
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        child: myTextInput(
+                          textString: "First Name",
+                          labelText: 'First Name',
+                          colBlue: colFName,
+                          colBlue_1: colFName_1,
+                          colBlue_2: colFName_2,
+                          textInputAction: TextInputAction.next,
+                          spaceAllowed: false,
+                          obscure: false,
+                          onChange: (value) {
+                            globals.fName = value;
+                          },
+                        ),
                       ),
                     ),
 
-                    Padding(
-                      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03, bottom: 8.0),
-                      child: myTextInput(textString: "Last Name",
-                        labelText: 'Last Name',
-                        widthh: 145.0,
-                        colBlue: colLName,
-                        colBlue_1: colLName_1,
-                        colBlue_2: colLName_2,
-                        obscure: false,
-                        onChange: (value) {
-                          globals.lName = value;
-                        },
+
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5 ,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        child: myTextInput(textString: "Last Name",
+                          labelText: 'Last Name',
+                          colBlue: colLName,
+                          colBlue_1: colLName_1,
+                          colBlue_2: colLName_2,
+                          textInputAction: TextInputAction.next,
+                          spaceAllowed: true,
+                          obscure: false,
+                          onChange: (value) {
+                            globals.lName = value;
+                          },
+                        ),
                       ),
                     ),
                   ],
                 ),
 
+
+
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.03,right: MediaQuery.of(context).size.width * 0.03, top: 8.0),
+                  padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(textString: "UserName",
                     labelText: 'UserName',
-                    widthh: MediaQuery.of(context).size.width * 0.78,
+
                     colBlue: colUserName,
                     colBlue_1: colUserName_1,
                     colBlue_2: colUserName_2,
+                    textInputAction: TextInputAction.next,
+                    spaceAllowed: false,
                     obscure: false,
                     onChange: (value) {
                       globals.userName = value;
                     },),
                 ),
 
+                if(id == 1)
+                  myErrorText(
+                    errorText:globals.error1,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 2)
+                    myErrorText(
+                      errorText:globals.error2_1,
+                      color: colErrorText = globals.red_1,
+                    ),
+
+                if(id == 3)
+                  myErrorText(
+                    errorText:globals.error2_2,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 4)
+                  myErrorText(
+                    errorText:globals.error5,
+                    color: colErrorText = globals.red_1,
+                  ),
+
 
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
+                  padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(textString: "Email Address",
                     labelText: 'Email Address',
-                    widthh: MediaQuery.of(context).size.width * 0.78,
+
                     colBlue: colEmail,
                     colBlue_1: colEmail_1,
                     colBlue_2: colEmail_2,
+                    textInputAction: TextInputAction.next,
+                    spaceAllowed: false,
                     obscure: false,
                     onChange: (value) {
                       globals.email = value;
@@ -155,14 +206,36 @@ class _registrationState extends State<registration> {
                   ),
                 ),
 
+                if(id == 1)
+                  myErrorText(
+                    errorText:globals.error1,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 5)
+                  myErrorText(
+                    errorText:globals.error2_5,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 6)
+                  myErrorText(
+                    errorText:globals.error6,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001,top: 8.0),
+                  padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(textString: "Password",
                     labelText: 'Password',
-                    widthh: MediaQuery.of(context).size.width * 0.78,
+
                     colBlue: colPass,
                     colBlue_1: colPass_1,
                     colBlue_2: colPass_2,
+                    maxLines: 1,
+                    textInputAction: TextInputAction.next,
+                    spaceAllowed: false,
                     obscure: true,
                     onChange: (value) {
                       globals.password = value;
@@ -170,14 +243,29 @@ class _registrationState extends State<registration> {
                   ),
                 ),
 
+                if(id == 7)
+                  myErrorText(
+                    errorText:globals.error2_3,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 8)
+                  myErrorText(
+                    errorText:globals.error3,
+                    color: colErrorText = globals.red_1,
+                  ),
+
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
+                  padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(textString: "ReEnterPassword",
                     labelText: 'ReEnterPassword',
-                    widthh: MediaQuery.of(context).size.width * 0.78,
+
                     colBlue: colRePass,
                     colBlue_1: colRePass_1,
                     colBlue_2: colRePass_2,
+                    maxLines: 1,
+                    textInputAction: TextInputAction.next,
+                    spaceAllowed: false,
                     obscure: true,
                     onChange: (value) {
                       globals.repassword = value;
@@ -185,57 +273,102 @@ class _registrationState extends State<registration> {
                   ),
                 ),
 
+                if(id == 8)
+                  myErrorText(
+                    errorText:globals.error3,
+                    color: colErrorText = globals.red_1,
+                  ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.001, top: 8.0),
+                  padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0),
                   child: myTextInput(textString: "Phone Number",
                     labelText: 'Phone Number',
-                    widthh: MediaQuery.of(context).size.width * 0.78,
+                    keybType: TextInputType.numberWithOptions(
+                        decimal: true),
+
                     colBlue: colPhoneNb,
                     colBlue_1: colPhoneNb_1,
                     colBlue_2: colPhoneNb_2,
+                    textInputAction: TextInputAction.done,
+                    spaceAllowed: false,
                     obscure: false,
-                    keybType: TextInputType.numberWithOptions(
-                        decimal: true),
                     onChange: (value) {
                       globals.phoneNumber = value;
                     },
                   ),
                 ),
 
-                myRadioButton(),
+                if(id == 9)
+                  myErrorText(
+                    errorText:globals.error2_7,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                if(id == 10)
+                  myErrorText(
+                    errorText:globals.error9,
+                    color: colErrorText = globals.red_1,
+                  ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                      child: myRadioButton(
+                        text: ' Male ',
+                        color: colRadioMale,
+                        color_1: colRadioMale_1,
+                        onPressed: (){
+                          globals.gender = 'Male';
+                          setState(() {
+                            colRadioMale = globals.blue_1;
+                            colRadioMale_1 = globals.blue;
+                            colRadioFem = globals.blue;
+                            colRadioFem_1 = globals.blue_1;
+                          });
+
+                          print(globals.gender);
+                        },
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                      child: myRadioButton(
+                        text: 'Female',
+                        color: colRadioFem,
+                        color_1: colRadioFem_1,
+                        onPressed: (){
+                          globals.gender = 'Female';
+                          setState(() {
+                            colRadioFem = globals.blue_1;
+                            colRadioFem_1 = globals.blue;
+                            colRadioMale = globals.blue;
+                            colRadioMale_1 = globals.blue_1;
+                          });
+                          print(globals.gender);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+
 
                 Text("Choose your Gender", style: TextStyle(
                   color: colGender,
                   fontSize: 15.0,
                 ),),
 
-                myDateOfBirth(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: myDateOfBirth(),
+                ),
 
-
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Row(
-                //     children: [
-                //       Text("Gender: ",style: TextStyle(
-                //           color: Colors.lightBlue,
-                //           fontSize: 20.0
-                //       ),),
-                //       radioBtn(
-                //         valuee: "Male",
-                //         title: "Male",
-                //         onChanged: (value){
-                //           globals.gender = value;
-                //         },),
-                //       radioBtn(
-                //         valuee: "Female",
-                //         title: "Female",
-                //         onChanged: (value){
-                //           globals.gender = value;
-                //         },)
-                //     ],
-                //   ),
-                // ),
+                Text("Choose your Date Of Birth", style: TextStyle(
+                  color: colDateBirth,
+                  fontSize: 15.0,
+                ),),
 
                 Padding(
                   padding: const EdgeInsets.all(28.0),
@@ -263,6 +396,7 @@ class _registrationState extends State<registration> {
                         }
                       }),
                 ),
+
 
 
               ],
@@ -329,50 +463,51 @@ class _registrationState extends State<registration> {
     }
 
     if (globals.gender != null) {
-      if (globals.gender!.isNotEmpty)
+      if (globals.gender!.isNotEmpty) {
         if9 = true;
+      }
     }
 
 
     if (if1) {
       setState(() {
-        colFName = Colors.blue.shade50;
-        colFName_1 = Colors.blue.shade900;
-        colFName_2 = Colors.blue.shade900.withOpacity(0.5);
+        colFName = globals.blue;
+        colFName_1 = globals.blue_1;
+        colFName_2 = globals.blue_2;
       });
     } else {
       setState(() {
-        colFName = Colors.red.shade50;
-        colFName_1 = Colors.red.shade900;
-        colFName_2 = Colors.red.shade900.withOpacity(0.5);
+        colFName = globals.red;
+        colFName_1 = globals.red_1;
+        colFName_2 = globals.red_2;
       });
     }
 
     if (if2) {
       setState(() {
-        colLName = Colors.blue.shade50;
-        colLName_1 = Colors.blue.shade900;
-        colLName_2 = Colors.blue.shade900.withOpacity(0.5);
+        colLName = globals.blue;
+        colLName_1 = globals.blue_1;
+        colLName_2 = globals.blue_2;
       });
     } else {
       setState(() {
-        colLName = Colors.red.shade50;
-        colLName_1 = Colors.red.shade900;
-        colLName_2 = Colors.red.shade900.withOpacity(0.5);
+        colLName = globals.red;
+        colLName_1 = globals.red_1;
+        colLName_2 = globals.red_2;
       });
     }
 
     if (if3) {
         setState(() {
-          colUserName = Colors.blue.shade50;
-          colUserName_1 = Colors.blue.shade900;
-          colUserName_2 = Colors.blue.shade900.withOpacity(0.5);
+          colUserName = globals.blue;
+          colUserName_1 = globals.blue_1;
+          colUserName_2 = globals.blue_2;
         });
     } else {
       setState(() {
-        colUserName = Colors.red.shade50;
-        colUserName_1 = Colors.red.shade900;
-        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
+        colUserName = globals.red;
+        colUserName_1 = globals.red_1;
+        colUserName_2 = globals.red_2;
       });
     }
 
@@ -380,44 +515,46 @@ class _registrationState extends State<registration> {
 
     if (if4) {
       setState(() {
-        col4 = Colors.blue.shade50;
-        col4_1 = Colors.blue.shade900;
-        col4_2 = Colors.blue.shade900.withOpacity(0.5);
+        colDateOfBirth = globals.blue;
+        colDateOfBirth_1 = globals.blue_1;
+        colDateOfBirth_2 = globals.blue_2;
+        colDateBirth = globals.transparent;
       });
     } else {
       setState(() {
-        col4 = Colors.red.shade50;
-        col4_1 = Colors.red.shade900;
-        col4_2 = Colors.red.shade900.withOpacity(0.5);
+        colDateOfBirth = globals.red;
+        colDateOfBirth_1 = globals.red_1;
+        colDateOfBirth_2 = globals.red_2;
+        colDateBirth = globals.red_1;
       });
     }
 
 
     if (if5) {
         setState(() {
-          colPass = Colors.blue.shade50;
-          colPass_1 = Colors.blue.shade900;
-          colPass_2 = Colors.blue.shade900.withOpacity(0.5);
+          colPass = globals.blue;
+          colPass_1 = globals.blue_1;
+          colPass_2 = globals.blue_2;
         });
     } else {
       setState(() {
-        colPass = Colors.red.shade50;
-        colPass_1 = Colors.red.shade900;
-        colPass_2 = Colors.red.shade900.withOpacity(0.5);
+        colPass = globals.red;
+        colPass_1 = globals.red_1;
+        colPass_2 = globals.red_2;
       });
     }
 
     if (if6) {
       setState(() {
-        colRePass = Colors.blue.shade50;
-        colRePass_1 = Colors.blue.shade900;
-        colRePass_2 = Colors.blue.shade900.withOpacity(0.5);
+        colRePass = globals.blue;
+        colRePass_1 = globals.blue_1;
+        colRePass_2 = globals.blue_2;
       });
     } else {
       setState(() {
-        colRePass = Colors.red.shade50;
-        colRePass_1 = Colors.red.shade900;
-        colRePass_2 = Colors.red.shade900.withOpacity(0.5);
+        colRePass = globals.red;
+        colRePass_1 = globals.red_1;
+        colRePass_2 = globals.red_2;
       });
     }
 
@@ -425,36 +562,36 @@ class _registrationState extends State<registration> {
 
     if (if7) {
       setState(() {
-        colPhoneNb = Colors.blue.shade50;
-        colPhoneNb_1 = Colors.blue.shade900;
-        colPhoneNb_2 = Colors.blue.shade900.withOpacity(0.5);
+        colPhoneNb = globals.blue;
+        colPhoneNb_1 = globals.blue_1;
+        colPhoneNb_2 = globals.blue_2;
       });
     } else {
       setState(() {
-        colPhoneNb = Colors.red.shade50;
-        colPhoneNb_1 = Colors.red.shade900;
-        colPhoneNb_2 = Colors.red.shade900.withOpacity(0.5);
+        colPhoneNb = globals.red;
+        colPhoneNb_1 = globals.red_1;
+        colPhoneNb_2 = globals.red_2;
       });
     }
 
     if (if8) {
       setState(() {
-        colEmail = Colors.blue.shade50;
-        colEmail_1 = Colors.blue.shade900;
-        colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+        colEmail = globals.blue;
+        colEmail_1 = globals.blue_1;
+        colEmail_2 = globals.blue_2;
       });
     } else {
       setState(() {
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        colEmail = globals.red;
+        colEmail_1 = globals.red_1;
+        colEmail_2 = globals.red_2;
       });
     }
 
 
     if (if9) {
       setState(() {
-        colGender = Colors.transparent;
+        colGender = globals.transparent;
       });
     } else {
       setState(() {
@@ -485,115 +622,67 @@ class _registrationState extends State<registration> {
                       _reg();
                     } else {
                       setState(() {
-                        colPhoneNb = Colors.red.shade50;
-                        colPhoneNb_1 = Colors.red.shade900;
-                        colPhoneNb_2 = Colors.red.shade900.withOpacity(0.5);
+                        colPhoneNb = globals.red;
+                        colPhoneNb_1 = globals.red_1;
+                        colPhoneNb_2 = globals.red_2;
                       });
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => ErrorAlertDialog(
-                              message: globals.error9));
+                      id = 10;
                     }
                   }else{
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          AlertDialog(
-                            title: const Text('Error'),
-                            content: const Text(
-                                globals.error2_2),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                    );
+                    colUserName = globals.red;
+                    colUserName_1 = globals.red_1;
+                    colUserName_2 = globals.red_2;
+                    id = 3;
                   }
                 }else{
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        AlertDialog(
-                          title: const Text('Error'),
-                          content: const Text(
-                              globals.error2_1),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                  );
+                  colUserName = globals.red;
+                  colUserName_1 = globals.red_1;
+                  colUserName_2 = globals.red_2;
+                  id = 2;
                 }
               }else{
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) =>
-                      AlertDialog(
-                        title: const Text('Error'),
-                        content: const Text(
-                            globals.error1),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                );
+                colUserName = globals.red;
+                colUserName_1 = globals.red_1;
+                colUserName_2 = globals.red_2;
+                id = 1;
               }
             }else {
               setState(() {
-                colPass = Colors.red.shade50;
-                colPass_1 = Colors.red.shade900;
-                colPass_2 = Colors.red.shade900.withOpacity(0.5);
-                colRePass = Colors.red.shade50;
-                colRePass_1 = Colors.red.shade900;
-                colRePass_2 = Colors.red.shade900.withOpacity(0.5);
+                colPass = globals.red;
+                colPass_1 = globals.red_1;
+                colPass_2 = globals.red_2;
+                colRePass = globals.red;
+                colRePass_1 = globals.red_1;
+                colRePass_2 = globals.red_2;
               });
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => ErrorAlertDialog(
-                      message: globals.error3));
+              id = 8;
             }
           }else {
             setState(() {
-              colPass = Colors.red.shade50;
-              colPass_1 = Colors.red.shade900;
-              colPass_2 = Colors.red.shade900.withOpacity(0.5);
+              colPass = globals.red;
+              colPass_1 = globals.red_1;
+              colPass_2 = globals.red_2;
             });
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => ErrorAlertDialog(
-                    message: globals.error2_3));
+            id = 7;
           }
         }else {
           setState(() {
-            colPass = Colors.red.shade50;
-            colPass_1 = Colors.red.shade900;
-            colPass_2 = Colors.red.shade900.withOpacity(0.5);
-            colRePass = Colors.red.shade50;
-            colRePass_1 = Colors.red.shade900;
-            colRePass_2 = Colors.red.shade900.withOpacity(0.5);
+            colPass = globals.red;
+            colPass_1 = globals.red_1;
+            colPass_2 = globals.red_2;
+            colRePass = globals.red;
+            colRePass_1 = globals.red_1;
+            colRePass_2 = globals.red_2;
           });
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error2_3));
+          id = 7;
         }
       } else {
         setState(() {
-          colEmail = Colors.red.shade50;
-          colEmail_1 = Colors.red.shade900;
-          colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+          colEmail = globals.red;
+          colEmail_1 = globals.red_1;
+          colEmail_2 = globals.red_2;
         });
-        showDialog(
-            context: context,
-            builder: (BuildContext context) => ErrorAlertDialog(
-                message: globals.error2_5));
+        id = 5;
       }
     } else {
       showDialog(
@@ -636,60 +725,33 @@ class _registrationState extends State<registration> {
         if (body[0] == "success") {
           Navigator.pushNamed(context, '/home');
         } else if (body[0] == "error1") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error1));
+          id = 1;
         } else if (body[0] == "error2_1") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error2_1));
+          id = 2;
         } else if (body[0] == "error2_2") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error2_2));
+          id = 3;
         } else if (body[0] == "error2_3") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error2_3));
+          id = 7;
         } else if (body[0] == "error2_5") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error2_5));
+          id = 5;
         } else if (body[0] == "error3") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error3));
+          id = 8;
         } else if (body[0] == "error4") {
           showDialog(
               context: context,
               builder: (BuildContext context) => ErrorAlertDialog(
                   message: globals.error4));
         } else if (body[0] == "error5") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error5));
+          id = 4;
         } else if (body[0] == "error6") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error6));
+          id = 6;
         } else if (body[0] == "error7") {
           showDialog(
               context: context,
               builder: (BuildContext context) => ErrorAlertDialog(
                   message: globals.error7));
         } else if (body[0] == "error9") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => ErrorAlertDialog(
-                  message: globals.error9));
+          id = 10;
         } else {
           showDialog(
               context: context,
@@ -730,10 +792,7 @@ class _registrationState extends State<registration> {
           );
         }  } */
       } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) => ErrorAlertDialog(
-                message: globals.error1));
+        id = 1;
       }
     } else {
       showDialog(

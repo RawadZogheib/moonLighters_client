@@ -9,14 +9,14 @@ import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 
-Color colEmail = Colors.blue.shade50;               //email
-Color colEmail_1 = Colors.blue.shade900;
-Color colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colEmail = globals.blue;               //email
+Color colEmail_1 = globals.blue_1;
+Color colEmail_2 = globals.blue_2;
 
 
-Color colPass = Colors.blue.shade50;               //password
-Color colPass_1 = Colors.blue.shade900;
-Color colPass_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colPass = globals.blue;               //password
+Color colPass_1 = globals.blue_1;
+Color colPass_2 = globals.blue_2;
 
 
 class login extends StatefulWidget {
@@ -30,6 +30,7 @@ class _loginState extends State<login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: globals.whiteBlue,
       body: ListView(
         children: [
           Padding(
@@ -50,12 +51,14 @@ class _loginState extends State<login> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(textString: "Enter Your Email Address",
                       labelText: 'Enter Your Email Address',
                       colBlue: colEmail,
                       colBlue_1: colEmail_1,
                       colBlue_2: colEmail_2,
+                      textInputAction: TextInputAction.next,
+                      spaceAllowed: false,
                       obscure: false ,
                       onChange: (value){
                         globals.emailLogin = value;
@@ -63,13 +66,16 @@ class _loginState extends State<login> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
                   child: myTextInput(
                     textString: "Enter Your Password",
                     labelText: 'Enter Your Password',
                     colBlue: colPass,
                     colBlue_1: colPass_1,
                     colBlue_2: colPass_2,
+                    maxLines: 1,
+                    textInputAction: TextInputAction.none,
+                    spaceAllowed: false,
                     obscure: true,
                     onChange: (value){
                       globals.passwordLogin = value;
@@ -79,7 +85,7 @@ class _loginState extends State<login> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(28.0),
                   child: InkWell(
                     child: btn(btnText: "Submit"),
                     onTap: (){
@@ -186,7 +192,7 @@ class _loginState extends State<login> {
   _verifc() async{
 
 
-    if(globals.emailLogin != null && globals.passwordLogin != null){
+    // if(globals.emailLogin != null && globals.passwordLogin != null){
       // print(globals.emailLogin);
       // print(globals.passwordLogin);
       var data = {
@@ -213,8 +219,11 @@ class _loginState extends State<login> {
             builder: (BuildContext context) => ErrorAlertDialog(
                 message: globals.error8));
       }
-    }else{
-
-    }
+    // }else{
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => ErrorAlertDialog(
+    //           message: globals.error7));
+    // }
   }
 }

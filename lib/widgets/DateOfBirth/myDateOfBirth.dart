@@ -8,11 +8,11 @@ import 'package:intl/intl.dart';
 
 
 
-Color col4 = Colors.blue.shade50;
-Color col4_1 = Colors.blue.shade900;
-Color col4_2 = Colors.blue.shade900.withOpacity(0.5);
+Color colDateOfBirth = globals.blue;
+Color colDateOfBirth_1 = globals.blue_1;
+Color colDateOfBirth_2 = globals.blue_2;
 
-
+String dateOfBirthText = '';
 
 class myDateOfBirth extends StatefulWidget {
   const myDateOfBirth({Key? key}) : super(key: key);
@@ -40,7 +40,9 @@ class _myDateOfBirthState extends State<myDateOfBirth> {
         _date = _datePicker;
         print(_date.toString());
 
+
         globals.dateOfBirth = myFormat.format(_date);
+        dateOfBirthText = myFormat.format(_date);
       });
     }
   }
@@ -49,8 +51,10 @@ class _myDateOfBirthState extends State<myDateOfBirth> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.78,
       child: TextFormField(
-        controller: _datecontroller,
-        cursorColor: col4_1,
+        key: Key(dateOfBirthText),
+        initialValue: dateOfBirthText,
+        //controller: _datecontroller,
+        cursorColor: colDateOfBirth_1,
         readOnly: true,
         onTap: (){
           setState(() {
@@ -59,19 +63,19 @@ class _myDateOfBirthState extends State<myDateOfBirth> {
         },
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: col4),
+              borderSide: BorderSide(color: colDateOfBirth),
               borderRadius: BorderRadius.circular(10)),
           filled: true,
-          fillColor: col4,
+          fillColor: colDateOfBirth,
           labelText: "Date of birth",
-          labelStyle: TextStyle( color: col4_2),
-          hintText: ('${myFormat.format(_date)}'),
+          labelStyle: TextStyle( color: colDateOfBirth_1),
+          hintText: ('${globals.dateOfBirth}'),
           hintStyle: TextStyle(
-            color: Colors.indigo,
+            color: colDateOfBirth_1,
             fontSize: 15.0,
           ),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: col4_1, width: 2.0),
+              borderSide: BorderSide(color: colDateOfBirth, width: 2.0),
               borderRadius: BorderRadius.circular(10)
           ),
         ),
