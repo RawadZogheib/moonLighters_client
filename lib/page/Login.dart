@@ -191,8 +191,8 @@ class _loginState extends State<login> {
 
   _verifc() async{
 
-
-    // if(globals.emailLogin != null && globals.passwordLogin != null){
+    try {
+      // if(globals.emailLogin != null && globals.passwordLogin != null){
       // print(globals.emailLogin);
       // print(globals.passwordLogin);
       var data = {
@@ -200,14 +200,15 @@ class _loginState extends State<login> {
         'password': globals.passwordLogin
       };
 
-      var res = await CallApi().postData(data, 'Login/Control/(Control)Login.php');
+      var res = await CallApi().postData(
+          data, 'Login/Control/(Control)Login.php');
       print(res);
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
-      if(body[0] == "success"){
+      if (body[0] == "success") {
         Navigator.pushNamed(context, '/home');
-      }else if(body[0] == "error8"){
+      } else if (body[0] == "error8") {
         colEmail = Colors.red.shade50;
         colEmail_1 = Colors.red.shade900;
         colEmail_2 = Colors.red.shade900.withOpacity(0.5);
@@ -216,14 +217,21 @@ class _loginState extends State<login> {
         colPass_2 = Colors.red.shade900.withOpacity(0.5);
         showDialog(
             context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(
+                    message: globals.error8));
+      } else{
+        showDialog(
+            context: context,
             builder: (BuildContext context) => ErrorAlertDialog(
-                message: globals.error8));
+                message: globals.errorElse));
       }
-    // }else{
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) => ErrorAlertDialog(
-    //           message: globals.error7));
-    // }
+
+    }catch(e){
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => ErrorAlertDialog(
+              message: globals.errorException));
+    }
   }
 }
