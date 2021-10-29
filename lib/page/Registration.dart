@@ -606,113 +606,105 @@ class _registrationState extends State<registration> {
         }
       }
     } catch (e) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text(globals.errorElse),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => ErrorAlertDialog(
+              message: globals.errorElse));
     }
   }
 
   _reg() async {
-    if (globals.email != null &&
-        globals.fName != null &&
-        globals.lName != null &&
-        globals.userName != null &&
-        globals.password != null &&
-        globals.dateOfBirth != null &&
-        globals.gender != null &&
-        globals.phoneNumber != null) {
-      if (!globals.email!.contains(" ") && !globals.userName!.contains(" ")) {
-        //if(exp.hasMatch(globals.password!)) {
-        //if (globals.password == globals.repassword) {
-        var data = {
-          'email': globals.email,
-          'fname': globals.fName,
-          'lname': globals.lName,
-          'userName': globals.userName,
-          'password': globals.password,
-          'repassword': globals.repassword,
-          'dateOfBirth': globals.dateOfBirth,
-          'phoneNumber': globals.phoneNumber,
-          'gender': globals.gender
-        };
-        var res = await CallApi()
-            .postData(data, 'Registration/Control/(Control)registration.php');
-        print(res.body);
-        List<dynamic> body = json.decode(res.body);
-        if (body[0] == "success") {
-          Navigator.pushNamed(context, '/home');
-        } else if (body[0] == "error1") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error1));
-        } else if (body[0] == "error2_1") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error2_1));
-        } else if (body[0] == "error2_2") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error2_2));
-        } else if (body[0] == "error2_3") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error2_3));
-        } else if (body[0] == "error2_5") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error2_5));
-        } else if (body[0] == "error2_7") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error2_7));
-        } else if (body[0] == "error3") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error3));
-        } else if (body[0] == "error4") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error4));
-        } else if (body[0] == "error5") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error5));
-        } else if (body[0] == "error6") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error6));
-        } else if (body[0] == "error7") {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error7));
-        } else {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.errorElse));
-        }
-        /* } else {
+    try {
+      if (globals.email != null &&
+          globals.fName != null &&
+          globals.lName != null &&
+          globals.userName != null &&
+          globals.password != null &&
+          globals.dateOfBirth != null &&
+          globals.gender != null &&
+          globals.phoneNumber != null) {
+        if (!globals.email!.contains(" ") && !globals.userName!.contains(" ")) {
+          //if(exp.hasMatch(globals.password!)) {
+          //if (globals.password == globals.repassword) {
+          var data = {
+            'email': globals.email,
+            'fname': globals.fName,
+            'lname': globals.lName,
+            'userName': globals.userName,
+            'password': globals.password,
+            'repassword': globals.repassword,
+            'dateOfBirth': globals.dateOfBirth,
+            'phoneNumber': globals.phoneNumber,
+            'gender': globals.gender
+          };
+          var res = await CallApi()
+              .postData(data, 'Registration/Control/(Control)registration.php');
+          print(res.body);
+          List<dynamic> body = json.decode(res.body);
+          if (body[0] == "success") {
+            Navigator.pushNamed(context, '/home');
+          } else if (body[0] == "error1") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error1));
+          } else if (body[0] == "error2_1") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error2_1));
+          } else if (body[0] == "error2_2") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error2_2));
+          } else if (body[0] == "error2_3") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error2_3));
+          } else if (body[0] == "error2_5") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error2_5));
+          } else if (body[0] == "error2_7") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error2_7));
+          } else if (body[0] == "error3") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error3));
+          } else if (body[0] == "error4") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error4));
+          } else if (body[0] == "error5") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error5));
+          } else if (body[0] == "error6") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error6));
+          } else if (body[0] == "error7") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.error7));
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    ErrorAlertDialog(message: globals.errorElse));
+          }
+          /* } else {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) =>
@@ -729,7 +721,7 @@ class _registrationState extends State<registration> {
                   ),
             );
           } */
-        /* }else{
+          /* }else{
           showDialog<String>(
             context: context,
             builder: (BuildContext context) =>
@@ -745,17 +737,24 @@ class _registrationState extends State<registration> {
                 ),
           );
         }  } */
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  ErrorAlertDialog(message: globals.error1));
+        }
       } else {
         showDialog(
             context: context,
             builder: (BuildContext context) =>
-                ErrorAlertDialog(message: globals.error1));
+                ErrorAlertDialog(message: 'No nulls Allowed.'));
       }
-    } else {
+
+    }catch(e){
       showDialog(
           context: context,
-          builder: (BuildContext context) =>
-              ErrorAlertDialog(message: 'No nulls Allowed.'));
+          builder: (BuildContext context) => ErrorAlertDialog(
+              message: globals.errorElse));
     }
   }
 }
