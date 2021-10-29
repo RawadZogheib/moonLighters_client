@@ -14,11 +14,6 @@ class FirstPage extends StatefulWidget {
 class _FirstPage extends State<FirstPage>  {
 
   @override
-  void initState() {
-    super.initState();
-
-  }
-  @override
   Widget build(BuildContext context) {
 
     _timer();
@@ -36,9 +31,13 @@ class _FirstPage extends State<FirstPage>  {
   }
 
   _timer() async {
-    new Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
-    });
+    try {
+      new Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

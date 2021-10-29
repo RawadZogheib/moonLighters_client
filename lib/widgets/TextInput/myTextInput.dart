@@ -12,6 +12,7 @@ class myTextInput extends StatelessWidget {
   var colBlue, colBlue_1, colBlue_2;
   var textInputAction;
   var labelText;
+  var prefixText;
 
   myTextInput(
       {required this.textString,
@@ -23,6 +24,7 @@ class myTextInput extends StatelessWidget {
         this.colBlue_1,
         this.colBlue_2,
         this.textInputAction,
+        this.prefixText,
         required this.spaceAllowed,
         required this.obscure,
         this.onChange});
@@ -47,7 +49,9 @@ class myTextInput extends StatelessWidget {
           border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: colBlue_1),
-              borderRadius: BorderRadius.circular(10))),
+              borderRadius: BorderRadius.circular(10)),
+      prefixText: prefixText,
+      ),
       textInputAction: textInputAction,
       keyboardType: this.keybType,
       obscureText: this.obscure,

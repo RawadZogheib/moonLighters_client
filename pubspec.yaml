@@ -33,6 +33,7 @@ dependencies:
   sizer: ^2.0.15
   shared_preferences: ^2.0.8
   http: ^0.13.4
+  mailer: ^5.0.2
 
 dev_dependencies:
   flutter_test:

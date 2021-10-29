@@ -8,7 +8,7 @@ import 'package:flutter_client/globals/globals.dart' as globals;
 class myErrorText extends StatelessWidget {
   var errorText;
   var color;
-  myErrorText({this.errorText,required this.color});
+  myErrorText({required this.errorText,required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class myErrorText extends StatelessWidget {
         errorText,
         style: TextStyle(
           color: color,
-        ),),
+        ),
+      ),
     );
   }
 }

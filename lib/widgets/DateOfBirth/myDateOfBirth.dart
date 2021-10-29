@@ -49,7 +49,7 @@ class _myDateOfBirthState extends State<myDateOfBirth> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.78,
+      width: MediaQuery.of(context).size.width * 0.86,
       child: TextFormField(
         key: Key(dateOfBirthText),
         initialValue: dateOfBirthText,
