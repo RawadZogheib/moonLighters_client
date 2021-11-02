@@ -7,6 +7,10 @@ import 'package:flutter_client/hexColor/hexColor.dart';
 //Server Ip  (page[/my_api.dart])
 const String myIP = "http://147.78.45.13/";
 
+//Version
+const String version = "1.0";
+
+
 
 //Colors
 final Color blue = Colors.blue.shade50;
@@ -37,6 +41,8 @@ const String error7 = "Field cannot be empty.";
 const String error8 = "Incorrect email or password.";       // for login
 const String error9 = "It's not a phoneNumber format, example: +961########";
 const String error10 = "No data available";
+const String errorToken = "Token Error.";
+const String errorVersion = "New version available.";
 const String errorElse = "Failed to connect... Connection Problem.";
 const String errorException = "OOPs! Something went wrong. Try again in few seconds.";
 

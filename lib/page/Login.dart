@@ -196,6 +196,7 @@ class _loginState extends State<login> {
       // print(globals.emailLogin);
       // print(globals.passwordLogin);
       var data = {
+        'version': globals.version,
         'email': globals.emailLogin,
         'password': globals.passwordLogin
       };
@@ -208,7 +209,41 @@ class _loginState extends State<login> {
 
       if (body[0] == "success") {
         Navigator.pushNamed(context, '/home');
-      } else if (body[0] == "error8") {
+      }else if (body[0] == "errorToken") {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(
+                title: const Text('Error'),
+                content: const Text(
+                    globals.errorToken),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+        );
+      }else if (body[0] == "errorVersion") {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(
+                title: const Text('Error'),
+                content: const Text("Your version: " + globals.version + "\n" +
+                    globals.errorVersion),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+        );
+      }else if (body[0] == "error8") {
         colEmail = Colors.red.shade50;
         colEmail_1 = Colors.red.shade900;
         colEmail_2 = Colors.red.shade900.withOpacity(0.5);
