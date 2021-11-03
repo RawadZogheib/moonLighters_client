@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/Button/myButton.dart';
+import 'package:flutter_client/widgets/Code/sixCode.dart';
 import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
 import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
 import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
@@ -642,7 +643,11 @@ class _registrationState extends State<registration> {
           print(res.body);
           List<dynamic> body = json.decode(res.body);
           if (body[0] == "success") {
-            Navigator.pushNamed(context, '/home');
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => sixCode()).then((exit) {
+                    _nullTextCode();
+                });
           } else if (body[0] == "error1") {
             showDialog(
                 context: context,
@@ -756,5 +761,14 @@ class _registrationState extends State<registration> {
           builder: (BuildContext context) => ErrorAlertDialog(
               message: globals.errorElse));
     }
+  }
+
+  _nullTextCode(){
+    firstNb = null;
+    secondNb = null;
+    thirdNb = null;
+    fourthNb = null;
+    fifthNb = null;
+    sixNb = null;
   }
 }

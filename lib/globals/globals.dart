@@ -23,6 +23,9 @@ final Color transparent = Colors.transparent;
 final Color black = Colors.black;
 final Color whiteBlue = HexColor("#f2f3f8");
 final Color white = HexColor("#fdfdfd");
+final colCode = Colors.white38;
+final colCode_1 = Colors.white;
+final colCode_2 = Colors.white70;
 
 //Errors
 const String error1 = "No Spaces Allowed.";
@@ -45,6 +48,9 @@ const String errorToken = "Token Error.";
 const String errorVersion = "New version available.";
 const String errorElse = "Failed to connect... Connection Problem.";
 const String errorException = "OOPs! Something went wrong. Try again in few seconds.";
+
+//for 6 digit code
+String? sixCodeNb = null;
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
 String? email = null;
