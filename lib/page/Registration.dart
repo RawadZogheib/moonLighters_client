@@ -643,6 +643,7 @@ class _registrationState extends State<registration> {
           print(res.body);
           List<dynamic> body = json.decode(res.body);
           if (body[0] == "success") {
+            print("successfully done");
             showDialog(
                 context: context,
                 builder: (BuildContext context) => sixCode()).then((exit) {
