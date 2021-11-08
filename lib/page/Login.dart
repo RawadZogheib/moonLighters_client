@@ -19,6 +19,7 @@ Color colPass_1 = globals.blue_1;
 Color colPass_2 = globals.blue_2;
 
 
+
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
 
@@ -191,7 +192,7 @@ class _loginState extends State<login> {
 
   _verifc() async{
 
-    try {
+    // try {
       // if(globals.emailLogin != null && globals.passwordLogin != null){
       // print(globals.emailLogin);
       // print(globals.passwordLogin);
@@ -261,12 +262,13 @@ class _loginState extends State<login> {
             builder: (BuildContext context) => ErrorAlertDialog(
                 message: globals.errorElse));
       }
-
-    }catch(e){
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.errorException));
-    }
+    //
+    // }catch(e){
+    //   print(e);
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => ErrorAlertDialog(
+    //           message: globals.errorException));
+    // }
   }
 }

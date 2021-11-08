@@ -4,11 +4,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/hexColor/hexColor.dart';
+
+//Version
+const String version = "v1.0";
+
 //Server Ip  (page[/my_api.dart])
 const String myIP = "http://147.78.45.13/";
 
-//Version
-const String version = "1.0";
 
 
 
