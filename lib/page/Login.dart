@@ -4,14 +4,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/widgets/Button/myButton.dart';
-<<<<<<< Updated upstream
+
 import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
-=======
+
 import 'package:flutter_client/widgets/Code/codeDialog.dart';
 import 'package:flutter_client/widgets/Code/sixCode.dart';
-import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
+
 import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
->>>>>>> Stashed changes
+
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 
@@ -220,9 +220,9 @@ class _loginState extends State<login> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
-<<<<<<< Updated upstream
+
         Navigator.pushNamed(context, '/Contrat');
-=======
+
         // Navigator.pushNamed(context, '/home');
         showDialog(
             context: context,
@@ -231,7 +231,7 @@ class _loginState extends State<login> {
             _nullTextCode();
           });
         });
->>>>>>> Stashed changes
+
       }else if (body[0] == "errorToken") {
         setState(() {
           errTxt = globals.errorToken;

@@ -29,8 +29,7 @@ class sixCode extends StatelessWidget {
             padding: EdgeInsets.only(top: 28.0),
             child: Row(
               children: [
-                myCode(textString: , labelText: )
-
+                //myCode(textString: , labelText: )
                 Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Container(
@@ -44,6 +43,6 @@ class sixCode extends StatelessWidget {
                 ),
         ],
       ),
-    );
+    )]));
   }
 }

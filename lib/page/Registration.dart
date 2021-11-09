@@ -641,13 +641,13 @@ class _registrationState extends State<registration> {
           var body = json.decode(res.body);
           print(body);
           if (body[0] == "success") {
-<<<<<<< Updated upstream
+
             Navigator.pushNamed(context, '/Login');
             // print("successfully done");
-=======
+
             // Navigator.pushNamed(context, '/home');
             print("successfully done");
->>>>>>> Stashed changes
+
             // showDialog(
             //     context: context,
             //     builder: (BuildContext context) => sixCode()).then((exit) {
