@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/widgets/Button/myButton.dart';
-import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
+import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 

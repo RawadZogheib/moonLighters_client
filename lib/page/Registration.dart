@@ -8,7 +8,7 @@ import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/Button/myButton.dart';
 import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
-import 'package:flutter_client/widgets/Other/ErrorAlertDialog.dart';
+import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
 import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';

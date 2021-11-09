@@ -55,6 +55,7 @@ const String errorException = "OOPs! Something went wrong. Try again in few seco
 String? sixCodeNb = null;
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
+String? id = "1";
 String? email = null;
 String? fName = null;
 String? lName = null;
@@ -69,3 +70,12 @@ String? dateOfBirth = null;
 //login  (page[/login.dart /login2.dart])
 String? emailLogin = null;
 String? passwordLogin = null;
+
+
+//Contrat (page[/contrat])
+String? contrat_Id = null;
+String? contrat_name = null;
+String? contrat_dollar_per_hour = null;
+String? contrat_max_payment = null;
+String? contrat_description = null;
+String? contrat_code = null;

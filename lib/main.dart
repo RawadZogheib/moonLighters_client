@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
-import 'package:flutter_client/page/home.dart';
+import 'package:flutter_client/page/contrat.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/Login': (context) => login(),
             '/Registration': (context) => registration(),
-            '/home': (context) => home(),
+            '/contrat': (context) => contrat(),
             '/FirstPage': (context) => FirstPage(),
           });
     });

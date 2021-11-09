@@ -34,6 +34,10 @@ dependencies:
   shared_preferences: ^2.0.8
   http: ^0.13.4
   mailer: ^5.0.2
+  dotted_border: ^2.0.0+1
+  flip_card: ^0.6.0
+  desktop_window: ^0.4.0
+
 
 dev_dependencies:
   flutter_test:
@@ -53,7 +57,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - Assets/firstPageLogo/image1.gif
-
+    - Assets/projectLogo/wordLogo.png
+    - Assets/projectLogo/excelLogo.png
+    - Assets/projectLogo/powerPointLogo.png
+    - Assets/projectLogo/accessLogo.png
+    - Assets/projectLogo/oneNoteLogo.png
+    - Assets/projectLogo/publisherLogo.png
+    - Assets/contratLogo/contratLogo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
