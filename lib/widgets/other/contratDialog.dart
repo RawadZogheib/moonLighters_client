@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/Button/myButton.dart';
-import 'package:flutter_client/widgets/button/myButton.dart';
 import 'package:flutter_client/widgets/other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/textInput/myTextInput.dart';
 import 'package:sizer/sizer.dart';
