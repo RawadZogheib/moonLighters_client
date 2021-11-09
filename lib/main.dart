@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/Login': (context) => login(),
             '/Registration': (context) => registration(),
-            '/contrat': (context) => contrat(),
+            '/Contrat': (context) => contrat(),
             '/FirstPage': (context) => FirstPage(),
           });
     });

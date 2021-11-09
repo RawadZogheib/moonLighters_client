@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/widgets/Button/myButton.dart';
@@ -209,7 +208,7 @@ class _loginState extends State<login> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/Contrat');
       }else if (body[0] == "errorToken") {
         showDialog<String>(
           context: context,

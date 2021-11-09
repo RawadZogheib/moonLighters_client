@@ -624,7 +624,7 @@ class _registrationState extends State<registration> {
           print(body);
           print("pppp");
           if (body[0] == "success") {
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushNamed(context, '/Login');
             // print("successfully done");
             // showDialog(
             //     context: context,
