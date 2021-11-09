@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_client/widgets/Button/myButton.dart';
 import 'package:flutter_client/widgets/Code/myCode.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
+import 'package:flutter/material.dart';
+import 'package:flutter_client/widgets/Button/myButton.dart';
+
+import 'myCode.dart';
 
 
 String? firstNb = null;
@@ -19,81 +22,26 @@ class sixCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Container(
       child: Column(
         children: [
-          Row(
-            children: [
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    firstNb = value;
-                  }),
+          Padding(
+            padding: EdgeInsets.only(top: 28.0),
+            child: Row(
+              children: [
+                myCode(textString: , labelText: )
 
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    secondNb = value;
-                  }),
-
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    thirdNb = value;
-                  }),
-
-              Container(
-                child: Text("-",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w700,color: Colors.black),),
-              ),
-
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    fourthNb = value;
-                  }),
-
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    fifthNb = value;
-                  }),
-
-              myCode(keybType: TextInputType.numberWithOptions(decimal: true),
-                  textInputAction: TextInputAction.next,
-                  color: globals.colCode,
-                  color_1: globals.colCode_1,
-                  color_2: globals.colCode_2,
-                  onChange: (value){
-                    sixNb = value;
-                  }),
-            ],
-          ),
-
-          Center(
-            child: Container(
-              child: InkWell(
-                child: btn(btnText: 'Send'),
-                onTap: (){
-                  globals.sixCodeNb = '${firstNb}'+'${secondNb}'+'${thirdNb}'+'${fourthNb}'+'${fifthNb}'+'${sixNb}';
-                  // _checkCode();
-                },
-              )),
-          ),
+                Padding(
+                  padding: const EdgeInsets.all(28.0),
+                  child: Container(
+                      child: InkWell(
+                        child: btn(btnText: 'Send'),
+                        onTap: (){
+                          globals.sixCodeNb = '${firstNb}'+'${secondNb}'+'${thirdNb}'+'${fourthNb}'+'${fifthNb}'+'${sixNb}';
+                          // _checkCode();
+                        },
+                      )),
+                ),
         ],
       ),
     );

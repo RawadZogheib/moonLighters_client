@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/Button/myButton.dart';
+import 'package:flutter_client/widgets/Code/sixCode.dart';
 import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
 import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
@@ -76,6 +77,8 @@ String errTxtGender = ''; // for error textFields
 Color colErrTxtGender = globals.transparent;
 String errTxtDate = ''; // for error textFields
 Color colErrTxtDate = globals.transparent;
+String errTxt = '';
+Color colErrTxt = globals.transparent;
 
 class registration extends StatefulWidget {
   const registration({Key? key}) : super(key: key);
@@ -331,6 +334,9 @@ class _registrationState extends State<registration> {
                           _nullErr();
                         }),
                   ),
+
+                  myErrorText(errorText: errTxt, color: colErrTxt),
+
                 ],
               ),
             ],
@@ -590,6 +596,19 @@ class _registrationState extends State<registration> {
   }
 
   _reg() async {
+
+     errTxtFname = ''; // for error textFields
+     errTxtLname = ''; // for error textFields
+     errTxtUsr = ''; // for error textFields
+     errTxtEmail = ''; // for error textFields
+     errTxtPass = ''; // for error textFields
+     errTxtRepass = ''; // for error textFields
+     errTxtPhone = ''; // for error textFields
+     errTxtGender = ''; // for error textFields
+     errTxtDate = ''; // for error textFields
+     errTxt = '';   // for errorElse, errorVersion,...
+
+
     try {
       if (globals.email != null &&
           globals.fName != null &&
@@ -599,7 +618,6 @@ class _registrationState extends State<registration> {
           globals.dateOfBirth != null &&
           globals.gender != null &&
           globals.phoneNumber != null) {
-        if (!globals.email!.contains(" ") && !globals.userName!.contains(" ")) {
           //if(exp.hasMatch(globals.password!)) {
           //if (globals.password == globals.repassword) {
           var data = {
@@ -617,15 +635,19 @@ class _registrationState extends State<registration> {
 
           var res = await CallApi()
               .postData(data, 'Registration/Control/(Control)registration.php');
-          print("111");
+
           print(res.body);
           print("printed");
           var body = json.decode(res.body);
           print(body);
-          print("pppp");
           if (body[0] == "success") {
+<<<<<<< Updated upstream
             Navigator.pushNamed(context, '/Login');
             // print("successfully done");
+=======
+            // Navigator.pushNamed(context, '/home');
+            print("successfully done");
+>>>>>>> Stashed changes
             // showDialog(
             //     context: context,
             //     builder: (BuildContext context) => sixCode()).then((exit) {
@@ -634,71 +656,98 @@ class _registrationState extends State<registration> {
             //       });
             //     });
           } else if (body[0] == "error1") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error1));
+            setState(() {
+              colErrTxtUsr = globals.red_1;
+              colUserName = globals.red;
+              colUserName_1 = globals.red_1;
+              colUserName_2 = globals.red_2;
+              errTxtUsr = globals.error1;
+            });
           } else if (body[0] == "error2_1") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error2_1));
+            setState(() {
+              colErrTxtUsr = globals.red_1;
+              colUserName = globals.red;
+              colUserName_1 = globals.red_1;
+              colUserName_2 = globals.red_2;
+              errTxtUsr = globals.error2_1;
+            });
           } else if (body[0] == "error2_2") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error2_2));
+            setState(() {
+              colErrTxtUsr = globals.red_1;
+              colUserName = globals.red;
+              colUserName_1 = globals.red_1;
+              colUserName_2 = globals.red_2;
+              errTxtUsr = globals.error2_2;
+            });
           } else if (body[0] == "error2_3") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error2_3));
+            setState(() {
+              colPass = globals.red;
+              colPass_1 = globals.red_1;
+              colPass_2 = globals.red_2;
+              colErrTxtPass = globals.red_1;
+              errTxtPass = globals.error2_3;
+            });
           } else if (body[0] == "error2_5") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error2_5));
+            setState(() {
+              colEmail = globals.red;
+              colEmail_1 = globals.red_1;
+              colEmail_2 = globals.red_2;
+              colErrTxtEmail = globals.red_1;
+              errTxtEmail = globals.error2_5;
+            });
           } else if (body[0] == "error2_7") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error2_7));
+            setState(() {
+              colPhoneNb = globals.red;
+              colPhoneNb_1 = globals.red_1;
+              colPhoneNb_2 = globals.red_2;
+              colErrTxtPhone = globals.red_1;
+              errTxtPhone = globals.error2_7;
+            });
           } else if (body[0] == "error3") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error3));
+            setState(() {
+              colRePass = globals.red;
+              colRePass_1 = globals.red_1;
+              colRePass_2 = globals.red_2;
+              colErrTxtRepass = globals.red_1;
+              errTxtRepass = globals.error3;
+            });
           } else if (body[0] == "error4") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error4));
+            setState(() {
+              colErrTxt = globals.red_1;
+              errTxt = globals.error4;
+            });
           } else if (body[0] == "error5") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error5));
+            setState(() {
+              colErrTxtUsr = globals.red_1;
+              colUserName = globals.red;
+              colUserName_1 = globals.red_1;
+              colUserName_2 = globals.red_2;
+              errTxtUsr = globals.error5;
+            });
           } else if (body[0] == "error6") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error6));
+            setState(() {
+              colErrTxtEmail = globals.red_1;
+              colEmail = globals.red;
+              colEmail_1 = globals.red_1;
+              colEmail_2 = globals.red_2;
+              errTxtEmail = globals.error6;
+            });
           } else if (body[0] == "error7") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.error7));
+            setState(() {
+              colErrTxt = globals.red_1;
+              errTxt = globals.error7;
+            });
           } else if (body[0] == "errorVersion") {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.errorVersion));
+            setState(() {
+              colErrTxt = globals.red_1;
+              errTxt = globals.errorVersion;
+            });
           } else {
             print(body[0]);
-            showDialog(
-                context: context,
-                builder: (BuildContext context) =>
-                    ErrorAlertDialog(message: globals.errorElse));
+            setState(() {
+              colErrTxt = globals.red_1;
+              errTxt = globals.errorElse;
+            });
           }
           /* } else {
             showDialog<String>(
@@ -733,23 +782,17 @@ class _registrationState extends State<registration> {
                 ),
           );
         }  } */
-        } else {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) =>
-                  ErrorAlertDialog(message: globals.error1));
-        }
       } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) =>
-                ErrorAlertDialog(message: 'No nulls Allowed.'));
+        setState(() {
+          colErrTxt = globals.red_1;
+          errTxt = 'No nulls allowed';
+        });
       }
     } catch (e) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-              ErrorAlertDialog(message: globals.errorElse));
+      setState(() {
+        colErrTxt = globals.red_1;
+        errTxt = globals.errorElse;
+      });
     }
   }
 
@@ -819,4 +862,5 @@ class _registrationState extends State<registration> {
 //   fifthNb = null;
 //   sixNb = null;
 // }
+
 }

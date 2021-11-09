@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
+<<<<<<< Updated upstream
 import 'package:flutter_client/page/contrat.dart';
+=======
+import 'package:flutter_client/page/home.dart';
+import 'package:flutter_client/widgets/Code/sixCode.dart';
+>>>>>>> Stashed changes
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -28,6 +33,7 @@ class MyApp extends StatelessWidget {
             '/Registration': (context) => registration(),
             '/Contrat': (context) => contrat(),
             '/FirstPage': (context) => FirstPage(),
+            'sixCode': (context)=>sixCode(),
           });
     });
   }
