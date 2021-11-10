@@ -113,7 +113,7 @@ class _contratState extends State<contrat> {
         'account_id': globals.id,
       };
       var res = await CallApi()
-          .postData(data, 'Contrat/Control/(Control)loadContrat.php');
+          .postData(data, 'Contrat/Control/(Control)loadContratClient.php');
 
       print(res.body);
       List<dynamic> body = json.decode(res.body);
