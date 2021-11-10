@@ -127,6 +127,7 @@ class _ProjectState extends State<Project> {
 
   void _loadPage() async {
     var data = {
+      'version':globals.version,
       'contrat_Id': globals.contrat_Id,
     };
     var res = await CallApi().postData(data, 'Project/Control/(Control)loadProject.php');

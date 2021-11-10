@@ -110,6 +110,7 @@ class _contratState extends State<contrat> {
   void _loadPage() async {
     try {
       var data = {
+        'version':globals.version,
         'account_id': globals.id,
       };
       var res = await CallApi()
