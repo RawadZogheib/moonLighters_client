@@ -8,6 +8,7 @@ import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/contratCard/myContratCard.dart';
 import 'package:flutter_client/widgets/other/plusContratCard.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //
 String _status = "0";
@@ -108,7 +109,7 @@ class _contratState extends State<contrat> {
   }
 
   void _loadPage() async {
-    try {
+    //try {
       var data = {
         'version':globals.version,
         'account_id': globals.id,
@@ -120,14 +121,17 @@ class _contratState extends State<contrat> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', body[1]);
+        
         for (var i = 0; i < body[1].length; i++) {
           children.add(_createCards(
-            body[1][i][0], //contrat_Id
-            body[1][i][1], //contrat_name
-            body[1][i][2], //contrat_description
-            body[1][i][3], //contrat_dollar_per_hour
-            body[1][i][4], //contrat_max_payment
-            body[1][i][5], //contrat_code
+            body[2][i][0], //contrat_Id
+            body[2][i][1], //contrat_name
+            body[2][i][2], //contrat_description
+            body[2][i][3], //contrat_dollar_per_hour
+            body[2][i][4], //contrat_max_payment
+            body[2][i][5], //contrat_code
           ));
         }
         setState(() {
@@ -174,13 +178,13 @@ class _contratState extends State<contrat> {
                     "\n ErrorNumber: " +
                     body[0].toString()));
       }
-    } catch (e) {
-      print(e);
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-              ErrorAlertDialog(message: globals.errorException));
-    }
+    // } catch (e) {
+    //   print(e);
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) =>
+    //           ErrorAlertDialog(message: globals.errorException));
+    // }
   }
 
   _back() {

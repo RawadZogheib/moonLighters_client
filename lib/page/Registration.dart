@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -7,12 +8,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/Button/myButton.dart';
+import 'package:flutter_client/widgets/Code/codeDialog.dart';
 import 'package:flutter_client/widgets/Code/sixCode.dart';
 import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
 import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
 import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
 import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 
 RegExp passExp = new RegExp(
     r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@#$%^&:,?_-]).{8,}$");
@@ -640,21 +644,18 @@ class _registrationState extends State<registration> {
           print("printed");
           var body = json.decode(res.body);
           print(body);
-          if (body[0] == "success") {
-
+          if (body[0] == "true") {
+            //_sendCodeToMail();
             Navigator.pushNamed(context, '/Login');
-            // print("successfully done");
-
             // Navigator.pushNamed(context, '/home');
-            print("successfully done");
-
             // showDialog(
             //     context: context,
-            //     builder: (BuildContext context) => sixCode()).then((exit) {
-            //       setState(() {
-            //         _nullTextCode();
-            //       });
-            //     });
+            //     builder: (BuildContext context) => codeDialog()).then((exit) {
+            //   setState(() {
+            //     _nullTextCode();
+            //   });
+            // });
+
           } else if (body[0] == "error1") {
             setState(() {
               colErrTxtUsr = globals.red_1;
@@ -854,13 +855,48 @@ class _registrationState extends State<registration> {
   }
 
 
-// _nullTextCode(){
-//   firstNb = null;
-//   secondNb = null;
-//   thirdNb = null;
-//   fourthNb = null;
-//   fifthNb = null;
-//   sixNb = null;
-// }
+_nullTextCode(){
+  globals.sixCodeNb = null;
+}
+
+  // _sendCodeToMail() async{
+  //   int min = 100000; //min and max values act as your 6 digit range
+  //   int max = 999999;
+  //   var randomizer = new Random();
+  //   var rNum = min + randomizer.nextInt(max - min);
+  //
+  //   String username = "kiwanhoda2@gmail.com";
+  //   String password = "hodhod02@";
+  //
+  //   // ignore: deprecated_member_use
+  //   final smtpServer = gmail(username, password);
+  //   // Use the SmtpServer class to configure an SMTP server:
+  //   // final smtpServer = SmtpServer('smtp.domain.com');
+  //   // See the named arguments of SmtpServer for further configuration
+  //   // options.
+  //
+  //   // Create our message.
+  //   final message = Message()
+  //     ..from = Address(username)
+  //     ..recipients.add("michel.nachar10@gmail.com")
+  //     //..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+  //     //..bccRecipients.add(Address('bccAddress@example.com'))
+  //     ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+  //     //..text = 'This is the plain text.\nThis is line 2 of the text part.'
+  //     ..html = "<h1>Code: </h1>\n<p>$rNum</p>";
+  //
+  //   try {
+  //     final sendReport = await send(message, smtpServer);
+  //     print('Message sent: ' + sendReport.toString());
+  //   } on MailerException catch (e) {
+  //     print(e);
+  //     print('Message not sent.');
+  //     for (var p in e.problems) {
+  //       print('Problem: ${p.code}: ${p.msg}');
+  //     }
+  //   }
+  //   // DONE
+  //
+  // }
 
 }

@@ -13,6 +13,7 @@ import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/other/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/other/plusProjectCard.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final children = <Widget>[];
 
@@ -135,12 +136,15 @@ class _ProjectState extends State<Project> {
     List<dynamic> body = json.decode(res.body);
 
     if (body[0] == "success") {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', body[1]);
+
       for (var i = 0; i < body[1].length; i++) {
         children.add(_createCards(
-          body[1][i][0], //project_Id
-          body[1][i][1], //project_name
-          body[1][i][2], //project_description
-          body[1][i][3], //project_type
+          body[2][i][0], //project_Id
+          body[2][i][1], //project_name
+          body[2][i][2], //project_description
+          body[2][i][3], //project_type
         ));
       }
       setState(() {
