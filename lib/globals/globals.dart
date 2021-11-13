@@ -53,7 +53,7 @@ const String codeFailed = "your code is incorrect";
 String? sixCodeNb = null;
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
-String? id = "1";
+String? id = null;
 String? email = null;
 String? fName = null;
 String? lName = null;
