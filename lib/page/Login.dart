@@ -224,31 +224,33 @@ class _loginState extends State<login> {
           data, 'Login/Control/(Control)Login.php');
       print(res);
       print(res.body);
-      print("pppppp");
+      //print("pppppp");
       List<dynamic> body = json.decode(res.body);
 
       //print(body[1]);
-      print("welcome");
+      //print("welcome");
       if (body[0] == "success") {
 
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1][0]);
 
-        print(body[1][1]);
+        //print(body[1][0]);
+
+        //print(body[1][1]);
           globals.id = body[1][1].toString();
-          print(body[1][2]);
+          //print(body[1][2]);
           globals.fName = body[1][2].toString();
-          print(body[1][3]);
+          //print(body[1][3]);
           globals.lName = body[1][3].toString();
-          print(body[1][4]);
+          //print(body[1][4]);
           globals.userName = body[1][4].toString();
-        print(body[1][5]);
+        //print(body[1][5]);
           globals.email = body[1][5].toString();
-        print(body[1][6]);
+        //print(body[1][6]);
           globals.phoneNumber = body[1][6].toString();
-        print(body[1][7]);
+        //print(body[1][7]);
           globals.gender = body[1][7].toString();
-        print(body[1][8]);
+        //print(body[1][8]);
           globals.dateOfBirth = body[1][8].toString();
 
 
