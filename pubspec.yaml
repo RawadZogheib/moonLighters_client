@@ -32,7 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   sizer: ^2.0.15
   shared_preferences: ^2.0.8
-  http: ^0.13.4
+  http: ^0.13.3
   mailer: ^5.0.2
   dotted_border: ^2.0.0+1
   flip_card: ^0.6.0
