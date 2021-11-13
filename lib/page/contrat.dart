@@ -152,6 +152,11 @@ class _contratState extends State<contrat> {
             context: context,
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.error4));
+      } else if (body[0] == "errorToken") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.errorToken));
       } else if (body[0] == "error10") {
         setState(() {
           children.add(PlusContratCard(
@@ -174,9 +179,7 @@ class _contratState extends State<contrat> {
         showDialog(
             context: context,
             builder: (BuildContext context) => ErrorAlertDialog(
-                message: globals.errorElse +
-                    "\n ErrorNumber: " +
-                    body[0].toString()));
+                message: globals.errorElse));
       }
     // } catch (e) {
     //   print(e);
