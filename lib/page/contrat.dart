@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
@@ -124,7 +125,7 @@ class _contratState extends State<contrat> {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1]);
         
-        for (var i = 0; i < body[1].length; i++) {
+        for (var i = 0; i < body[2].length; i++) {
           children.add(_createCards(
             body[2][i][0], //contrat_Id
             body[2][i][1], //contrat_name
@@ -191,14 +192,15 @@ class _contratState extends State<contrat> {
   }
 
   _back() {
-    globals.contrat_Id = null;
-    globals.contrat_name = null;
-    globals.contrat_dollar_per_hour = null;
-    globals.contrat_max_payment = null;
-    globals.contrat_description = null;
-    globals.contrat_code = null;
-    //children.clear();
-    //Navigator.of(context).pop();
+    exit;
+    // globals.contrat_Id = null;
+    // globals.contrat_name = null;
+    // globals.contrat_dollar_per_hour = null;
+    // globals.contrat_max_payment = null;
+    // globals.contrat_description = null;
+    // globals.contrat_code = null;
+    // children.clear();
+    // Navigator.of(context).pop();
   }
 
 }
