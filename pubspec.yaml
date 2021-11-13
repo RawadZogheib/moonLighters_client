@@ -37,6 +37,7 @@ dependencies:
   dotted_border: ^2.0.0+1
   flip_card: ^0.6.0
   desktop_window: ^0.4.0
+  flutter_ion: ^0.5.4
 
 
 dev_dependencies:

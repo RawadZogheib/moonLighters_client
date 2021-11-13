@@ -77,3 +77,15 @@ String? contrat_dollar_per_hour = null;
 String? contrat_max_payment = null;
 String? contrat_description = null;
 String? contrat_code = null;
+
+String? ProjectName = null;
+
+/*
+  print(globals.contrat_Id.toString() + " " +
+  globals.contrat_name.toString() + " " +
+  globals.contrat_dollar_per_hour.toString() + " " +
+  globals.contrat_max_payment.toString() + " " +
+  globals.contrat_description.toString() + " " +
+  globals.contrat_code.toString());
+
+*/
