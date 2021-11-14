@@ -237,7 +237,7 @@ class _loginState extends State<login> {
         //print(body[1][0]);
 
         //print(body[1][1]);
-          globals.id = body[1][1].toString();
+          globals.Id = body[1][1].toString();
           //print(body[1][2]);
           globals.fName = body[1][2].toString();
           //print(body[1][3]);
@@ -255,7 +255,7 @@ class _loginState extends State<login> {
 
 
 
-        // print("globalsid = ${globals.id} globFName = ${globals.fName} \n globLName = ${globals.lName} globUsernm = ${globals.userName} \n"
+        // print("globalsId = ${globals.Id} globFName = ${globals.fName} \n globLName = ${globals.lName} globUsernm = ${globals.userName} \n"
         //     "globpass = ${globals.password} globEmail = ${globals.email} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
         //     "globDate = ${globals.dateOfBirth}");
 
