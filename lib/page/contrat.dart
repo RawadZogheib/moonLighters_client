@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/hexColor/hexColor.dart';
-import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
+import 'package:flutter_client/widgets/other/errorAlertDialog.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/contratCard/myContratCard.dart';
 import 'package:flutter_client/widgets/other/plusContratCard.dart';
@@ -154,10 +154,17 @@ class _contratState extends State<contrat> {
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.error4));
       } else if (body[0] == "errorToken") {
+        children.clear();
         showDialog(
             context: context,
             builder: (BuildContext context) =>
-                ErrorAlertDialog(message: globals.errorToken));
+                ErrorAlertDialog(message: globals.errorToken, goHome: true));
+      }  else if(body[0] == "errorVersion"){
+        children.clear();
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.errorVersion, goHome: true));
       } else if (body[0] == "error10") {
         setState(() {
           children.add(PlusContratCard(
