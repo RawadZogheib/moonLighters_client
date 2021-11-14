@@ -4,7 +4,7 @@ import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/contrat.dart';
 import 'package:flutter_client/page/project.dart';
-import 'package:flutter_client/widgets/Code/sixCode.dart';
+import 'package:flutter_client/widgets/code/sixCode.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
