@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_client/api/my_api.dart';
-import 'package:flutter_client/widgets/Button/myButton.dart';
-import 'package:flutter_client/widgets/Code/myCode.dart';
+import 'package:flutter_client/widgets/button/myButton.dart';
+import 'package:flutter_client/widgets/code/myCode.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter/material.dart';
-import 'package:flutter_client/widgets/Button/myButton.dart';
-import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
+import 'package:flutter_client/widgets/textInput/myErrorText.dart';
 
 import 'myCode.dart';
 

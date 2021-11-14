@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_client/widgets/Code/sixCode.dart';
+import 'package:flutter_client/widgets/code/sixCode.dart';
 import 'package:sizer/sizer.dart';
 
 class codeDialog extends StatefulWidget {
