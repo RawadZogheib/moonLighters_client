@@ -110,21 +110,23 @@ class _contratState extends State<contrat> {
   }
 
   void _loadPage() async {
-    //try {
+    try {
       var data = {
         'version':globals.version,
         'account_Id': globals.Id,
       };
       var res = await CallApi()
-          .postData(data, 'Contrat/Control/(Control)loadContratClient.php');
+          .postData(data, 'Contrat/Control/(Control)loadContratConsultant.php');
 
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
+      //print("hellozzzzzzz");
+
       if (body[0] == "success") {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1]);
-        
+
         for (var i = 0; i < body[2].length; i++) {
           children.add(_createCards(
             body[2][i][0], //contrat_Id
@@ -134,7 +136,17 @@ class _contratState extends State<contrat> {
             body[2][i][4], //contrat_max_payment
             body[2][i][5], //contrat_code
           ));
+          // print("childrennnnnn");
+          // print(children.length);
+          // print("welcomeeee");
+          // print(body[2][i][0]);
+          // print(body[2][i][1]);
+          // print(body[2][i][2]);
+          // print(body[2][i][3]);
+          // print(body[2][i][4]);
+          // print(body[2][i][5]);
         }
+
         setState(() {
           children.add(PlusContratCard(
             onTap: () {
@@ -155,12 +167,25 @@ class _contratState extends State<contrat> {
                 ErrorAlertDialog(message: globals.error4));
       } else if (body[0] == "errorToken") {
         children.clear();
+        //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
+        _globRegist();
+
+        //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
         showDialog(
             context: context,
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.errorToken, goHome: true));
-      }  else if(body[0] == "errorVersion"){
+      } else if(body[0] == "errorVersion"){
         children.clear();
+        // print("errorrrrrrVersionnnnnn");
+        // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
+        _globRegist();
+
+        //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
         showDialog(
             context: context,
             builder: (BuildContext context) =>
@@ -189,13 +214,13 @@ class _contratState extends State<contrat> {
             builder: (BuildContext context) => ErrorAlertDialog(
                 message: globals.errorElse));
       }
-    // } catch (e) {
-    //   print(e);
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) =>
-    //           ErrorAlertDialog(message: globals.errorException));
-    // }
+    } catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              ErrorAlertDialog(message: globals.errorException));
+    }
   }
 
   _back() {
@@ -209,5 +234,19 @@ class _contratState extends State<contrat> {
     // children.clear();
     // Navigator.of(context).pop();
   }
+
+  _globRegist(){
+    setState(() {
+      globals.Id = null;
+      globals.email = null;
+      globals.fName = null;
+      globals.lName = null;
+      globals.gender = null;
+      globals.phoneNumber = null;
+      globals.userName = null;
+      globals.dateOfBirth = null;
+    });
+  }
+
 
 }

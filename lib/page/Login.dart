@@ -3,16 +3,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
-import 'package:flutter_client/widgets/Button/myButton.dart';
+import 'package:flutter_client/widgets/button/myButton.dart';
 
-import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
+import 'package:flutter_client/widgets/other/errorAlertDialog.dart';
 
-import 'package:flutter_client/widgets/Code/codeDialog.dart';
-import 'package:flutter_client/widgets/Code/sixCode.dart';
+import 'package:flutter_client/widgets/code/codeDialog.dart';
+import 'package:flutter_client/widgets/code/sixCode.dart';
 
-import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
+import 'package:flutter_client/widgets/textInput/myErrorText.dart';
 
-import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
+import 'package:flutter_client/widgets/textInput/myTextInput.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +43,7 @@ class _loginState extends State<login> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => _back(),
+      onWillPop: () async => _back(),
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
         body: ListView(
@@ -76,7 +76,7 @@ class _loginState extends State<login> {
                         spaceAllowed: false,
                         obscure: false ,
                         onChange: (value){
-                          globals.email = value;
+                          globals.emailLogin = value;
                         }),
                   ),
 
@@ -95,8 +95,8 @@ class _loginState extends State<login> {
                       spaceAllowed: false,
                       obscure: true,
                       onChange: (value){
-                        globals.password = value;
-                        //print(globals.password);
+                        globals.passwordLogin = value;
+                        //print(globals.Login);
                       },
                     ),
                   ),
@@ -156,13 +156,13 @@ class _loginState extends State<login> {
   _LoginCtrl(){
     bool isEmpty = false;
 
-     errTxtEmail = '';
-     colErrTxtEmail = globals.transparent;
-     errTxtPass = '';
-     colErrTxtPass = globals.transparent;
+    errTxtEmail = '';
+    colErrTxtEmail = globals.transparent;
+    errTxtPass = '';
+    colErrTxtPass = globals.transparent;
 
 
-    if(globals.email != null && globals.email != ''){
+    if(globals.emailLogin != null && globals.emailLogin != ''){
       setState(() {
         colEmail = Colors.blue.shade50;
         colEmail_1 = Colors.blue.shade900;
@@ -179,7 +179,7 @@ class _loginState extends State<login> {
       });
     }
 
-    if(globals.password != null && globals.password != ''){
+    if(globals.passwordLogin != null && globals.passwordLogin != ''){
       setState(() {
         colPass = Colors.blue.shade50;
         colPass_1 = Colors.blue.shade900;
@@ -211,13 +211,13 @@ class _loginState extends State<login> {
 
     try {
       print("hey");
-      // if(globals.email != null && globals.password != null){
-      // print(globals.email);
-      // print(globals.password);
+      // if(globals.emailLogin != null && globals.passwordLogin != null){
+      // print(globals.emailLogin);
+      // print(globals.passwordLogin);
       var data = {
         'version': globals.version,
-        'email': globals.email,
-        'password': globals.password
+        'email': globals.emailLogin,
+        'password': globals.passwordLogin
       };
 
       var res = await CallApi().postData(
@@ -237,37 +237,37 @@ class _loginState extends State<login> {
         //print(body[1][0]);
 
         //print(body[1][1]);
-          globals.Id = body[1][1].toString();
-          //print(body[1][2]);
-          globals.fName = body[1][2].toString();
-          //print(body[1][3]);
-          globals.lName = body[1][3].toString();
-          //print(body[1][4]);
-          globals.userName = body[1][4].toString();
+        globals.Id = body[1][1].toString();
+        //print(body[1][2]);
+        globals.fName = body[1][2].toString();
+        //print(body[1][3]);
+        globals.lName = body[1][3].toString();
+        //print(body[1][4]);
+        globals.userName = body[1][4].toString();
         //print(body[1][5]);
-          globals.email = body[1][5].toString();
+        globals.email = body[1][5].toString();
         //print(body[1][6]);
-          globals.phoneNumber = body[1][6].toString();
+        globals.phoneNumber = body[1][6].toString();
         //print(body[1][7]);
-          globals.gender = body[1][7].toString();
+        globals.gender = body[1][7].toString();
         //print(body[1][8]);
-          globals.dateOfBirth = body[1][8].toString();
+        globals.dateOfBirth = body[1][8].toString();
 
 
 
         // print("globalsId = ${globals.Id} globFName = ${globals.fName} \n globLName = ${globals.lName} globUsernm = ${globals.userName} \n"
-        //     "globpass = ${globals.password} globEmail = ${globals.email} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
+        //     "globpass = ${globals.passwordLogin} globEmail = ${globals.emailLogin} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
         //     "globDate = ${globals.dateOfBirth}");
 
         Navigator.pushNamed(context, '/Contrat');
 
         // Navigator.pushNamed(context, '/home');
 
-      // }else if (body[0] == "errorToken") {
-      //   setState(() {
-      //     errTxt = globals.errorToken;
-      //     colErrTxt = globals.red_1;
-      //   });
+        // }else if (body[0] == "errorToken") {
+        //   setState(() {
+        //     errTxt = globals.errorToken;
+        //     colErrTxt = globals.red_1;
+        //   });
       }else if (body[0] == "errorVersion") {
         setState(() {
           errTxt = "Your version: " + globals.version + "\n" + globals.errorVersion;
@@ -301,24 +301,24 @@ class _loginState extends State<login> {
   }
 
   _back(){
-    globals.email = null;
-    globals.password = null;
+    globals.emailLogin = null;
+    globals.passwordLogin = null;
     setState(() {
-       colEmail = globals.blue;               //email
-       colEmail_1 = globals.blue_1;
-       colEmail_2 = globals.blue_2;
+      colEmail = globals.blue;               //email
+      colEmail_1 = globals.blue_1;
+      colEmail_2 = globals.blue_2;
 
-       colPass = globals.blue;               //password
-       colPass_1 = globals.blue_1;
-       colPass_2 = globals.blue_2;
+      colPass = globals.blue;               //password
+      colPass_1 = globals.blue_1;
+      colPass_2 = globals.blue_2;
 
-       errTxtEmail = '';    //email error
-       colErrTxtEmail = globals.transparent;
-       errTxtPass = '';     //password error
-       colErrTxtPass = globals.transparent;
-       errTxt = '';         //else error
-       colErrTxt = globals.transparent;
-       Navigator.pushNamedAndRemoveUntil(context,'/FirstPage', (route) => false);
+      errTxtEmail = '';    //email error
+      colErrTxtEmail = globals.transparent;
+      errTxtPass = '';     //password error
+      colErrTxtPass = globals.transparent;
+      errTxt = '';         //else error
+      colErrTxt = globals.transparent;
+      Navigator.pushNamedAndRemoveUntil(context,'/FirstPage', (route) => false);
     });
   }
 
