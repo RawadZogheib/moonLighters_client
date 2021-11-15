@@ -169,27 +169,29 @@ class _contratState extends State<contrat> {
         children.clear();
         //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
-        _globRegist();
-
         //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
         showDialog(
             context: context,
             builder: (BuildContext context) =>
-                ErrorAlertDialog(message: globals.errorToken, goHome: true));
+                ErrorAlertDialog(message: globals.errorToken, goHome: true,
+                  onPress: (){
+                    _globRegist();
+                  },));
       } else if(body[0] == "errorVersion"){
         children.clear();
         // print("errorrrrrrVersionnnnnn");
         // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
-        _globRegist();
-
         //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
         showDialog(
             context: context,
             builder: (BuildContext context) =>
-                ErrorAlertDialog(message: globals.errorVersion, goHome: true));
+                ErrorAlertDialog(message: globals.errorVersion, goHome: true,
+                  onPress: (){
+                    _globRegist();
+                },));
       } else if (body[0] == "error10") {
         setState(() {
           children.add(PlusContratCard(
