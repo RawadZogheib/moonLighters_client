@@ -92,6 +92,44 @@ class registration extends StatefulWidget {
 }
 
 class _registrationState extends State<registration> {
+
+
+  _sendCodeToMail() async {
+    int min = 100000; //min and max values act as your 6 digit range
+    int max = 999999;
+    var randomizer = new Random();
+    var rNum = min + randomizer.nextInt(max - min);
+
+    String username = 'mimo.nr0520@gmail.com';
+    String password = 'Micho@1dark';
+
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username)
+      ..recipients.add('michel.nachar10@gmail.com')
+    // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+    // ..bccRecipients.add(Address('bccAddress@example.com'))
+      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+    //..text = 'This is the plain text.\nThis is line 2 of the text part.'
+      ..html = "<h1>Code: </h1>\n<p>$rNum</p>";
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+      globals.sixCodeNb = rNum;
+      print(globals.sixCodeNb);
+      //Toast.show("clickedd",context, duration: 3, gravity: Toast.CENTER);
+    } on MailerException catch (e) {
+      print(e);
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -859,44 +897,5 @@ _nullTextCode(){
   globals.sixCodeNb = null;
 }
 
-  _sendCodeToMail() async{
-    int min = 100000; //min and max values act as your 6 digit range
-    int max = 999999;
-    var randomizer = new Random();
-    var rNum = min + randomizer.nextInt(max - min);
-
-    String username = "Micho";
-    String password = "Micho@1dark";
-
-    // ignore: deprecated_member_use
-    final smtpServer = gmail(username, password);
-    // Use the SmtpServer class to configure an SMTP server:
-    // final smtpServer = SmtpServer('smtp.domain.com');
-    // See the named arguments of SmtpServer for further configuration
-    // options.
-
-    // Create our message.
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add("michel.nachar10@gmail.com")
-      //..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
-      //..bccRecipients.add(Address('bccAddress@example.com'))
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-      //..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html = "<h1>Code: </h1>\n<p>$rNum</p>";
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print(e);
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-    // DONE
-
-  }
 
 }

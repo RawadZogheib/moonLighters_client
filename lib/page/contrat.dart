@@ -180,7 +180,7 @@ class _contratState extends State<contrat> {
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.errorToken, goHome: true,
                     onPress: (){
-                      _globRegist();
+                      //_globRegist();
                     }));
 
       } else if(body[0] == "errorVersion"){
@@ -195,7 +195,7 @@ class _contratState extends State<contrat> {
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.errorVersion, goHome: true,
                   onPress: (){
-                    _globRegist();
+                    //_globRegist();
                 },));
       } else if (body[0] == "error10") {
         setState(() {
@@ -242,18 +242,21 @@ class _contratState extends State<contrat> {
     // Navigator.of(context).pop();
   }
 
-  _globRegist(){
-    setState(() {
-      globals.Id = null;
-      globals.email = null;
-      globals.fName = null;
-      globals.lName = null;
-      globals.gender = null;
-      globals.phoneNumber = null;
-      globals.userName = null;
-      globals.dateOfBirth = null;
-    });
-  }
+  // _globRegist(){
+  //   setState(() {
+  //     globals.Id = null;
+  //     globals.email = null;
+  //     globals.fName = null;
+  //     globals.lName = null;
+  //     globals.gender = null;
+  //     globals.phoneNumber = null;
+  //     globals.userName = null;
+  //     globals.dateOfBirth = null;
+  //   });
+  // }
 
+_initSharedPreferences () async{
+  SharedPreferences localStorage = await SharedPreferences.getInstance();
+}
 
 }

@@ -236,22 +236,24 @@ class _loginState extends State<login> {
 
         //print(body[1][0]);
 
-        //print(body[1][1]);
-        globals.Id = body[1][1].toString();
-        //print(body[1][2]);
-        globals.fName = body[1][2].toString();
-        //print(body[1][3]);
-        globals.lName = body[1][3].toString();
-        //print(body[1][4]);
-        globals.userName = body[1][4].toString();
-        //print(body[1][5]);
-        globals.email = body[1][5].toString();
-        //print(body[1][6]);
-        globals.phoneNumber = body[1][6].toString();
-        //print(body[1][7]);
-        globals.gender = body[1][7].toString();
-        //print(body[1][8]);
-        globals.dateOfBirth = body[1][8].toString();
+
+
+        // //print(body[1][1]);
+        // globals.Id = body[1][1].toString();
+        // //print(body[1][2]);
+        // globals.fName = body[1][2].toString();
+        // //print(body[1][3]);
+        // globals.lName = body[1][3].toString();
+        // //print(body[1][4]);
+        // globals.userName = body[1][4].toString();
+        // //print(body[1][5]);
+        // globals.email = body[1][5].toString();
+        // //print(body[1][6]);
+        // globals.phoneNumber = body[1][6].toString();
+        // //print(body[1][7]);
+        // globals.gender = body[1][7].toString();
+        // //print(body[1][8]);
+        // globals.dateOfBirth = body[1][8].toString();
 
 
 

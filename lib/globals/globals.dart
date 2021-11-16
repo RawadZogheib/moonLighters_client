@@ -50,7 +50,9 @@ const String errorException = "OOPs! Something went wrong. Try again in few seco
 const String codeFailed = "your code is incorrect";
 
 //for 6 digit code
-String? sixCodeNb = null;
+int? sixCodeNb = null;
+
+
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
 String? Id = null;
