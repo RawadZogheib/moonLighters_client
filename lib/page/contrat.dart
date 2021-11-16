@@ -116,7 +116,7 @@ class _contratState extends State<contrat> {
         'account_Id': globals.Id,
       };
       var res = await CallApi()
-          .postData(data, 'Contrat/Control/(Control)loadContratConsultant.php');
+          .postData(data, 'Contrat/Control/(Control)loadContratClient.php');
 
       print(res.body);
       List<dynamic> body = json.decode(res.body);
@@ -146,6 +146,8 @@ class _contratState extends State<contrat> {
           // print(body[2][i][4]);
           // print(body[2][i][5]);
         }
+        print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
 
         setState(() {
           children.add(PlusContratCard(
@@ -160,6 +162,8 @@ class _contratState extends State<contrat> {
             },
           ));
         });
+        print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+
       } else if (body[0] == "error4") {
         showDialog(
             context: context,
@@ -175,15 +179,16 @@ class _contratState extends State<contrat> {
             context: context,
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.errorToken, goHome: true,
-                  onPress: (){
-                    _globRegist();
-                  },));
+                    onPress: (){
+                      _globRegist();
+                    }));
+
       } else if(body[0] == "errorVersion"){
         children.clear();
-        // print("errorrrrrrVersionnnnnn");
-        // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+        //print("errorrrrrrVersionnnnnn");
+       // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
-        //print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+       // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
 
         showDialog(
             context: context,
