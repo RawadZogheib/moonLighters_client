@@ -845,7 +845,7 @@ class _registrationState extends State<registration> {
     } catch (e) {
       setState(() {
         colErrTxt = globals.red_1;
-        errTxt = globals.errorElse;
+        errTxt = globals.errorException;
       });
     }
   }
