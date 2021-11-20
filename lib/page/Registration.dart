@@ -96,6 +96,7 @@ class _registrationState extends State<registration> {
     super.initState();
 
     globals.clearRegist();
+    _clearColor();
   }
 
 
@@ -814,14 +815,77 @@ class _registrationState extends State<registration> {
   _back() {
     setState(() {
       globals.clearRegist();
+      
+      
     });
 
-    Navigator.of(context).pop();
+    Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
   }
 
 
   _nullTextCode(){
     globals.sixCodeNb = null;
+  }
+
+  _clearColor() {
+
+    colFName = globals.blue; //fname
+     colFName_1 = globals.blue_1;
+     colFName_2 = globals.blue_2;
+
+     colLName = globals.blue; //lname
+     colLName_1 = globals.blue_1;
+     colLName_2 = globals.blue_2;
+
+     colUserName = globals.blue; //username
+     colUserName_1 = globals.blue_1;
+     colUserName_2 = globals.blue_2;
+
+     colPass = globals.blue; //password
+     colPass_1 = globals.blue_1;
+     colPass_2 = globals.blue_2;
+
+     colRePass = globals.blue; //repassword
+     colRePass_1 = globals.blue_1;
+     colRePass_2 = globals.blue_2;
+
+     colPhoneNb = globals.blue; //phoneNumber
+     colPhoneNb_1 = globals.blue_1;
+     colPhoneNb_2 = globals.blue_2;
+
+     colEmail = globals.blue; //email
+     colEmail_1 = globals.blue_1;
+     colEmail_2 = globals.blue_2;
+
+     colRadioMale = globals.blue; // background color for gender button
+     colRadioMale_1 = globals.blue_1;
+     colRadioFem = globals.blue;
+     colRadioFem_1 = globals.blue_1;
+
+    colDateOfBirth = globals.blue;
+    colDateOfBirth_1 = globals.blue_1;
+    colDateOfBirth_2 = globals.blue_2;
+
+     errTxtFname = ''; // for error textFields
+     colErrTxtFname = globals.transparent;
+     errTxtLname = ''; // for error textFields
+     colErrTxtLname = globals.transparent;
+     errTxtUsr = ''; // for error textFields
+     colErrTxtUsr = globals.transparent;
+     errTxtEmail = ''; // for error textFields
+     colErrTxtEmail = globals.transparent;
+     errTxtPass = ''; // for error textFields
+     colErrTxtPass = globals.transparent;
+     errTxtRepass = ''; // for error textFields
+     colErrTxtRepass = globals.transparent;
+     errTxtPhone = ''; // for error textFields
+     colErrTxtPhone = globals.transparent;
+     errTxtGender = '';//genderError
+     colErrTxtGender = globals.transparent;
+     errTxtDate = ''; //date ErrorText
+     colErrTxtDate = globals.transparent;
+     errTxt = '';
+     colErrTxt = globals.transparent;
   }
 
 }
