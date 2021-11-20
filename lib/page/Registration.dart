@@ -7,22 +7,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
-import 'package:flutter_client/widgets/Button/myButton.dart';
+import 'package:flutter_client/widgets/button/myButton.dart';
 import 'package:flutter_client/widgets/Code/codeDialog.dart';
 import 'package:flutter_client/widgets/Code/sixCode.dart';
-import 'package:flutter_client/widgets/DateOfBirth/myDateOfBirth.dart';
-import 'package:flutter_client/widgets/Other/errorAlertDialog.dart';
-import 'package:flutter_client/widgets/RadioButton/myRadioButton.dart';
-import 'package:flutter_client/widgets/TextInput/myErrorText.dart';
-import 'package:flutter_client/widgets/TextInput/myTextInput.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
+import 'package:flutter_client/widgets/dateOfBirth/myDateOfBirth.dart';
+import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
+import 'package:flutter_client/widgets/radioButton/myRadioButton.dart';
+import 'package:flutter_client/widgets/textInput/myErrorText.dart';
+import 'package:flutter_client/widgets/textInput/myTextInput.dart';
+
 
 RegExp passExp = new RegExp(
     r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@#$%^&:,?_-]).{8,}$");
 RegExp exp = new RegExp(r"^[a-zA-Z0-9_\.]*$", caseSensitive: false);
 RegExp mailExp =
-    new RegExp(r"[a-zA-Z0-9]+@(g|hot)mail.com$", caseSensitive: false);
+new RegExp(r"[a-zA-Z0-9]+@(g|hot)mail.com$", caseSensitive: false);
 RegExp phoneExp = new RegExp(
     r"(961|1|86|357|20|33|91|39)[0-9]{8}\b"); //lebanon, american or canada, china, cyprus, egypt, france, india, italy
 
@@ -61,8 +60,6 @@ Color colRadioFem_1 = globals.blue_1;
 
 
 
-
-
 String errTxtFname = ''; // for error textFields
 Color colErrTxtFname = globals.transparent;
 String errTxtLname = ''; // for error textFields
@@ -77,7 +74,7 @@ String errTxtRepass = ''; // for error textFields
 Color colErrTxtRepass = globals.transparent;
 String errTxtPhone = ''; // for error textFields
 Color colErrTxtPhone = globals.transparent;
-String errTxtGender = ''; //genderError
+String errTxtGender = '';//genderError
 Color colErrTxtGender = globals.transparent;
 String errTxtDate = ''; //date ErrorText
 Color colErrTxtDate = globals.transparent;
@@ -93,7 +90,6 @@ class registration extends StatefulWidget {
 
 class _registrationState extends State<registration> {
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -104,46 +100,10 @@ class _registrationState extends State<registration> {
 
 
 
-  _sendCodeToMail() async {
-    int min = 100000; //min and max values act as your 6 digit range
-    int max = 999999;
-    var randomizer = new Random();
-    var rNum = min + randomizer.nextInt(max - min);
-
-    String username = 'mimo.nr0520@gmail.com';
-    String password = 'Micho@1dark';
-
-    final smtpServer = gmail(username, password);
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add('michel.nachar10@gmail.com')
-    // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
-    // ..bccRecipients.add(Address('bccAddress@example.com'))
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-    //..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html = "<h1>Code: </h1>\n<p>$rNum</p>";
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-      globals.sixCodeNb = rNum;
-      print(globals.sixCodeNb);
-      //Toast.show("clickedd",context, duration: 3, gravity: Toast.CENTER);
-    } on MailerException catch (e) {
-      print(e);
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => _back(),
+      onWillPop: () async => _back(),
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
         appBar: AppBar(
@@ -379,7 +339,7 @@ class _registrationState extends State<registration> {
                   myErrorText(errorText: errTxtGender, color: colErrTxtGender),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 18.0, left: 8.0, right: 8.0),
+                    const EdgeInsets.only(top: 18.0, left: 8.0, right: 8.0),
                     child: myDateOfBirth(),
                   ),
                   myErrorText(errorText: errTxtDate, color: colErrTxtDate),
@@ -654,16 +614,16 @@ class _registrationState extends State<registration> {
 
   _reg() async {
 
-     errTxtFname = ''; // for error textFields
-     errTxtLname = ''; // for error textFields
-     errTxtUsr = ''; // for error textFields
-     errTxtEmail = ''; // for error textFields
-     errTxtPass = ''; // for error textFields
-     errTxtRepass = ''; // for error textFields
-     errTxtPhone = ''; // for error textFields
-     errTxtGender = ''; // for error textFields
-     errTxtDate = ''; // for error textFields
-     errTxt = '';   // for errorElse, errorVersion,...
+    errTxtFname = ''; // for error textFields
+    errTxtLname = ''; // for error textFields
+    errTxtUsr = ''; // for error textFields
+    errTxtEmail = ''; // for error textFields
+    errTxtPass = ''; // for error textFields
+    errTxtRepass = ''; // for error textFields
+    errTxtPhone = ''; // for error textFields
+    errTxtGender = ''; // for error textFields
+    errTxtDate = ''; // for error textFields
+    errTxt = '';   // for errorElse, errorVersion,...
 
 
     try {
@@ -675,135 +635,135 @@ class _registrationState extends State<registration> {
           globals.dateOfBirth != null &&
           globals.gender != null &&
           globals.phoneNumber != null) {
-          //if(exp.hasMatch(globals.password!)) {
-          //if (globals.password == globals.repassword) {
-          var data = {
-            'version': globals.version,
-            'email': globals.email,
-            'fname': globals.fName,
-            'lname': globals.lName,
-            'userName': globals.userName,
-            'password': globals.password,
-            'repassword': globals.repassword,
-            'dateOfBirth': globals.dateOfBirth,
-            'phoneNumber': globals.phoneNumber,
-            'gender': globals.gender
-          };
+        //if(exp.hasMatch(globals.password!)) {
+        //if (globals.password == globals.repassword) {
+        var data = {
+          'version': globals.version,
+          'email': globals.email,
+          'fname': globals.fName,
+          'lname': globals.lName,
+          'userName': globals.userName,
+          'password': globals.password,
+          'repassword': globals.repassword,
+          'dateOfBirth': globals.dateOfBirth,
+          'phoneNumber': globals.phoneNumber,
+          'gender': globals.gender
+        };
 
-          var res = await CallApi()
-              .postData(data, 'Registration/Control/(Control)registration.php');
+        var res = await CallApi()
+            .postData(data, 'Registration/Control/(Control)registration.php');
 
-          print(res.body);
-          print("printed");
-          var body = json.decode(res.body);
-          print(body);
-          if (body[0] == "true") {
-            _sendCodeToMail();
-            //Navigator.pushNamed(context, '/Login');
-            //Navigator.pushNamed(context, '/home');
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => codeDialog()).then((exit) {
-              setState(() {
-                _nullTextCode();
-              });
-            });
+        print(res.body);
+        //print("printed");
+        var body = json.decode(res.body);
+        //print(body);
+        if (body[0] == "true") {
 
-          } else if (body[0] == "error1") {
+          //Navigator.pushNamed(context, '/Login');
+          //Navigator.pushNamed(context, '/home');
+          showDialog(
+              context: context,
+              builder: (BuildContext context) => codeDialog()).then((exit) {
             setState(() {
-              colErrTxtUsr = globals.red_1;
-              colUserName = globals.red;
-              colUserName_1 = globals.red_1;
-              colUserName_2 = globals.red_2;
-              errTxtUsr = globals.error1;
+              _nullTextCode();
             });
-          } else if (body[0] == "error2_1") {
-            setState(() {
-              colErrTxtUsr = globals.red_1;
-              colUserName = globals.red;
-              colUserName_1 = globals.red_1;
-              colUserName_2 = globals.red_2;
-              errTxtUsr = globals.error2_1;
-            });
-          } else if (body[0] == "error2_2") {
-            setState(() {
-              colErrTxtUsr = globals.red_1;
-              colUserName = globals.red;
-              colUserName_1 = globals.red_1;
-              colUserName_2 = globals.red_2;
-              errTxtUsr = globals.error2_2;
-            });
-          } else if (body[0] == "error2_3") {
-            setState(() {
-              colPass = globals.red;
-              colPass_1 = globals.red_1;
-              colPass_2 = globals.red_2;
-              colErrTxtPass = globals.red_1;
-              errTxtPass = globals.error2_3;
-            });
-          } else if (body[0] == "error2_5") {
-            setState(() {
-              colEmail = globals.red;
-              colEmail_1 = globals.red_1;
-              colEmail_2 = globals.red_2;
-              colErrTxtEmail = globals.red_1;
-              errTxtEmail = globals.error2_5;
-            });
-          } else if (body[0] == "error2_7") {
-            setState(() {
-              colPhoneNb = globals.red;
-              colPhoneNb_1 = globals.red_1;
-              colPhoneNb_2 = globals.red_2;
-              colErrTxtPhone = globals.red_1;
-              errTxtPhone = globals.error2_7;
-            });
-          } else if (body[0] == "error3") {
-            setState(() {
-              colRePass = globals.red;
-              colRePass_1 = globals.red_1;
-              colRePass_2 = globals.red_2;
-              colErrTxtRepass = globals.red_1;
-              errTxtRepass = globals.error3;
-            });
-          } else if (body[0] == "error4") {
-            setState(() {
-              colErrTxt = globals.red_1;
-              errTxt = globals.error4;
-            });
-          } else if (body[0] == "error5") {
-            setState(() {
-              colErrTxtUsr = globals.red_1;
-              colUserName = globals.red;
-              colUserName_1 = globals.red_1;
-              colUserName_2 = globals.red_2;
-              errTxtUsr = globals.error5;
-            });
-          } else if (body[0] == "error6") {
-            setState(() {
-              colErrTxtEmail = globals.red_1;
-              colEmail = globals.red;
-              colEmail_1 = globals.red_1;
-              colEmail_2 = globals.red_2;
-              errTxtEmail = globals.error6;
-            });
-          } else if (body[0] == "error7") {
-            setState(() {
-              colErrTxt = globals.red_1;
-              errTxt = globals.error7;
-            });
-          } else if (body[0] == "errorVersion") {
-            setState(() {
-              colErrTxt = globals.red_1;
-              errTxt = globals.errorVersion;
-            });
-          } else {
-            print(body[0]);
-            setState(() {
-              colErrTxt = globals.red_1;
-              errTxt = globals.errorElse;
-            });
-          }
-          /* } else {
+          });
+
+        } else if (body[0] == "error1") {
+          setState(() {
+            colErrTxtUsr = globals.red_1;
+            colUserName = globals.red;
+            colUserName_1 = globals.red_1;
+            colUserName_2 = globals.red_2;
+            errTxtUsr = globals.error1;
+          });
+        } else if (body[0] == "error2_1") {
+          setState(() {
+            colErrTxtUsr = globals.red_1;
+            colUserName = globals.red;
+            colUserName_1 = globals.red_1;
+            colUserName_2 = globals.red_2;
+            errTxtUsr = globals.error2_1;
+          });
+        } else if (body[0] == "error2_2") {
+          setState(() {
+            colErrTxtUsr = globals.red_1;
+            colUserName = globals.red;
+            colUserName_1 = globals.red_1;
+            colUserName_2 = globals.red_2;
+            errTxtUsr = globals.error2_2;
+          });
+        } else if (body[0] == "error2_3") {
+          setState(() {
+            colPass = globals.red;
+            colPass_1 = globals.red_1;
+            colPass_2 = globals.red_2;
+            colErrTxtPass = globals.red_1;
+            errTxtPass = globals.error2_3;
+          });
+        } else if (body[0] == "error2_5") {
+          setState(() {
+            colEmail = globals.red;
+            colEmail_1 = globals.red_1;
+            colEmail_2 = globals.red_2;
+            colErrTxtEmail = globals.red_1;
+            errTxtEmail = globals.error2_5;
+          });
+        } else if (body[0] == "error2_7") {
+          setState(() {
+            colPhoneNb = globals.red;
+            colPhoneNb_1 = globals.red_1;
+            colPhoneNb_2 = globals.red_2;
+            colErrTxtPhone = globals.red_1;
+            errTxtPhone = globals.error2_7;
+          });
+        } else if (body[0] == "error3") {
+          setState(() {
+            colRePass = globals.red;
+            colRePass_1 = globals.red_1;
+            colRePass_2 = globals.red_2;
+            colErrTxtRepass = globals.red_1;
+            errTxtRepass = globals.error3;
+          });
+        } else if (body[0] == "error4") {
+          setState(() {
+            colErrTxt = globals.red_1;
+            errTxt = globals.error4;
+          });
+        } else if (body[0] == "error5") {
+          setState(() {
+            colErrTxtUsr = globals.red_1;
+            colUserName = globals.red;
+            colUserName_1 = globals.red_1;
+            colUserName_2 = globals.red_2;
+            errTxtUsr = globals.error5;
+          });
+        } else if (body[0] == "error6") {
+          setState(() {
+            colErrTxtEmail = globals.red_1;
+            colEmail = globals.red;
+            colEmail_1 = globals.red_1;
+            colEmail_2 = globals.red_2;
+            errTxtEmail = globals.error6;
+          });
+        } else if (body[0] == "error7") {
+          setState(() {
+            colErrTxt = globals.red_1;
+            errTxt = globals.error7;
+          });
+        } else if (body[0] == "errorVersion") {
+          setState(() {
+            colErrTxt = globals.red_1;
+            errTxt = globals.errorVersion;
+          });
+        } else {
+          print(body[0]);
+          setState(() {
+            colErrTxt = globals.red_1;
+            errTxt = globals.errorElse;
+          });
+        }
+        /* } else {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) =>
@@ -820,7 +780,7 @@ class _registrationState extends State<registration> {
                   ),
             );
           } */
-          /* }else{
+        /* }else{
           showDialog<String>(
             context: context,
             builder: (BuildContext context) =>
@@ -851,57 +811,17 @@ class _registrationState extends State<registration> {
   }
 
 
-  _back(){
+  _back() {
     setState(() {
       globals.clearRegist();
-
-      colFName = globals.blue; //fname
-      colFName_1 = globals.blue_1;
-      colFName_2 = globals.blue_2;
-      colLName = globals.blue; //lname
-      colLName_1 = globals.blue_1;
-      colLName_2 = globals.blue_2;
-      colUserName = globals.blue; //username
-      colUserName_1 = globals.blue_1;
-      colUserName_2 = globals.blue_2;
-      colPass = globals.blue; //password
-      colPass_1 = globals.blue_1;
-      colPass_2 = globals.blue_2;
-      colRePass = globals.blue; //repassword
-      colRePass_1 = globals.blue_1;
-      colRePass_2 = globals.blue_2;
-      colPhoneNb = globals.blue; //phoneNumber
-      colPhoneNb_1 = globals.blue_1;
-      colPhoneNb_2 = globals.blue_2;
-      colEmail = globals.blue; //email
-      colEmail_1 = globals.blue_1;
-      colEmail_2 = globals.blue_2;
-      errTxtDate = ''; //date ErrorText
-      errTxtFname = '';
-      errTxtLname = '';
-      errTxtUsr = '';
-      errTxtEmail = '';
-      errTxtPass = '';
-      errTxtRepass = '';
-      errTxtPhone = '';
-      errTxtGender = '';//genderError
-      colRadioMale = globals.blue; // background color for gender button
-      colRadioMale_1 = globals.blue_1;
-      colRadioFem = globals.blue;
-      colRadioFem_1 = globals.blue_1;
-      colDateOfBirth = globals.blue;
-      colDateOfBirth_1 = globals.blue_1;
-      colDateOfBirth_2 = globals.blue_2;
-      Navigator.pushNamedAndRemoveUntil(context,'/Login', (route) => false);
     });
 
-
+    Navigator.of(context).pop();
   }
 
 
-_nullTextCode(){
-  globals.sixCodeNb = null;
-}
-
+  _nullTextCode(){
+    globals.sixCodeNb = null;
+  }
 
 }
