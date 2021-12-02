@@ -133,7 +133,7 @@ class _contratState extends State<contrat> {
 
       if (body[0] == "success") {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
-        localStorage.setString('token', body[1]);
+        localStorage.setString('token',body[1]);
 
         for (var i = 0; i < body[2].length; i++) {
           //localStorage.setString('contrat_Id', value)

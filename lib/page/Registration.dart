@@ -15,6 +15,7 @@ import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/radioButton/myRadioButton.dart';
 import 'package:flutter_client/widgets/textInput/myErrorText.dart';
 import 'package:flutter_client/widgets/textInput/myTextInput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 RegExp passExp = new RegExp(
@@ -658,8 +659,15 @@ class _registrationState extends State<registration> {
         //print("printed");
         var body = json.decode(res.body);
         //print(body);
+        print(body[0]);
         if (body[0] == "true") {
 
+          print("helooooooooo");
+          SharedPreferences localStorage = await SharedPreferences.getInstance();
+          localStorage.setString('Id', body[1][0]);
+          localStorage.setString('email', body[1][1]);
+          print(localStorage.getString('Id'));
+          print(localStorage.getString('email'));
           //Navigator.pushNamed(context, '/Login');
           //Navigator.pushNamed(context, '/home');
           showDialog(
