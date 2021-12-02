@@ -245,10 +245,12 @@ class _loginState extends State<login> {
 
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1][0]);
+        localStorage.setString('Id', body[1][1]);
         localStorage.setString('fName', body[1][1]);
         //print(localStorage.getString('fname'));
         localStorage.setString('lName', body[1][2]);
         localStorage.setString('userName', body[1][3]);
+        localStorage.setString('email', body[1][1]);
         localStorage.setString('phoneNumber', body[1][4]);
         localStorage.setString('gender', body[1][5]);
         localStorage.setString('dateOfBirth', body[1][6]);
