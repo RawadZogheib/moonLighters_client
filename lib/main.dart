@@ -5,6 +5,7 @@ import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/contrat.dart';
 import 'package:flutter_client/page/project.dart';
 import 'package:flutter_client/widgets/code/sixCode.dart';
+import 'package:flutter_client/widgets/code/sixCodeLogin.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             '/Project': (context) => Project(),
             '/FirstPage': (context) => FirstPage(),
             '/sixCode': (context)=>sixCode(),
+            '/sixCodeLogin': (context)=>sixCodeLogin(),
           });
      });
   }

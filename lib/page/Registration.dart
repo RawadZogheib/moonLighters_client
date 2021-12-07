@@ -649,7 +649,8 @@ class _registrationState extends State<registration> {
           'repassword': globals.repassword,
           'dateOfBirth': globals.dateOfBirth,
           'phoneNumber': globals.phoneNumber,
-          'gender': globals.gender
+          'gender': globals.gender,
+          'isRegistered' : globals.isRegistered
         };
 
         var res = await CallApi()
@@ -662,7 +663,7 @@ class _registrationState extends State<registration> {
         print(body[0]);
         if (body[0] == "true") {
 
-          print("helooooooooo");
+          //print("helooooooooo");
           SharedPreferences localStorage = await SharedPreferences.getInstance();
           localStorage.setString('Id', body[1][0]);
           localStorage.setString('email', body[1][1]);

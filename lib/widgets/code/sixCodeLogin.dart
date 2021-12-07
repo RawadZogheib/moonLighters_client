@@ -14,14 +14,14 @@ Color colErrCode = globals.transparent;
 
 
 
-class sixCode extends StatefulWidget {
-  const sixCode({Key? key}) : super(key: key);
+class sixCodeLogin extends StatefulWidget {
+  const sixCodeLogin({Key? key}) : super(key: key);
 
   @override
-  _sixCodeState createState() => _sixCodeState();
+  _sixCodeLoginState createState() => _sixCodeLoginState();
 }
 
-class _sixCodeState extends State<sixCode> {
+class _sixCodeLoginState extends State<sixCodeLogin> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -179,16 +179,36 @@ class _sixCodeState extends State<sixCode> {
       };
 
       var res = await CallApi().postData(
-          data, 'Registration/Control/(Control)checkCode.php');
+          data, 'Login/Control/(Control)checkCodeLogin.php');
       //print(res);
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
-      if(body[0] == "true"){
-        Navigator.pushNamed(context, '/Login');
+      if(body[0] == "success"){
+
+        Navigator.pushNamed(context, '/Contrat');
+
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', body[1]);
+        localStorage.setString('Id', body[2][0]);
+        localStorage.setString('fName', body[2][1]);
+        //print(localStorage.getString('fname'));
+        localStorage.setString('lName', body[2][2]);
+        localStorage.setString('userName', body[2][3]);
+        localStorage.setString('email', body[2][4]);
+        localStorage.setString('phoneNumber', body[2][5]);
+        localStorage.setString('gender', body[2][6]);
+        localStorage.setString('dateOfBirth', body[2][7]);
+        localStorage.setString('isRegistered', body[2][8]);
+
       }else if(body[0] == "codeFailed"){
         setState(() {
           errCode = globals.codeFailed;
+          colErrCode = globals.red_1;
+        });
+      }else if(body[0] == "error4"){
+        setState(() {
+          errCode = globals.error4;
           colErrCode = globals.red_1;
         });
       }else if(body[0] == "error7"){

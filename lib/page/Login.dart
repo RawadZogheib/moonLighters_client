@@ -5,10 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/widgets/button/myButton.dart';
+import 'package:flutter_client/widgets/code/codeDialogLogin.dart';
 
 import 'package:flutter_client/widgets/other/errorAlertDialog.dart';
 
-import 'package:flutter_client/widgets/code/codeDialog.dart';
+
 import 'package:flutter_client/widgets/code/sixCode.dart';
 
 import 'package:flutter_client/widgets/textInput/myErrorText.dart';
@@ -241,7 +242,16 @@ class _loginState extends State<login> {
 
       //print(body[1]);
       //print("welcome");
-      if (body[0] == "success") {
+      if(body[0] == "true") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => codeDialogLogin()).then((exit) {
+          setState(() {
+            _nullTextCode();
+          });
+        });
+
+      }else if (body[0] == "success") {
 
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1]);
@@ -254,6 +264,7 @@ class _loginState extends State<login> {
         localStorage.setString('phoneNumber', body[2][5]);
         localStorage.setString('gender', body[2][6]);
         localStorage.setString('dateOfBirth', body[2][7]);
+        localStorage.setString('isRegistered', body[2][8]);
 
 
         //print(body[1][0]);
@@ -343,6 +354,10 @@ class _loginState extends State<login> {
       colPass_2 = globals.blue_2;
 
     });
+  }
+
+  _nullTextCode(){
+    globals.sixCodeNb = null;
   }
 
 }
