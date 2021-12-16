@@ -824,8 +824,6 @@ class _registrationState extends State<registration> {
   _back() {
     setState(() {
       globals.clearRegist();
-      
-      
     });
 
     Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
