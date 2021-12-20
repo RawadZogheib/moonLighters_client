@@ -335,7 +335,7 @@ class _loginState extends State<login> {
   }
 
   _back(){
-    exit;
+    exit(0);
   }
 
   _nullLogin(){
