@@ -14,10 +14,11 @@ import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/other/plusProjectCard.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:percent_indicator/percent_indicator.dart';
 final children = <Widget>[];
 
 class Project extends StatefulWidget {
+  double percentage = 95;
   @override
   _ProjectState createState() => _ProjectState();
 }
@@ -63,24 +64,84 @@ class _ProjectState extends State<Project> {
       onWillPop: () async => _back(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Tracking App"),
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
               onPressed: () {
                 _back();
               }),
-        ),
-        backgroundColor: globals.whiteBlue,
-        body: Container(
-          margin: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: <Widget>[
-              Wrap(
-                children: children,
-                //new Card(child: Text('B'))
+          elevation: 0,),
+        backgroundColor: Colors.blue,
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Project',
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: globals.whiteBlue,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 150,
+                      margin: EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: globals.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: LinearPercentIndicator(
+                          width: MediaQuery.of(context).size.width - 50,
+                          animation: true,
+                          lineHeight: 20.0,
+                          animationDuration: 2000,
+                          percent: (widget.percentage/100),
+                          center: Text((widget.percentage).toString() + "%"),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          progressColor: Colors.blue,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: <Widget>[
+                          Center(
+                            child: Wrap(
+                              children: children,
+                              //new Card(child: Text('B'))
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -153,7 +214,7 @@ class _ProjectState extends State<Project> {
         // print(body[2][i][3]);
       }
       setState(() {
-        children.add(PlusProjectCard());
+        children;
       });
     }else if(body[0] == "error4"){
       showDialog(
