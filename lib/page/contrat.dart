@@ -63,10 +63,7 @@ class _contratState extends State<contrat> {
             ),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 30,
-                ),
+                padding: const EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
                   color: globals.whiteBlue,
                   borderRadius: const BorderRadius.only(
@@ -74,12 +71,13 @@ class _contratState extends State<contrat> {
                     topRight: Radius.circular(30),
                   ),
                 ),
-                alignment: Alignment.center,
                 child: ListView(
                   children: <Widget>[
-                    Wrap(
-                      children: children,
-                      //new Card(child: Text('B'))
+                    Center(
+                      child: Wrap(
+                        children: children,
+                        //new Card(child: Text('B'))
+                      ),
                     ),
                   ],
                 ),
@@ -268,7 +266,7 @@ class _contratState extends State<contrat> {
   }
 
   _back() {
-    exit;
+    exit(0);
     // globals.contrat_Id = null;
     // globals.contrat_name = null;
     // globals.contrat_dollar_per_hour = null;
