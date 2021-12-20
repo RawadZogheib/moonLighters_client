@@ -37,24 +37,55 @@ class _contratState extends State<contrat> {
       onWillPop: () async => _back(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Tracking App"),
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
               onPressed: () {
                 _back();
               }),
-        ),
-        backgroundColor: globals.whiteBlue,
-        body: Container(
-          margin: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: <Widget>[
-              Wrap(
-                children: children,
-                //new Card(child: Text('B'))
+          elevation: 0,),
+        backgroundColor: Colors.blue,
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Contrat',
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 30,
+                ),
+                decoration: BoxDecoration(
+                  color: globals.whiteBlue,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: ListView(
+                  children: <Widget>[
+                    Wrap(
+                      children: children,
+                      //new Card(child: Text('B'))
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
