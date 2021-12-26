@@ -2,29 +2,29 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
-
+import 'package:flutter_client/globals/globals.dart' as globals;
+import 'package:flutter_client/widgets/other/plusProjectCard.dart';
+import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/projectCard/accessCard.dart';
 import 'package:flutter_client/widgets/projectCard/excelCard.dart';
 import 'package:flutter_client/widgets/projectCard/oneNoteCard.dart';
 import 'package:flutter_client/widgets/projectCard/powerPointCard.dart';
 import 'package:flutter_client/widgets/projectCard/publisherCard.dart';
 import 'package:flutter_client/widgets/projectCard/wordCard.dart';
-import 'package:flutter_client/globals/globals.dart' as globals;
-import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
-import 'package:flutter_client/widgets/other/plusProjectCard.dart';
-import 'package:desktop_window/desktop_window.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 final children = <Widget>[];
+final childrenOnline = <Widget>[];
 
 class Project extends StatefulWidget {
   double percentage = 95;
+
   @override
   _ProjectState createState() => _ProjectState();
 }
 
 class _ProjectState extends State<Project> {
-
   /*
   late String contrat_Id;
   late String contrat_name;
@@ -55,11 +55,11 @@ class _ProjectState extends State<Project> {
     // TODO: implement initState
     super.initState();
     _checkVariables();
+    _loadChildrenOnline();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
@@ -69,7 +69,8 @@ class _ProjectState extends State<Project> {
               onPressed: () {
                 _back();
               }),
-          elevation: 0,),
+          elevation: 0,
+        ),
         backgroundColor: Colors.blue,
         body: Column(
           children: [
@@ -111,18 +112,34 @@ class _ProjectState extends State<Project> {
                           bottomRight: Radius.circular(30),
                         ),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: LinearPercentIndicator(
-                          width: MediaQuery.of(context).size.width - 50,
-                          animation: true,
-                          lineHeight: 20.0,
-                          animationDuration: 2000,
-                          percent: (widget.percentage/100),
-                          center: Text((widget.percentage).toString() + "%"),
-                          linearStrokeCap: LinearStrokeCap.roundAll,
-                          progressColor: Colors.blue,
-                        ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(22.0),
+                                child: LinearPercentIndicator(
+                                  width: MediaQuery.of(context).size.width - 50,
+                                  animation: true,
+                                  lineHeight: 20.0,
+                                  animationDuration: 2000,
+                                  percent: (widget.percentage / 100),
+                                  center: Text(
+                                      (widget.percentage).toString() + "%"),
+                                  linearStrokeCap: LinearStrokeCap.roundAll,
+                                  progressColor: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: childrenOnline,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
@@ -188,82 +205,200 @@ class _ProjectState extends State<Project> {
   }
 
   void _loadPage() async {
-    var data = {
-      'version':globals.version,
-      'account_Id': globals.Id,
-      'contrat_Id': globals.contrat_Id,
-    };
-    var res = await CallApi().postData(data, 'Project/Control/(Control)loadProject.php');
-    print(res.body);
-    List<dynamic> body = json.decode(res.body);
-
-    if (body[0] == "success") {
-      //SharedPreferences localStorage = await SharedPreferences.getInstance();
-      //localStorage.setString('token', body[1]);
-
-      for (var i = 0; i < body[1].length; i++) {
-        children.add(_createCards(
-          body[1][i][0], //project_Id
-          body[1][i][1], //project_name
-          body[1][i][2], //project_description
-          body[1][i][3], //project_type
-        ));
-        // print(body[2][i][0]);
-        // print(body[2][i][1]);
-        // print(body[2][i][2]);
-        // print(body[2][i][3]);
-      }
-      setState(() {
-        children;
-      });
-    }else if(body[0] == "error4"){
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.error4));
-    }else if(body[0] == "error10"){
-      setState(() {
-        children.add(PlusProjectCard());
-      });
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.error10));
-    } else if (body[0] == "errorToken") {
+    try {
       children.clear();
+      var data = {
+        'version': globals.version,
+        'account_Id': globals.Id,
+        'contrat_Id': globals.contrat_Id,
+      };
+      var res = await CallApi()
+          .postData(data, 'Project/Control/(Control)loadProject.php');
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
 
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-              ErrorAlertDialog(message: globals.errorToken, goHome: true,
-                  onPress: (){
-                    _globRegist();
-                    _globContrat();
-                  }));
-    } else if(body[0] == "errorVersion"){
-      children.clear();
-      // print("errorrrrrrVersionnnnnn");
-      // print("${globals.Id}");
-      // print("${globals.contrat_Id}  ${globals.contrat_code}  ${globals.contrat_description}  ${globals.contrat_description}  ${globals.contrat_dollar_per_hour}  ${globals.contrat_max_payment}  ${globals.contrat_name}");
+      if (body[0] == "success") {
+        //SharedPreferences localStorage = await SharedPreferences.getInstance();
+        //localStorage.setString('token', body[1]);
 
-      // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
-      // print("${globals.contrat_Id}  ${globals.contrat_code}  ${globals.contrat_description}  ${globals.contrat_description}  ${globals.contrat_dollar_per_hour}  ${globals.contrat_max_payment}  ${globals.contrat_name}");
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-              ErrorAlertDialog(message: globals.errorVersion, goHome: true,
-                onPress: (){
+        for (var i = 0; i < body[1].length; i++) {
+          children.add(_createCards(
+            body[1][i][0], //project_Id
+            body[1][i][1], //project_name
+            body[1][i][2], //project_description
+            body[1][i][3], //project_type
+          ));
+          // print(body[2][i][0]);
+          // print(body[2][i][1]);
+          // print(body[2][i][2]);
+          // print(body[2][i][3]);
+        }
+        if(mounted){
+          setState(() {
+            children;
+          });
+        }
+
+      } else if (body[0] == "error4") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error4));
+      } else if (body[0] == "error10") {
+        setState(() {
+          children.add(PlusProjectCard());
+        });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error10));
+      } else if (body[0] == "errorToken") {
+        children.clear();
+
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => ErrorAlertDialog(
+                message: globals.errorToken,
+                goHome: true,
+                onPress: () {
                   _globRegist();
                   _globContrat();
-                },));
-    } else {
+                }));
+      } else if (body[0] == "errorVersion") {
+        children.clear();
+        // print("errorrrrrrVersionnnnnn");
+        // print("${globals.Id}");
+        // print("${globals.contrat_Id}  ${globals.contrat_code}  ${globals.contrat_description}  ${globals.contrat_description}  ${globals.contrat_dollar_per_hour}  ${globals.contrat_max_payment}  ${globals.contrat_name}");
+
+        // print("${globals.Id}  ${globals.userName}  ${globals.email}  ${globals.dateOfBirth}  ${globals.gender}  ${globals.fName}  ${globals.lName}\n");
+        // print("${globals.contrat_Id}  ${globals.contrat_code}  ${globals.contrat_description}  ${globals.contrat_description}  ${globals.contrat_dollar_per_hour}  ${globals.contrat_max_payment}  ${globals.contrat_name}");
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => ErrorAlertDialog(
+                  message: globals.errorVersion,
+                  goHome: true,
+                  onPress: () {
+                    _globRegist();
+                    _globContrat();
+                  },
+                ));
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.errorElse));
+      }
+    } catch (e) {
+      print(e);
       showDialog(
           context: context,
-          builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.errorElse));
+          builder: (BuildContext context) =>
+              ErrorAlertDialog(message: globals.errorException));
     }
   }
 
+  _loadChildrenOnline() async {
+    // var data = {
+    //   'version':globals.version,
+    //   'account_Id': globals.Id,
+    //   'contrat_Id': globals.contrat_Id,
+    // };
+    // var res = await CallApi().postData(data, 'Project/Control/(Control)loadProject.php');
+    // print(res.body);
+    // List<dynamic> body = json.decode(res.body);
+    //
+    // if (body[0] == "success") {
+    //   //SharedPreferences localStorage = await SharedPreferences.getInstance();
+    //   //localStorage.setString('token', body[1]);
+    //
+    //   for (var i = 0; i < body[1].length; i++) {
+    //     children.add(_createCards(
+    //       body[1][i][0], //project_Id
+    //       body[1][i][1], //project_name
+    //       body[1][i][2], //project_description
+    //       body[1][i][3], //project_type
+    //     ));
+    //     // print(body[2][i][0]);
+    //     // print(body[2][i][1]);
+    //     // print(body[2][i][2]);
+    //     // print(body[2][i][3]);
+    //   }
+    //   setState(() {
+    //     children;
+    //   });
+
+    childrenOnline.clear();
+
+    childrenOnline.addAll([
+      _iconContainer("word"),
+      _iconContainer("excel"),
+      _iconContainer("powerPoint"),
+      _iconContainer("access"),
+      _iconContainer("oneNote"),
+      _iconContainer("publisher"),
+      _iconContainer("word"),
+      _iconContainer("excel"),
+      _iconContainer("powerPoint"),
+      _iconContainer("access"),
+      _iconContainer("oneNote"),
+      _iconContainer("publisher"),
+    ]);
+
+    if (mounted) {
+      setState(() {
+        childrenOnline;
+      });
+    }
+
+    // }else if(body[0] == "error4"){
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => ErrorAlertDialog(
+    //           message: globals.error4));
+    // }else if(body[0] == "error10"){
+    //   setState(() {
+    //     children.add(PlusProjectCard());
+    //   });
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => ErrorAlertDialog(
+    //           message: globals.error10));
+    // } else if (body[0] == "errorToken") {
+    //   children.clear();
+    //
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) =>
+    //           ErrorAlertDialog(message: globals.errorToken, goHome: true,
+    //               onPress: (){
+    //                 _globRegist();
+    //                 _globContrat();
+    //               }));
+    // } else if(body[0] == "errorVersion"){
+    //   children.clear();
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) =>
+    //           ErrorAlertDialog(message: globals.errorVersion, goHome: true,
+    //             onPress: (){
+    //               _globRegist();
+    //               _globContrat();
+    //             },));
+    // } else {
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => ErrorAlertDialog(
+    //           message: globals.errorElse));
+    // }
+
+    await Future.delayed(const Duration(seconds: 30), () {
+      print("30sec gone!!");
+      if (mounted) {
+        print("30sec gone,and _loadChildrenOnline!!");
+        _loadChildrenOnline();
+      }
+    });
+  }
 
   void _checkVariables() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -271,7 +406,8 @@ class _ProjectState extends State<Project> {
     globals.contrat_Id = localStorage.getString('contrat_Id');
     globals.contrat_name = localStorage.getString('contrat_name');
     globals.contrat_description = localStorage.getString('contrat_description');
-    globals.contrat_dollar_per_hour = localStorage.getString('contrat_dollar_per_hour');
+    globals.contrat_dollar_per_hour =
+        localStorage.getString('contrat_dollar_per_hour');
     globals.contrat_max_payment = localStorage.getString('contrat_max_payment');
     globals.contrat_code = localStorage.getString('contrat_code');
     if (globals.contrat_Id == null ||
@@ -304,6 +440,23 @@ class _ProjectState extends State<Project> {
     }
   }
 
+  _iconContainer(String appName) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Tooltip(
+          message: appName,
+          child: Image(
+            height: 40,
+            width: 40,
+            image: AssetImage(
+              'Assets/projectLogo/${appName}Logo.png',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   _back() {
     globals.contrat_Id = null;
@@ -316,16 +469,15 @@ class _ProjectState extends State<Project> {
     Navigator.of(context).pop();
   }
 
-  _globRegist(){
+  _globRegist() {
     setState(() {
       globals.Id = null;
     });
   }
 
-  _globContrat(){
+  _globContrat() {
     setState(() {
       globals.clearContrat();
     });
   }
-
 }

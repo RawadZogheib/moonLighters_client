@@ -42,7 +42,8 @@ class _contratState extends State<contrat> {
               onPressed: () {
                 _back();
               }),
-          elevation: 0,),
+          elevation: 0,
+        ),
         backgroundColor: Colors.blue,
         body: Column(
           children: [
@@ -139,6 +140,7 @@ class _contratState extends State<contrat> {
 
   void _loadPage() async {
     try {
+      children.clear();
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       globals.Id = localStorage.getString('Id');
       globals.fName = localStorage.getString('fName');
@@ -161,7 +163,6 @@ class _contratState extends State<contrat> {
       //print("hellozzzzzzz");
 
       if (body[0] == "success") {
-
         //SharedPreferences localStorage = await SharedPreferences.getInstance();
         //localStorage.setString('token',body[1]);
 
@@ -186,19 +187,22 @@ class _contratState extends State<contrat> {
           // print(body[2][i][5]);
         }
 
-        setState(() {
-          children.add(PlusContratCard(
-            onTap: () {
-              //Set null to use these variable to create a new contrat
-              globals.contrat_Id = null;
-              globals.contrat_name = null;
-              globals.contrat_dollar_per_hour = null;
-              globals.contrat_max_payment = null;
-              globals.contrat_description = null;
-              globals.contrat_code = null;
-            },
-          ));
-        });
+        if(mounted){
+          setState(() {
+            children.add(PlusContratCard(
+              onTap: () {
+                //Set null to use these variable to create a new contrat
+                globals.contrat_Id = null;
+                globals.contrat_name = null;
+                globals.contrat_dollar_per_hour = null;
+                globals.contrat_max_payment = null;
+                globals.contrat_description = null;
+                globals.contrat_code = null;
+              },
+            ));
+          });
+        }
+
       } else if (body[0] == "error4") {
         showDialog(
             context: context,
@@ -210,12 +214,12 @@ class _contratState extends State<contrat> {
         showDialog(
             context: context,
             builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.errorToken,
-              goHome: true,
-              onPress: () {
-                _globRegist();
-              },
-            ));
+                  message: globals.errorToken,
+                  goHome: true,
+                  onPress: () {
+                    _globRegist();
+                  },
+                ));
       } else if (body[0] == "errorVersion") {
         children.clear();
 
@@ -226,12 +230,12 @@ class _contratState extends State<contrat> {
         showDialog(
             context: context,
             builder: (BuildContext context) => ErrorAlertDialog(
-              message: globals.errorVersion,
-              goHome: true,
-              onPress: () {
-                _globRegist();
-              },
-            ));
+                  message: globals.errorVersion,
+                  goHome: true,
+                  onPress: () {
+                    _globRegist();
+                  },
+                ));
       } else if (body[0] == "error10") {
         setState(() {
           children.add(PlusContratCard(
@@ -266,7 +270,7 @@ class _contratState extends State<contrat> {
   }
 
   _back() {
-    exit(0);
+    //exit(0);
     // globals.contrat_Id = null;
     // globals.contrat_name = null;
     // globals.contrat_dollar_per_hour = null;
