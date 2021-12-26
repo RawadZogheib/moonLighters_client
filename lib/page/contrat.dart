@@ -63,24 +63,31 @@ class _contratState extends State<contrat> {
               height: 35,
             ),
             Expanded(
-              child: Container(
-                padding: const EdgeInsets.only(top: 30),
-                decoration: BoxDecoration(
-                  color: globals.whiteBlue,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
-                child: ListView(
-                  children: <Widget>[
-                    Center(
-                      child: Wrap(
-                        children: children,
-                        //new Card(child: Text('B'))
-                      ),
+                child: Container(
+                  //padding: const EdgeInsets.only(top: 30),
+                  decoration: BoxDecoration(
+                    color: globals.whiteBlue,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
-                  ],
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      SizedBox(height: 30,),
+                      Center(
+                        child: Wrap(
+                          children: children,
+                          //new Card(child: Text('B'))
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -14,10 +14,9 @@ import 'package:flutter_client/widgets/projectCard/wordCard.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final children = <Widget>[];
-final childrenOnline = <Widget>[];
-
 class Project extends StatefulWidget {
+  final children = <Widget>[];
+  final childrenOnline = <Widget>[];
   double percentage = 95;
 
   @override
@@ -102,7 +101,6 @@ class _ProjectState extends State<Project> {
                   children: [
                     Container(
                       height: 150,
-                      margin: EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
                         color: globals.white,
                         borderRadius: const BorderRadius.only(
@@ -118,9 +116,9 @@ class _ProjectState extends State<Project> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(22.0),
+                                padding: const EdgeInsets.fromLTRB(0.0,18.0,0.0,14.0),
                                 child: LinearPercentIndicator(
-                                  width: MediaQuery.of(context).size.width - 50,
+                                  width: MediaQuery.of(context).size.width - 30,
                                   animation: true,
                                   lineHeight: 20.0,
                                   animationDuration: 2000,
@@ -133,25 +131,37 @@ class _ProjectState extends State<Project> {
                               ),
                             ],
                           ),
+                          Text("Active Projects",style: TextStyle(fontSize: 12.0),),
                           Expanded(
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: childrenOnline,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(8.0,2.0,8.0,11.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: Container(
+                                  decoration: BoxDecoration(color: globals.whiteBlue),
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: widget.childrenOnline,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Expanded(
-                      child: ListView(
-                        children: <Widget>[
-                          Center(
-                            child: Wrap(
-                              children: children,
-                              //new Card(child: Text('B'))
+                      child: Container(
+                        child: ListView(
+                          children: <Widget>[
+                            Center(
+                              child: Wrap(
+                                children: widget.children,
+                                //new Card(child: Text('B'))
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -206,7 +216,7 @@ class _ProjectState extends State<Project> {
 
   void _loadPage() async {
     try {
-      children.clear();
+      widget.children.clear();
       var data = {
         'version': globals.version,
         'account_Id': globals.Id,
@@ -222,7 +232,7 @@ class _ProjectState extends State<Project> {
         //localStorage.setString('token', body[1]);
 
         for (var i = 0; i < body[1].length; i++) {
-          children.add(_createCards(
+          widget.children.add(_createCards(
             body[1][i][0], //project_Id
             body[1][i][1], //project_name
             body[1][i][2], //project_description
@@ -233,12 +243,11 @@ class _ProjectState extends State<Project> {
           // print(body[2][i][2]);
           // print(body[2][i][3]);
         }
-        if(mounted){
+        if (mounted) {
           setState(() {
-            children;
+            widget.children;
           });
         }
-
       } else if (body[0] == "error4") {
         showDialog(
             context: context,
@@ -246,14 +255,14 @@ class _ProjectState extends State<Project> {
                 ErrorAlertDialog(message: globals.error4));
       } else if (body[0] == "error10") {
         setState(() {
-          children.add(PlusProjectCard());
+          widget.children.add(PlusProjectCard());
         });
         showDialog(
             context: context,
             builder: (BuildContext context) =>
                 ErrorAlertDialog(message: globals.error10));
       } else if (body[0] == "errorToken") {
-        children.clear();
+        widget.children.clear();
 
         showDialog(
             context: context,
@@ -265,7 +274,7 @@ class _ProjectState extends State<Project> {
                   _globContrat();
                 }));
       } else if (body[0] == "errorVersion") {
-        children.clear();
+        widget.children.clear();
         // print("errorrrrrrVersionnnnnn");
         // print("${globals.Id}");
         // print("${globals.contrat_Id}  ${globals.contrat_code}  ${globals.contrat_description}  ${globals.contrat_description}  ${globals.contrat_dollar_per_hour}  ${globals.contrat_max_payment}  ${globals.contrat_name}");
@@ -298,106 +307,115 @@ class _ProjectState extends State<Project> {
   }
 
   _loadChildrenOnline() async {
-    // var data = {
-    //   'version':globals.version,
-    //   'account_Id': globals.Id,
-    //   'contrat_Id': globals.contrat_Id,
-    // };
-    // var res = await CallApi().postData(data, 'Project/Control/(Control)loadProject.php');
-    // print(res.body);
-    // List<dynamic> body = json.decode(res.body);
-    //
-    // if (body[0] == "success") {
-    //   //SharedPreferences localStorage = await SharedPreferences.getInstance();
-    //   //localStorage.setString('token', body[1]);
-    //
-    //   for (var i = 0; i < body[1].length; i++) {
-    //     children.add(_createCards(
-    //       body[1][i][0], //project_Id
-    //       body[1][i][1], //project_name
-    //       body[1][i][2], //project_description
-    //       body[1][i][3], //project_type
-    //     ));
-    //     // print(body[2][i][0]);
-    //     // print(body[2][i][1]);
-    //     // print(body[2][i][2]);
-    //     // print(body[2][i][3]);
-    //   }
-    //   setState(() {
-    //     children;
-    //   });
+    try {
+      // widget.children.clear();
+      // var data = {
+      //   'version':globals.version,
+      //   'account_Id': globals.Id,
+      //   'contrat_Id': globals.contrat_Id,
+      // };
+      // var res = await CallApi().postData(data, 'Project/Control/(Control)loadProject.php');
+      // print(res.body);
+      // List<dynamic> body = json.decode(res.body);
+      //
+      // if (body[0] == "success") {
+      //   //SharedPreferences localStorage = await SharedPreferences.getInstance();
+      //   //localStorage.setString('token', body[1]);
+      //
+      //   for (var i = 0; i < body[1].length; i++) {
+      //     widget.children.add(_createCards(
+      //       body[1][i][0], //project_Id
+      //       body[1][i][1], //project_name
+      //       body[1][i][2], //project_description
+      //       body[1][i][3], //project_type
+      //     ));
+      //     // print(body[2][i][0]);
+      //     // print(body[2][i][1]);
+      //     // print(body[2][i][2]);
+      //     // print(body[2][i][3]);
+      //   }
+      //   setState(() {
+      //     widget.children;
+      //   });
 
-    childrenOnline.clear();
+      widget.childrenOnline.clear();
 
-    childrenOnline.addAll([
-      _iconContainer("word"),
-      _iconContainer("excel"),
-      _iconContainer("powerPoint"),
-      _iconContainer("access"),
-      _iconContainer("oneNote"),
-      _iconContainer("publisher"),
-      _iconContainer("word"),
-      _iconContainer("excel"),
-      _iconContainer("powerPoint"),
-      _iconContainer("access"),
-      _iconContainer("oneNote"),
-      _iconContainer("publisher"),
-    ]);
+      widget.childrenOnline.addAll([
+        _iconContainer("word"),
+        _iconContainer("excel"),
+        _iconContainer("powerPoint"),
+        _iconContainer("access"),
+        _iconContainer("oneNote"),
+        _iconContainer("publisher"),
+        _iconContainer("word"),
+        _iconContainer("excel"),
+        _iconContainer("powerPoint"),
+        _iconContainer("access"),
+        _iconContainer("oneNote"),
+        _iconContainer("publisher"),
+      ]);
 
-    if (mounted) {
-      setState(() {
-        childrenOnline;
-      });
-    }
-
-    // }else if(body[0] == "error4"){
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) => ErrorAlertDialog(
-    //           message: globals.error4));
-    // }else if(body[0] == "error10"){
-    //   setState(() {
-    //     children.add(PlusProjectCard());
-    //   });
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) => ErrorAlertDialog(
-    //           message: globals.error10));
-    // } else if (body[0] == "errorToken") {
-    //   children.clear();
-    //
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) =>
-    //           ErrorAlertDialog(message: globals.errorToken, goHome: true,
-    //               onPress: (){
-    //                 _globRegist();
-    //                 _globContrat();
-    //               }));
-    // } else if(body[0] == "errorVersion"){
-    //   children.clear();
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) =>
-    //           ErrorAlertDialog(message: globals.errorVersion, goHome: true,
-    //             onPress: (){
-    //               _globRegist();
-    //               _globContrat();
-    //             },));
-    // } else {
-    //   showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) => ErrorAlertDialog(
-    //           message: globals.errorElse));
-    // }
-
-    await Future.delayed(const Duration(seconds: 30), () {
-      print("30sec gone!!");
       if (mounted) {
-        print("30sec gone,and _loadChildrenOnline!!");
-        _loadChildrenOnline();
+        setState(() {
+          widget.childrenOnline;
+        });
       }
-    });
+
+      // }else if(body[0] == "error4"){
+      //   showDialog(
+      //       context: context,
+      //       builder: (BuildContext context) => ErrorAlertDialog(
+      //           message: globals.error4));
+      // }else if(body[0] == "error10"){
+      //   setState(() {
+      //     widget.children.add(PlusProjectCard());
+      //   });
+      //   showDialog(
+      //       context: context,
+      //       builder: (BuildContext context) => ErrorAlertDialog(
+      //           message: globals.error10));
+      // } else if (body[0] == "errorToken") {
+      //   widget.children.clear();
+      //
+      //   showDialog(
+      //       context: context,
+      //       builder: (BuildContext context) =>
+      //           ErrorAlertDialog(message: globals.errorToken, goHome: true,
+      //               onPress: (){
+      //                 _globRegist();
+      //                 _globContrat();
+      //               }));
+      // } else if(body[0] == "errorVersion"){
+      //   widget.children.clear();
+      //   showDialog(
+      //       context: context,
+      //       builder: (BuildContext context) =>
+      //           ErrorAlertDialog(message: globals.errorVersion, goHome: true,
+      //             onPress: (){
+      //               _globRegist();
+      //               _globContrat();
+      //             },));
+      // } else {
+      //   showDialog(
+      //       context: context,
+      //       builder: (BuildContext context) => ErrorAlertDialog(
+      //           message: globals.errorElse));
+      // }
+
+      await Future.delayed(const Duration(seconds: 30), () {
+        print("30sec gone!!");
+        if (mounted) {
+          print("30sec gone,and _loadChildrenOnline!!");
+          _loadChildrenOnline();
+        }
+      });
+    } catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              ErrorAlertDialog(message: globals.errorException));
+    }
   }
 
   void _checkVariables() async {
@@ -465,7 +483,7 @@ class _ProjectState extends State<Project> {
     globals.contrat_max_payment = null;
     globals.contrat_description = null;
     globals.contrat_code = null;
-    children.clear();
+    widget.children.clear();
     Navigator.of(context).pop();
   }
 
