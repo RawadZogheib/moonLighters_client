@@ -131,10 +131,21 @@ class _loginState extends State<login> {
                   myErrorText(errorText: errTxt, color: colErrTxt),
                   Padding(
                     padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.1),
+                        top: MediaQuery.of(context).size.height * 0.001),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
+                          child: InkWell(
+                            child: Text('Forget Password',style: TextStyle(
+                              color: Colors.blue,
+                            ),),
+                            onTap: (){
+                              Navigator.pushNamed(context, '/forgetPassword');
+                            },
+                          ),
+                        ),
                         Text("didn't have an account? "),
                         Row(
                           children: [
@@ -170,6 +181,8 @@ class _loginState extends State<login> {
     colErrTxtEmail = globals.transparent;
     errTxtPass = '';
     colErrTxtPass = globals.transparent;
+    errTxt = '';
+    colErrTxt = globals.transparent;
 
     if (globals.emailLogin != null && globals.emailLogin != '') {
       setState(() {

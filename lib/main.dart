@@ -3,6 +3,7 @@ import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/contrat.dart';
+import 'package:flutter_client/page/forgetPassword.dart';
 import 'package:flutter_client/page/project.dart';
 import 'package:flutter_client/widgets/code/sixCode.dart';
 import 'package:flutter_client/widgets/code/sixCodeLogin.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
             '/FirstPage': (context) => FirstPage(),
             '/sixCode': (context)=>sixCode(),
             '/sixCodeLogin': (context)=>sixCodeLogin(),
+            '/forgetPassword': (context)=>forgetPass(),
           });
      });
   }
