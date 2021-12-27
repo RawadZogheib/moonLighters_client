@@ -331,6 +331,7 @@ class _loginState extends State<login> {
         colErrTxt = globals.red_1;
       });
     }
+    oneClick = 0;
   }
 
   _back() {
