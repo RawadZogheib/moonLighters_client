@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_client/hexColor/hexColor.dart';
 
-import 'myProjectCard.dart';
+import 'package:flutter_client/widgets/projectCard/myProjectCard.dart';
 
 class WordCard extends StatelessWidget {
   final String saveName;
