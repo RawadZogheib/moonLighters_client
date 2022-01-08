@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class Project extends StatefulWidget {
 }
 
 class _ProjectState extends State<Project> {
+  Timer? timer;
+
   /*
   late String contrat_Id;
   late String contrat_name;
@@ -53,8 +56,8 @@ class _ProjectState extends State<Project> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _checkVariables();
     _loadChildrenOnline();
+    _checkVariables();
   }
 
   @override
@@ -430,14 +433,20 @@ class _ProjectState extends State<Project> {
       //       builder: (BuildContext context) => ErrorAlertDialog(
       //           message: globals.errorElse));
       // }
-
-      await Future.delayed(const Duration(seconds: 30), () {
+      timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
         print("30sec gone!!");
         if (mounted) {
           print("30sec gone,and _loadChildrenOnline!!");
           _loadChildrenOnline();
         }
       });
+      // await Future.delayed(const Duration(seconds: 30), () {
+      //  print("30sec gone!!");
+      //         if (mounted) {
+      //           print("30sec gone,and _loadChildrenOnline!!");
+      //           _loadChildrenOnline();
+      //         }
+      // });
     } catch (e) {
       print(e);
       showDialog(
@@ -457,6 +466,7 @@ class _ProjectState extends State<Project> {
         localStorage.getString('contrat_dollar_per_hour');
     globals.contrat_max_payment = localStorage.getString('contrat_max_payment');
     globals.contrat_code = localStorage.getString('contrat_code');
+    globals.contrat_code = null;
     if (globals.contrat_Id == null ||
         globals.contrat_name == null ||
         globals.contrat_description == null ||
@@ -466,7 +476,7 @@ class _ProjectState extends State<Project> {
       print("Error: variable error page /Contrat");
       await Future.delayed(Duration(seconds: 1));
       //await Future.delayed(const Duration(seconds: 2), (){});
-      Navigator.of(context).pop();
+      _back();
     } else {
       /*
       contrat_Id = globals.contrat_Id.toString();
@@ -506,6 +516,7 @@ class _ProjectState extends State<Project> {
   }
 
   _back() {
+    timer?.cancel();
     globals.contrat_Id = null;
     globals.contrat_name = null;
     globals.contrat_dollar_per_hour = null;
