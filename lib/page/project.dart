@@ -472,7 +472,7 @@ class _ProjectState extends State<Project> {
         localStorage.getString('contrat_dollar_per_hour');
     globals.contrat_max_payment = localStorage.getString('contrat_max_payment');
     globals.contrat_code = localStorage.getString('contrat_code');
-    globals.contrat_code = null;
+    //globals.contrat_code = null;
     if (globals.contrat_Id == null ||
         globals.contrat_name == null ||
         globals.contrat_description == null ||
