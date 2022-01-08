@@ -58,6 +58,7 @@ class _ProjectState extends State<Project> {
     super.initState();
     _loadChildrenOnline();
     _checkVariables();
+    _30secAutoLoad();
   }
 
   @override
@@ -439,13 +440,6 @@ class _ProjectState extends State<Project> {
       //       builder: (BuildContext context) => ErrorAlertDialog(
       //           message: globals.errorElse));
       // }
-      timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-        print("30sec gone!!");
-        if (mounted) {
-          print("30sec gone,and _loadChildrenOnline!!");
-          _loadChildrenOnline();
-        }
-      });
       // await Future.delayed(const Duration(seconds: 30), () {
       //  print("30sec gone!!");
       //         if (mounted) {
@@ -542,6 +536,17 @@ class _ProjectState extends State<Project> {
   _globContrat() {
     setState(() {
       globals.clearContrat();
+    });
+  }
+
+  _30secAutoLoad() {
+    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+      print("30sec gone!!");
+      if (mounted) {
+        print("30sec gone,and _loadChildrenOnline!!");
+        _loadChildrenOnline();
+        _checkVariables();
+      }
     });
   }
 }
