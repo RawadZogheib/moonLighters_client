@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_client/page/CalendarPage.dart';
 import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             '/sixCode': (context)=>sixCode(),
             '/sixCodeLogin': (context)=>sixCodeLogin(),
             '/forgetPassword': (context)=>forgetPass(),
+            '/CalendarPage' : (context) => CalendarPage(),
           });
      });
   }

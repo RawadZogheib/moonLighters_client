@@ -9,7 +9,7 @@ import 'package:flutter_client/hexColor/hexColor.dart';
 const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
-const String myIP = "http://147.78.45.13/";
+const String myIP = "https://kwikcode.net/";
 
 
 //Colors

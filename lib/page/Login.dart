@@ -136,12 +136,16 @@ class _loginState extends State<login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.05),
                           child: InkWell(
-                            child: Text('Forget Password',style: TextStyle(
-                              color: Colors.blue,
-                            ),),
-                            onTap: (){
+                            child: Text(
+                              'Forget Password',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                            onTap: () {
                               Navigator.pushNamed(context, '/forgetPassword');
                             },
                           ),

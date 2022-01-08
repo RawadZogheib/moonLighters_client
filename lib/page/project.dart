@@ -63,6 +63,13 @@ class _ProjectState extends State<Project> {
       onWillPop: () async => _back(),
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            new IconButton(
+                icon: new Icon(Icons.calendar_today),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/CalendarPage');
+                })
+          ],
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
               onPressed: () {
@@ -116,7 +123,8 @@ class _ProjectState extends State<Project> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(0.0,18.0,0.0,14.0),
+                                padding: const EdgeInsets.fromLTRB(
+                                    0.0, 18.0, 0.0, 14.0),
                                 child: LinearPercentIndicator(
                                   width: MediaQuery.of(context).size.width - 30,
                                   animation: true,
@@ -131,14 +139,19 @@ class _ProjectState extends State<Project> {
                               ),
                             ],
                           ),
-                          Text("Active Projects",style: TextStyle(fontSize: 12.0),),
+                          Text(
+                            "Active Projects",
+                            style: TextStyle(fontSize: 12.0),
+                          ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(8.0,2.0,8.0,11.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  8.0, 2.0, 8.0, 11.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30.0),
                                 child: Container(
-                                  decoration: BoxDecoration(color: globals.whiteBlue),
+                                  decoration:
+                                      BoxDecoration(color: globals.whiteBlue),
                                   child: ListView(
                                     scrollDirection: Axis.horizontal,
                                     children: widget.childrenOnline,
@@ -150,17 +163,33 @@ class _ProjectState extends State<Project> {
                         ],
                       ),
                     ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
                     Expanded(
-                      child: Container(
-                        child: ListView(
-                          children: <Widget>[
-                            Center(
-                              child: Wrap(
-                                children: widget.children,
-                                //new Card(child: Text('B'))
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                        child: Container(
+                          color: Colors.white,
+                          child: ListView(
+                            children: <Widget>[
+                              ListTile(
+                                title: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  size: 36,
+                                ),
                               ),
-                            ),
-                          ],
+                              Center(
+                                child: Wrap(
+                                  children: widget.children,
+                                  //new Card(child: Text('B'))
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

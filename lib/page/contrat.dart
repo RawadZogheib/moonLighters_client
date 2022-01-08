@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
@@ -70,16 +69,12 @@ class _contratState extends State<contrat> {
                 ),
                 child: Container(
                   //padding: const EdgeInsets.only(top: 30),
-                  decoration: BoxDecoration(
-                    color: globals.whiteBlue,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
+                  color: globals.whiteBlue,
                   child: ListView(
                     children: <Widget>[
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Center(
                         child: Wrap(
                           children: children,
@@ -194,7 +189,7 @@ class _contratState extends State<contrat> {
           // print(body[2][i][5]);
         }
 
-        if(mounted){
+        if (mounted) {
           setState(() {
             children.add(PlusContratCard(
               onTap: () {
@@ -209,7 +204,6 @@ class _contratState extends State<contrat> {
             ));
           });
         }
-
       } else if (body[0] == "error4") {
         showDialog(
             context: context,
