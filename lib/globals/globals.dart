@@ -41,6 +41,8 @@ const String error7 = "Field cannot be empty.";
 const String error8 = "Incorrect email or password.";       // for login
 const String error9 = "It's not a phoneNumber format, example: +961########";
 const String error10 = "No data available";
+const String error11 = "This email is not Registered";
+const String error12 = "Incorrect Email sent";
 const String errorToken = "Token Error.";
 const String errorVersion = "New version available.";
 const String errorElse = "Failed to connect... Connection Problem.";
@@ -50,6 +52,11 @@ const String codeException = "Oops Something went wrong! please try to login aga
 
 //for 6 digit code
 String? sixCodeNb = null;
+
+//ForgetPassword
+String? emailForgetPass = null;
+String? newPassword = null;
+String? newPassword2 = null;
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
 String? Id = null;

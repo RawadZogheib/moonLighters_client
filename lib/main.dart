@@ -5,8 +5,10 @@ import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/contrat.dart';
 import 'package:flutter_client/page/forgetPassword.dart';
+import 'package:flutter_client/page/forgetPassword2.dart';
 import 'package:flutter_client/page/project.dart';
 import 'package:flutter_client/widgets/code/sixCode.dart';
+import 'package:flutter_client/widgets/code/sixCodeForgetPass.dart';
 import 'package:flutter_client/widgets/code/sixCodeLogin.dart';
 import 'package:sizer/sizer.dart';
 
@@ -36,8 +38,11 @@ class MyApp extends StatelessWidget {
             '/FirstPage': (context) => FirstPage(),
             '/sixCode': (context)=>sixCode(),
             '/sixCodeLogin': (context)=>sixCodeLogin(),
+            '/sixCodeForgPass': (context)=>sixCodeForgetPass(),
             '/forgetPassword': (context)=>forgetPass(),
             '/CalendarPage' : (context) => CalendarPage(),
+            '/forgetPassword2': (context)=>forgetPass2(),
+
           });
      });
   }
