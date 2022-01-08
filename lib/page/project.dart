@@ -61,6 +61,12 @@ class _ProjectState extends State<Project> {
   }
 
   @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => _back(),
