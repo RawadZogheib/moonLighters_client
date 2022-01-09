@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
+import 'package:flutter_client/widgets/button/myButton.dart';
 import 'package:flutter_client/widgets/other/plusProjectCard.dart';
 import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
 import 'package:flutter_client/widgets/projectCard/accessCard.dart';
@@ -18,7 +19,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Project extends StatefulWidget {
   final children = <Widget>[];
   final childrenOnline = <Widget>[];
-  double percentage = 95;
+
+  //double percentage = 95;
+  double percentage = 100;
 
   @override
   _ProjectState createState() => _ProjectState();
@@ -58,7 +61,7 @@ class _ProjectState extends State<Project> {
     super.initState();
     _loadChildrenOnline();
     _checkVariables();
-    _30secAutoLoad();
+    _thirtySecAutoLoad();
   }
 
   // @override
@@ -150,27 +153,39 @@ class _ProjectState extends State<Project> {
                               ),
                             ],
                           ),
-                          Text(
-                            "Active Projects",
-                            style: TextStyle(fontSize: 12.0),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  8.0, 2.0, 8.0, 11.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30.0),
-                                child: Container(
-                                  decoration:
-                                      BoxDecoration(color: globals.whiteBlue),
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: widget.childrenOnline,
+                          widget.percentage == 100
+                              ? SizedBox(
+                                  height: 14,
+                                )
+                              : Text(
+                                  "Active Projects",
+                                  style: TextStyle(fontSize: 12.0),
+                                ),
+                          widget.percentage == 100
+                              ? myButton(
+                                  btnText: "Pay",
+                                  width: 200.0,
+                                  onPress: () {
+                                    Navigator.pushNamed(context, '/PaymentPage');
+                                  },
+                                )
+                              : Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        8.0, 2.0, 8.0, 11.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: globals.whiteBlue),
+                                        child: ListView(
+                                          scrollDirection: Axis.horizontal,
+                                          children: widget.childrenOnline,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -284,9 +299,9 @@ class _ProjectState extends State<Project> {
           // print(body[2][i][3]);
         }
         //if (mounted) {
-          setState(() {
-            widget.children;
-          });
+        setState(() {
+          widget.children;
+        });
         //}
       } else if (body[0] == "error4") {
         showDialog(
@@ -396,9 +411,9 @@ class _ProjectState extends State<Project> {
       ]);
 
       //if (mounted) {
-        setState(() {
-          widget.childrenOnline;
-        });
+      setState(() {
+        widget.childrenOnline;
+      });
       //}
 
       // }else if(body[0] == "error4"){
@@ -540,12 +555,14 @@ class _ProjectState extends State<Project> {
     });
   }
 
-  _30secAutoLoad() {
+  _thirtySecAutoLoad() {
     timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
       print("30sec gone!!");
       if (mounted) {
         print("30sec gone,and _loadChildrenOnline!!");
-        _loadChildrenOnline();
+        if (widget.percentage != 100) {
+          _loadChildrenOnline();
+        }
         _checkVariables();
       }
     });

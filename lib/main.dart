@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_client/page/CalendarPage.dart';
 import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
+import 'package:flutter_client/page/PaymentPage.dart';
 import 'package:flutter_client/page/Registration.dart';
 import 'package:flutter_client/page/contrat.dart';
 import 'package:flutter_client/page/forgetPassword.dart';
@@ -13,7 +14,6 @@ import 'package:flutter_client/widgets/code/sixCodeLogin.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
-  debugShowCheckedModeBanner: false;
   runApp(MyApp());
 }
 
@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/forgetPassword': (context)=>forgetPass(),
             '/CalendarPage' : (context) => CalendarPage(),
             '/forgetPassword2': (context)=>forgetPass2(),
+            '/PaymentPage': (context)=>PaymentPage(),
 
           });
      });
