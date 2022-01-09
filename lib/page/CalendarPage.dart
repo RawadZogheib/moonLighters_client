@@ -65,6 +65,9 @@ class _CalendarPageState extends State<CalendarPage> {
                 calendarController: calendarController,
                 layout: Layout.DEFAULT,
                 calendarCrossAxisSpacing: 4,
+                scrollController: ScrollController(
+                    initialScrollOffset: MediaQuery.of(context).size.height*1.4,
+                ),
               ),
             ),
           )),
@@ -74,6 +77,6 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   _back() {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 }

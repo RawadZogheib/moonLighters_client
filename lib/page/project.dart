@@ -61,11 +61,11 @@ class _ProjectState extends State<Project> {
     _30secAutoLoad();
   }
 
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   timer?.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +77,7 @@ class _ProjectState extends State<Project> {
             new IconButton(
                 icon: new Icon(Icons.calendar_today),
                 onPressed: () {
+                  //_back();
                   Navigator.pushNamed(context, '/CalendarPage');
                 })
           ],
@@ -255,7 +256,6 @@ class _ProjectState extends State<Project> {
 
   void _loadPage() async {
     try {
-      widget.children.clear();
       var data = {
         'version': globals.version,
         'account_Id': globals.Id,
@@ -270,6 +270,7 @@ class _ProjectState extends State<Project> {
         //SharedPreferences localStorage = await SharedPreferences.getInstance();
         //localStorage.setString('token', body[1]);
 
+        widget.children.clear();
         for (var i = 0; i < body[1].length; i++) {
           widget.children.add(_createCards(
             body[1][i][0], //project_Id
@@ -282,11 +283,11 @@ class _ProjectState extends State<Project> {
           // print(body[2][i][2]);
           // print(body[2][i][3]);
         }
-        if (mounted) {
+        //if (mounted) {
           setState(() {
             widget.children;
           });
-        }
+        //}
       } else if (body[0] == "error4") {
         showDialog(
             context: context,
@@ -394,11 +395,11 @@ class _ProjectState extends State<Project> {
         _iconContainer("publisher"),
       ]);
 
-      if (mounted) {
+      //if (mounted) {
         setState(() {
           widget.childrenOnline;
         });
-      }
+      //}
 
       // }else if(body[0] == "error4"){
       //   showDialog(
