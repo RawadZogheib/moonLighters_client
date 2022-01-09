@@ -84,9 +84,6 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  _back() {
-    Navigator.pop(context);
-  }
 
   _open(String? thisDate) {
     showModalBottomSheet<void>(
@@ -156,5 +153,9 @@ class _CalendarPageState extends State<CalendarPage> {
       _open(thisDate);
       print(thisDate);
     });
+  }
+
+  _back() {
+    Navigator.pop(context);
   }
 }

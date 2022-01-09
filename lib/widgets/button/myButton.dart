@@ -38,7 +38,6 @@ class myButton extends StatelessWidget {
         primary: globals.blue,
         onPrimary: globals.blue_1,
         shadowColor: Colors.transparent,
-        onSurface: Colors.orange,
         fixedSize:
             Size(width != null ? width : 50, height != null ? height : 40),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
