@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
             '/sixCodeLogin': (context)=>sixCodeLogin(),
             '/sixCodeForgPass': (context)=>sixCodeForgetPass(),
             '/forgetPassword': (context)=>forgetPass(),
-            '/CalendarPage' : (context) => CalendarPage(),
             '/forgetPassword2': (context)=>forgetPass2(),
+            '/CalendarPage' : (context) => CalendarPage(),
             '/PaymentPage': (context)=>PaymentPage(),
             '/WalletPage': (context)=>WalletPage(),
 
