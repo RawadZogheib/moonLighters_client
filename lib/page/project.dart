@@ -78,6 +78,11 @@ class _ProjectState extends State<Project> {
         appBar: AppBar(
           actions: [
             new IconButton(
+                icon: new Icon(Icons.account_balance_wallet),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/WalletPage');
+                }),
+            new IconButton(
                 icon: new Icon(Icons.calendar_today),
                 onPressed: () {
                   //_back();

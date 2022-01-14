@@ -36,6 +36,13 @@ class _contratState extends State<contrat> {
       onWillPop: () async => _back(),
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            new IconButton(
+                icon: new Icon(Icons.account_balance_wallet),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/WalletPage');
+                }),
+          ],
           leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
               onPressed: () {

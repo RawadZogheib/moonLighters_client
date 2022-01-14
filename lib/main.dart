@@ -4,6 +4,7 @@ import 'package:flutter_client/page/FirstPage.dart';
 import 'package:flutter_client/page/Login.dart';
 import 'package:flutter_client/page/PaymentPage.dart';
 import 'package:flutter_client/page/Registration.dart';
+import 'package:flutter_client/page/WalletPage.dart';
 import 'package:flutter_client/page/contrat.dart';
 import 'package:flutter_client/page/forgetPassword.dart';
 import 'package:flutter_client/page/forgetPassword2.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
             '/CalendarPage' : (context) => CalendarPage(),
             '/forgetPassword2': (context)=>forgetPass2(),
             '/PaymentPage': (context)=>PaymentPage(),
+            '/WalletPage': (context)=>WalletPage(),
 
           });
      });

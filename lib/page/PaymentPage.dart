@@ -27,6 +27,13 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          new IconButton(
+              icon: new Icon(Icons.account_balance_wallet),
+              onPressed: () {
+                Navigator.pushNamed(context, '/WalletPage');
+              }),
+        ],
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
             onPressed: () {
@@ -93,138 +100,146 @@ class _PaymentPageState extends State<PaymentPage> {
                   SizedBox(
                     height: 25,
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 0.2,
-                        color: Colors.grey.shade900,
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 0.2,
+                          color: Colors.grey.shade900,
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(30)),
                       ),
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Total Bill: ",
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                      color: globals.blue_1),
+                                ),
+                                Text(
+                                  widget.totalBill.toStringAsFixed(2) + "\$",
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                      color: globals.blue_1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1.3,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Total Bill: ",
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: globals.blue_1),
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "Bill Account: ",
+                                  style: TextStyle(fontSize: 17),
+                                ),
                               ),
-                              Text(
-                                widget.totalBill.toStringAsFixed(2) + "\$",
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: globals.blue_1),
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "\$ ${widget.bill.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                      color: globals.blue_1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                        Divider(
-                          thickness: 1.3,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "Bill Account: ",
-                                style: TextStyle(fontSize: 17),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "Tax 1%",
+                                  style: TextStyle(fontSize: 17),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "\$ ${widget.bill.toStringAsFixed(2)}",
-                                style: TextStyle(
-                                    color: globals.blue_1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17),
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "\$ ${widget.tax.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                      color: globals.blue_1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "Tax 1%",
-                                style: TextStyle(fontSize: 17),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "Tip",
+                                  style: TextStyle(fontSize: 17),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "\$ ${widget.tax.toStringAsFixed(2)}",
-                                style: TextStyle(
-                                    color: globals.blue_1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17),
+                              Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Text(
+                                  "\$ ${widget.tipVal.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                      color: globals.blue_1,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
                               ),
+                            ],
+                          ),
+                          Center(
+                            child: Text(
+                              "${widget.percentage.round()} %",
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  color: globals.blue_1,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "Tip",
-                                style: TextStyle(fontSize: 17),
-                              ),
+                          ),
+                          Slider(
+                              min: 0,
+                              max: 100,
+                              divisions: 100,
+                              activeColor: globals.blue_1,
+                              inactiveColor: Colors.grey,
+                              value: widget.percentage,
+                              onChanged: _changeTip),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Center(
+                            child: myButton(
+                              width: 100.0,
+                              btnText: "Send",
+                              onPress: () {
+                                print("Sent");
+                              },
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Text(
-                                "\$ ${widget.tipVal.toStringAsFixed(2)}",
-                                style: TextStyle(
-                                    color: globals.blue_1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "${widget.percentage.round()} %",
-                          style: TextStyle(
-                              fontSize: 19,
-                              color: globals.blue_1,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Slider(
-                            min: 0,
-                            max: 100,
-                            divisions: 100,
-                            activeColor: globals.blue_1,
-                            inactiveColor: Colors.grey,
-                            value: widget.percentage,
-                            onChanged: _changeTip),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        myButton(
-                          btnText: "Send",
-                          onPress: () {
-                            print("Sent");
-                          },
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
