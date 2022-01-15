@@ -23,6 +23,7 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   Timer? timer;
+  bool transactionInRunning = false;
 
   @override
   void initState() {
@@ -245,13 +246,17 @@ class _PaymentPageState extends State<PaymentPage> {
                               width: 100.0,
                               btnText: "Send",
                               onPress: () {
-                                if (widget.totalBill > 0) {
-                                  _sendBill();
-                                  print("Sent");
-                                } else {
-                                  myToast.showToast(
-                                      'Your total bill should be > 0.',
-                                      const Icon(Icons.warning));
+                                if (transactionInRunning == false) {
+                                  transactionInRunning = true;
+                                  if (widget.totalBill > 0) {
+                                    _sendBill();
+                                    print("Sent");
+                                  } else {
+                                    myToast.showToast(
+                                        'Your total bill should be > 0.',
+                                        const Icon(Icons.warning));
+                                  }
+                                  transactionInRunning = false;
                                 }
                               },
                             ),
