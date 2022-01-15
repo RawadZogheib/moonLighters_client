@@ -245,11 +245,11 @@ class _PaymentPageState extends State<PaymentPage> {
                             child: myButton(
                               width: 100.0,
                               btnText: "Send",
-                              onPress: () {
+                              onPress: () async {
                                 if (transactionInRunning == false) {
                                   transactionInRunning = true;
                                   if (widget.totalBill > 0) {
-                                    _sendBill();
+                                    await _sendBill();
                                     print("Sent");
                                   } else {
                                     myToast.showToast(
@@ -383,6 +383,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   _back() {
+    timer?.cancel();
     Navigator.pop(context);
   }
 }

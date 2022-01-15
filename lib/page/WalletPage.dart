@@ -126,6 +126,7 @@ class _WalletPageState extends State<WalletPage> {
   }
 
   _back() {
+    timer?.cancel();
     Navigator.pop(context);
   }
 
