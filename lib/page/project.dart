@@ -562,9 +562,9 @@ class _ProjectState extends State<Project> {
 
   _thirtySecAutoLoad() {
     timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-      print("30sec gone!!");
+      print("30sec gone!!project");
       if (mounted) {
-        print("30sec gone,and _loadChildrenOnline!!");
+        print("30sec gone,and _loadChildrenOnline!!project");
         if (widget.percentage != 100) {
           _loadChildrenOnline();
         }

@@ -131,9 +131,9 @@ class _WalletPageState extends State<WalletPage> {
 
   _loadPage() {
     timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-      print("30sec gone!!");
+      print("30sec gone!!wallet");
       if (mounted) {
-        print("30sec gone,and _loadChildrenOnline!!");
+        print("30sec gone,and _loadChildrenOnline!!wallet");
         _checkBalance();
       }
     });

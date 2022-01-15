@@ -1,7 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_client/api/my_api.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
 import 'package:flutter_client/widgets/button/myButton.dart';
+import 'package:flutter_client/widgets/other/MyToast.dart' as myToast;
+import 'package:flutter_client/widgets/popup/errorAlertDialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PaymentPage extends StatefulWidget {
   double balance = 4700; // Get from server
@@ -16,10 +22,14 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  Timer? timer;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _loadToast();
+    _loadPage();
     _calcResult();
   }
 
@@ -110,13 +120,14 @@ class _PaymentPageState extends State<PaymentPage> {
                           width: 0.2,
                           color: Colors.grey.shade900,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(30)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30)),
                       ),
                       child: ListView(
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                            padding: const EdgeInsets.fromLTRB(
+                                16.0, 16.0, 16.0, 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -234,7 +245,14 @@ class _PaymentPageState extends State<PaymentPage> {
                               width: 100.0,
                               btnText: "Send",
                               onPress: () {
-                                print("Sent");
+                                if (widget.totalBill > 0) {
+                                  _sendBill();
+                                  print("Sent");
+                                } else {
+                                  myToast.showToast(
+                                      'Your total bill should be > 0.',
+                                      const Icon(Icons.warning));
+                                }
                               },
                             ),
                           ),
@@ -263,6 +281,99 @@ class _PaymentPageState extends State<PaymentPage> {
     setState(() {
       widget.totalBill = widget.bill + widget.tipVal + widget.tax;
       widget.tax = widget.totalBill * 1 / 100;
+    });
+  }
+
+  _sendBill() async {
+    try {
+      var data = {
+        'version': globals.version,
+        'account_Id': globals.Id,
+        'totalBill': widget.totalBill.toString(),
+        'contrat_Id': globals.contrat_Id,
+      };
+      var res = await CallApi()
+          .postData(data, 'Payment/Control/(Control)Payment.php');
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
+      if (body[0] == "success") {
+        myToast.showToast('Payment done successfully.', const Icon(Icons.done));
+        _back();
+      } else if (body[0] == "error4") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error4));
+      } else if (body[0] == "error401") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error401));
+      } else if (body[0] == "error402") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error402));
+      } else if (body[0] == "error403") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.error403));
+      } else if (body[0] == "errorToken") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => ErrorAlertDialog(
+                message: globals.errorToken,
+                goHome: true,
+                onPress: () {
+                  _clearAll();
+                }));
+      } else if (body[0] == "errorVersion") {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => ErrorAlertDialog(
+                  message: globals.errorVersion,
+                  goHome: true,
+                  onPress: () {
+                    _clearAll();
+                  },
+                ));
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+                ErrorAlertDialog(message: globals.errorElse));
+      }
+    } catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              ErrorAlertDialog(message: globals.errorException));
+    }
+  }
+
+  _loadToast() {
+    globals.fToast = FToast();
+    globals.fToast.init(context);
+  }
+
+  _loadPage() {
+    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+      print("30sec gone!!payment");
+      if (mounted) {
+        print("30sec gone,and _loadChildrenOnline!!payment");
+        _checkBalance();
+      }
+    });
+  }
+
+  _checkBalance() {}
+
+  _clearAll() {
+    setState(() {
+      globals.clearAll();
     });
   }
 

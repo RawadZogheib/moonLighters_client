@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_client/hexColor/hexColor.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 //Version
 const String version = "v1.0";
@@ -43,12 +44,17 @@ const String error9 = "It's not a phoneNumber format, example: +961########";
 const String error10 = "No data available";
 const String error11 = "This email is not Registered";
 const String error12 = "Incorrect Email sent";
+const String error401 = "Client Wallet Error";
+const String error402 = "Consultant wallet Error";
+const String error403 = "You don't have enough bill";
 const String errorToken = "Token Error.";
 const String errorVersion = "New version available.";
 const String errorElse = "Failed to connect... Connection Problem.";
 const String errorException = "OOPs! Something went wrong. Try again in few seconds.";
 const String codeFailed = "your code is incorrect";
 const String codeException = "Oops Something went wrong! please try to login again!";
+
+late FToast fToast;
 
 //for 6 digit code
 String? sixCodeNb = null;
@@ -125,6 +131,7 @@ clearLogin(){
 }
 
 clearAll(){
+  Id = null;
   fName = null;
   lName = null;
   userName = null;
@@ -140,6 +147,12 @@ clearAll(){
   contrat_max_payment = null;
   contrat_description = null;
   contrat_code = null;
+  ProjectName = null;
   emailLogin = null;
   passwordLogin = null;
+  sixCodeNb = null;
+  isRegistered = '0';
+  emailForgetPass = null;
+  newPassword = null;
+  newPassword2 = null;
 }
