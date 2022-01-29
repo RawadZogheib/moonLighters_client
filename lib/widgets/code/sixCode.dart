@@ -69,11 +69,6 @@ class _sixCodeState extends State<sixCode> {
                                   _resendCode();
                                 },
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                 left: MediaQuery.of(context).size.width * 0.1),
-                                child: Text("0:00"),
-                              ),
                             ],
                           )
                         ],
@@ -155,13 +150,19 @@ class _sixCodeState extends State<sixCode> {
     List<dynamic> body = json.decode(res.body);
     print(res.body);
 
-    if(body[0] == "error2_5"){
+    // if(body[0] == "true"){
+    //   //do nothing
+    // }else
+      if(body[0] == "error2_5"){
       errCode = globals.error2_5;
       colErrCode = globals.red_1;
     }else if(body[0] == "codeException"){
       errCode = globals.codeException;
       colErrCode = globals.red_1;
-    }else{
+    }else if(body[0] == "error7"){
+      errCode = globals.error7;
+      colErrCode = globals.red_1;
+    } else{
       setState(() {
         errCode = globals.errorElse;
         colErrCode = globals.red_1;

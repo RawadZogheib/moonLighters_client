@@ -1,10 +1,22 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_client/globals/globals.dart' as globals;
+import 'package:flutter_client/widgets/textInput/myErrorText.dart';
 import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
+import '../api/my_api.dart';
+
+String errSS = '';
+Color colErrSS = Colors.transparent;
+
 class CalendarPage extends StatefulWidget {
+  List<String> imgsDB = [];
+  List<Widget> imgs = [];
+
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -122,17 +134,12 @@ class _CalendarPageState extends State<CalendarPage> {
                           topRight: Radius.circular(30),
                         ),
                       ),
-                      child: ListView(
-                        children: [
-                          SizedBox(height: 150),
-                          Center(
-                            child: Text(thisDate != null ? thisDate : ''),
-                          ),
-                          // Wrap(
-                          //   alignment: WrapAlignment.center,
-                          //   children: children;
-                          // ),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: widget.imgs,
+                        ),
                       ),
                     ),
                   ),
@@ -143,19 +150,91 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  void _test(DateTime date) {
-    setState(() {
-      thisDate = date.day.toString() +
-          '  ' +
-          date.month.toString() +
-          '  ' +
-          date.year.toString();
-      _open(thisDate);
-      print(thisDate);
-    });
+  Future<void> _test(DateTime date) async {
+    String thisDay;
+    String thisMonth;
+    if (date.day < 10) {
+      thisDay = '0' + date.day.toString();
+    } else {
+      thisDay = date.day.toString();
+    }
+    if (date.month < 10) {
+      thisMonth = '0' + date.month.toString();
+    } else {
+      thisMonth = date.month.toString();
+    }
+
+    thisDate = date.year.toString() + '-' + thisMonth + '-' + thisDay;
+
+    print(thisDate);
+
+    await _getScreenshots();
+    _open(thisDate);
+
   }
 
   _back() {
     Navigator.pop(context);
+  }
+
+  _getScreenshots() async {
+    // widget.imgs.clear();
+    // widget.imgsDB.clear();
+
+    errSS = '';
+    colErrSS = Colors.transparent;
+
+    var data = {
+      'version': globals.version,
+      'date': thisDate,
+      'contrat_Id': globals.contrat_Id
+    };
+
+    var res = await CallApi()
+        .postData(data, 'Screenshot/Control/(Control)getScreenshotName.php');
+    print(res);
+    print(res.body);
+    //print("pppppp");
+    List<dynamic> body = json.decode(res.body);
+    print(body);
+
+    if (body[0] == "true") {
+      for (int i = 0; i < body[1].length; i++) {
+        widget.imgsDB.add(body[1][i]);
+        print(body[1][i]);
+        print(widget.imgsDB);
+      }
+
+      for (int i = 0; i < body[1].length; i++) {
+        widget.imgs.add(
+          Row(
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(22.0)),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  child: Image.network(
+                      'https://kwikcode.net/moonlighters_php/ScreenShot_Uploads/${globals.contrat_Id}/${widget.imgsDB[i]}',
+                      fit: BoxFit.fill),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        );
+      }
+
+    } else if (body[0] == "error10") {
+      setState(() {
+        errSS = globals.error10;
+        colErrSS = Colors.red;
+      });
+    }
   }
 }
