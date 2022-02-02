@@ -252,44 +252,20 @@ class _CalendarPageState extends State<CalendarPage> {
     };
 
     var res = await CallApi()
-        .postData(data, 'Screenshot/Control/(Control)getScreenshotName.php');
+        .postData(data, 'Timer/Control/(Control)TimeandAppsClient.php');
     print(res);
     print(res.body);
     //print("pppppp");
     List<dynamic> body = json.decode(res.body);
     print(body);
 
-    if (body[0] == "true") {
+    if (body[0] == "success") {
       for (int i = 0; i < body[1].length; i++) {
         widget.imgsDB.add(body[1][i]);
         print(body[1][i]);
         print(widget.imgsDB);
       }
 
-      for (int i = 0; i < body[1].length; i++) {
-        widget.imgs.add(
-          Row(
-            children: [
-              SizedBox(
-                width: 10,
-              ),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(22.0)),
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  child: Image.network(
-                      'https://kwikcode.net/moonlighters_php/ScreenShot_Uploads/${globals.contrat_Id}/${widget.imgsDB[i]}',
-                      fit: BoxFit.fill),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
-        );
-      }
 
     } else if (body[0] == "error10") {
       setState(() {
