@@ -75,22 +75,25 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           Expanded(
               child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            child: Container(
-              color: globals.whiteBlue,
-              child: ScrollableCleanCalendar(
-                calendarController: calendarController,
-                layout: Layout.DEFAULT,
-                calendarCrossAxisSpacing: 4,
-                scrollController: ScrollController(
-                  initialScrollOffset: MediaQuery.of(context).size.height * 1.4,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
-              ),
-            ),
-          )),
+                child: Container(
+                  color: globals.whiteBlue,
+                  child: ScrollableCleanCalendar(
+                    calendarController: calendarController,
+                    layout: Layout.DEFAULT,
+                    calendarCrossAxisSpacing: 4,
+                    scrollController: ScrollController(
+                      initialScrollOffset: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 1.4,
+                    ),
+                  ),
+                ),
+              )),
         ],
       ),
     );
@@ -104,7 +107,10 @@ class _CalendarPageState extends State<CalendarPage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.55,
             decoration: BoxDecoration(
               color: globals.white,
               borderRadius: const BorderRadius.only(
@@ -170,7 +176,6 @@ class _CalendarPageState extends State<CalendarPage> {
 
     await _getScreenshots();
     _open(thisDate);
-
   }
 
   _back() {
@@ -183,6 +188,62 @@ class _CalendarPageState extends State<CalendarPage> {
 
     errSS = '';
     colErrSS = Colors.transparent;
+
+    var data = {
+      'version': globals.version,
+      'contrat_Id': globals.contrat_Id
+    };
+
+    var res = await CallApi()
+        .postData(data, 'Screenshot/Control/(Control)getScreenshotName.php');
+    print(res);
+    print(res.body);
+    //print("pppppp");
+    List<dynamic> body = json.decode(res.body);
+    print(body);
+
+    if (body[0] == "true") {
+      for (int i = 0; i < body[1].length; i++) {
+        widget.imgsDB.add(body[1][i]);
+        print(body[1][i]);
+        print(widget.imgsDB);
+      }
+
+      for (int i = 0; i < body[1].length; i++) {
+        widget.imgs.add(
+          Row(
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(22.0)),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  child: Image.network(
+                      'https://kwikcode.net/moonlighters_php/ScreenShot_Uploads/${globals
+                          .contrat_Id}/${widget.imgsDB[i]}',
+                      fit: BoxFit.fill),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        );
+      }
+    } else if (body[0] == "error10") {
+      setState(() {
+        errSS = globals.error10;
+        colErrSS = Colors.red;
+      });
+    }
+  }
+
+
+  _getTime() async {
 
     var data = {
       'version': globals.version,
@@ -236,5 +297,9 @@ class _CalendarPageState extends State<CalendarPage> {
         colErrSS = Colors.red;
       });
     }
-  }
+
+
+
+
+}
 }
